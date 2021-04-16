@@ -10,7 +10,7 @@ CREATE TABLE options (
   PRIMARY KEY (id)
 );
 
-CREATE TABLE tariffs (
+CREATE TABLE tariff (
   id int NOT NULL AUTO_INCREMENT,
   name varchar(15),
   price DOUBLE,
@@ -19,7 +19,7 @@ CREATE TABLE tariffs (
   FOREIGN KEY(option_id) REFERENCES eCare_db.options(id)
 );
 
-CREATE TABLE tariffs_options(
+CREATE TABLE tariff_option(
 	tariff_id int,
     option_id int,
     PRIMARY KEY(tariff_id,option_id),
@@ -27,7 +27,7 @@ CREATE TABLE tariffs_options(
     FOREIGN KEY (option_id) REFERENCES eCare_db.options(id)
 );
 
-CREATE TABLE сontracts(
+CREATE TABLE сontract(
 	id int NOT NULL AUTO_INCREMENT,
 	number varchar(20),
     tariff_id int,
@@ -37,13 +37,13 @@ CREATE TABLE сontracts(
     FOREIGN KEY (option_id) REFERENCES eCare_db.options(id)    
 );
 /*TO DO about customer_details  */
-CREATE TABLE customers(
+CREATE TABLE customer(
     id int NOT NULL AUTO_INCREMENT,
 	name varchar(25),
 	surname varchar(25),
 	birth_date DATE,
 	passport_details varchar(150),
-    adress varchar(150),	
+    address varchar(150),
     сontract_id int,
     email varchar(25),
     customer_password VARCHAR(60),   
