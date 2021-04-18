@@ -29,7 +29,6 @@ public class Main {
         firstListContract.add(firstContract);
         Customer firstCustomer=new Customer("Ivan","Ivanov", LocalDate.of(2017, Month.NOVEMBER, 30),"1234 987654 SPb TP№70"
         ,"Spb,Planernay 71,86",firstListContract,"aasd.spb@mail.ru","12345",true);
-
         session.beginTransaction();
         session.save(option);
         session.save(firstTariff);

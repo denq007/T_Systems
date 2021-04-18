@@ -11,7 +11,7 @@ public class Contract {
     private int id;
     @Column
     private String number;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name = "tariff_id",referencedColumnName = "id")
     private Tariff tariffId;
     @OneToMany(mappedBy ="id" )

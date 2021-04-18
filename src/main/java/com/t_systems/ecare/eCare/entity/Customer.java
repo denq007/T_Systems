@@ -19,7 +19,18 @@ public class Customer {
     private LocalDate birthDate;
     @Column(name="passport_details")
     private String passportDetails;
-
+    @Column(name = "address")
+    private String address;
+    @OneToMany
+    @Column(name = "contract_id")
+    private List<Contract> contractId;
+    @Column(name = "email")
+    private String email;
+    @Column(name = "customer_password")
+    //TO DO add dependens after add table for security
+    private String password;
+    @Column(name = "enabled")
+    boolean check;
     public Customer() {
     }
 
@@ -115,18 +126,7 @@ public class Customer {
         this.check = check;
     }
 
-    @Column(name = "address")
-    private String address;
-    @OneToMany
-    @Column(name = "contract_id")
-    private List<Contract> contractId;
-    @Column(name = "email")
-    private String email;
-    @Column(name = "customer_password")
-    //TO DO add dependens after add table for security
-    private String password;
-    @Column(name = "enabled")
-    boolean check;
+
 
 
 

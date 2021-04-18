@@ -15,8 +15,8 @@ public class Tariff {
     private double price;
         //TO DO about CascadeType.ALL
     @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "tariff_options", joinColumns = @JoinColumn(name = "tariff_id"),
-            inverseJoinColumns =@JoinColumn(name = "toption_id"))
+    @JoinTable(name = "tariff_option", joinColumns = @JoinColumn(name = "tariff_id"),
+            inverseJoinColumns =@JoinColumn(name = "option_id"))
     private List<Option> optionId;
 
     public Tariff() {

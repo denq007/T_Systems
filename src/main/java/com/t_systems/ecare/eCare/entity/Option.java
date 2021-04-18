@@ -15,6 +15,11 @@ public class Option {
     private double price;
     @Column(name = "connection_cost")
     private double connectionCost;
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "tariff_option",joinColumns = @JoinColumn(name="option_id"),
+            inverseJoinColumns = @JoinColumn(name = "tariff_id")
+    )
+    private List<Tariff> tariff;
 
     public Option() {
     }
@@ -66,10 +71,6 @@ public class Option {
         this.tariff = tariff;
     }
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "tariffs_options",joinColumns = @JoinColumn(name="option_id"),
-    inverseJoinColumns = @JoinColumn(name = "tariffn_id")
-    )
-    private List<Tariff> tariff;
+
 
 }
