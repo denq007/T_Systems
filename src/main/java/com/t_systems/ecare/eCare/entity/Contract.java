@@ -4,25 +4,24 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "contracts")
+@Table(name = "contract")
 public class Contract {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     @Column
     private String number;
-    @OneToOne
-    @Column(name = "tarif_id")
+    @ManyToOne
+    @JoinColumn(name = "tariff_id",referencedColumnName = "id")
     private Tariff tariffId;
-    @OneToMany
+    @OneToMany(mappedBy ="id" )
     @Column(name = "option_id")
     private List<Option> optionId;
 
     public Contract() {
     }
 
-    public Contract(int id, String number, Tariff tariffId, List<Option> optionId) {
-        this.id = id;
+    public Contract( String number, Tariff tariffId, List<Option> optionId) {
         this.number = number;
         this.tariffId = tariffId;
         this.optionId = optionId;

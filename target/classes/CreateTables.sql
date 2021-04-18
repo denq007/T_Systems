@@ -43,7 +43,7 @@ CREATE TABLE customer(
 	surname varchar(25),
 	birth_date DATE,
 	passport_details varchar(150),
-    address  varchar(150),
+    address varchar(150),
     сontract_id int,
     email varchar(25),
     customer_password VARCHAR(60),   
