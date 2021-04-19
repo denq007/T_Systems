@@ -4,7 +4,7 @@ USE eCare_db;
 
 CREATE TABLE options (  
   id int NOT NULL AUTO_INCREMENT,
-  name varchar(15),
+  name varchar(35),
   price DOUBLE,
   connection_cost DOUBLE,
   PRIMARY KEY (id)

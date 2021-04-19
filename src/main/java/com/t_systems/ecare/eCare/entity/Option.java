@@ -7,11 +7,12 @@ import java.util.List;
 @Table(name = "options")
 public class Option {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private int id;
-    @Column
+    @Column(name = "name")
     private String name;
-    @Column
+    @Column(name = "price")
     private double price;
     @Column(name = "connection_cost")
     private double connectionCost;

@@ -20,7 +20,7 @@ public class Main {
                 .addAnnotatedClass(Contract.class)
                 .buildSessionFactory();
         Session session=sessionFactory.getCurrentSession();
-        Option option=new Option("unlimited Internet",50.00,0.00,new ArrayList<>());
+        Option option=new Option("unlInternet",50.00,0.00,new ArrayList<>());
         List<Option> firstListOption=new ArrayList<>();
         firstListOption.add(option);
         Tariff firstTariff=new Tariff("unlimited",123.99,firstListOption);
@@ -35,6 +35,6 @@ public class Main {
         session.save(firstContract);
         session.save(firstCustomer);
         session.getTransaction().commit();
-
+        session.close();
     }
 }

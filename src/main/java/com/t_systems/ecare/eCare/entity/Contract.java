@@ -1,17 +1,19 @@
 package com.t_systems.ecare.eCare.entity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "contract")
+@Table(name = "сontract")
 public class Contract {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column
+    @Column(name = "number")
     private String number;
-    @ManyToOne(cascade = CascadeType.REFRESH)
+    @ManyToOne(cascade = CascadeType.REFRESH,fetch = FetchType.EAGER)
     @JoinColumn(name = "tariff_id",referencedColumnName = "id")
     private Tariff tariffId;
     @OneToMany(mappedBy ="id" )

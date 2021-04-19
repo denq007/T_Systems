@@ -8,7 +8,7 @@ import java.util.List;
 @Table(name = "customer")
 public class Customer {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
     @Column(name = "name")
@@ -21,7 +21,7 @@ public class Customer {
     private String passportDetails;
     @Column(name = "address")
     private String address;
-    @OneToMany
+    @OneToMany(mappedBy = "id")
     @Column(name = "contract_id")
     private List<Contract> contractId;
     @Column(name = "email")
