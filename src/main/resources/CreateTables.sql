@@ -23,7 +23,7 @@ CREATE TABLE tariff_option(
 	tariff_id int,
     option_id int,
     PRIMARY KEY(tariff_id,option_id),
-    FOREIGN KEY (tariff_id) REFERENCES eCare_db.tariffs(id),
+    FOREIGN KEY (tariff_id) REFERENCES eCare_db.tariff(id),
     FOREIGN KEY (option_id) REFERENCES eCare_db.options(id)
 );
 
@@ -33,7 +33,7 @@ CREATE TABLE сontract(
     tariff_id int,
     option_id int,  
     PRIMARY KEY(id),
-    FOREIGN KEY (tariff_id) REFERENCES eCare_db.tariffs(id),
+    FOREIGN KEY (tariff_id) REFERENCES eCare_db.tariff(id),
     FOREIGN KEY (option_id) REFERENCES eCare_db.options(id)    
 );
 /*TO DO about customer_details  */
@@ -49,7 +49,7 @@ CREATE TABLE customer(
     customer_password VARCHAR(60),   
     enabled tinyint(1),
 	PRIMARY KEY (id),
-    FOREIGN KEY(сontract_id) REFERENCES eCare_db.сontracts(id)    
+    FOREIGN KEY(сontract_id) REFERENCES eCare_db.сontract(id)
 );
 
 /* to do after will study security
