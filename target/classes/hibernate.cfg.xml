@@ -13,10 +13,10 @@
         <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
         <property name="show_sql" >true</property>
 
-      <!--  <mapping class="com.t_systems.ecare.eCare.entity.Customer"/>
+       <mapping class="com.t_systems.ecare.eCare.entity.Customer"/>
         <mapping class="com.t_systems.ecare.eCare.entity.Option"/>
         <mapping class="com.t_systems.ecare.eCare.entity.Tariff"/>
-        <mapping class="com.t_systems.ecare.eCare.entity.Contract"/>-->
+        <mapping class="com.t_systems.ecare.eCare.entity.Contract"/>
     </session-factory>
 
 </hibernate-configuration>
