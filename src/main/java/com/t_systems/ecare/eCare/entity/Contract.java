@@ -13,27 +13,37 @@ public class Contract {
     private int id;
     @Column(name = "number")
     private String number;
-    @ManyToOne(cascade = CascadeType.REFRESH,fetch = FetchType.EAGER)
+    @ManyToOne(cascade = {CascadeType.PERSIST,CascadeType.MERGE, CascadeType.REFRESH,CascadeType.DETACH},fetch = FetchType.EAGER)
     @JoinColumn(name = "tariff_id",referencedColumnName = "id")
     private Tariff tariffId;
-    @OneToMany(mappedBy ="id" )
-    @Column(name = "option_id")
-    private List<Option> optionId;
 
     public Contract() {
     }
 
-    public Contract( String number, Tariff tariffId, List<Option> optionId) {
+    public Contract( String number, Tariff tariffId) {
         this.number = number;
         this.tariffId = tariffId;
-        this.optionId = optionId;
+    }
+  /*  public void addOptionToContract(Option option)
+    {
+        if(optionIdList==null)
+            optionIdList=new ArrayList<>();
+        optionIdList.add(option);
+
+    }*/
+
+    @Override
+    public String toString() {
+        return "Contract{" +
+                "id=" + id +
+                ", number='" + number + '\'' +
+                ", tariffId=" + tariffId +
+                '}';
     }
 
     public int getId() {
         return id;
     }
-
-
 
     public void setId(int id) {
         this.id = id;
@@ -55,14 +65,14 @@ public class Contract {
         this.tariffId = tariffId;
     }
 
-    public List<Option> getOptionId() {
-        return optionId;
+    /*public List<Option> getOptionIdList() {
+        return optionIdList;
     }
 
-    public void setOptionId(List<Option> optionId) {
-        this.optionId = optionId;
+    public void setOptionIdList(List<Option> optionId) {
+        this.optionIdList = optionId;
     }
-
+*/
 
 
 

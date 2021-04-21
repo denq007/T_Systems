@@ -2,9 +2,9 @@ CREATE DATABASE  eCare_db;
 USE eCare_db;
 
 
-CREATE TABLE options (  
+CREATE TABLE options (
   id int NOT NULL AUTO_INCREMENT,
-  name varchar(35),
+  name varchar(255),
   price DOUBLE,
   connection_cost DOUBLE,
   PRIMARY KEY (id)
@@ -12,11 +12,9 @@ CREATE TABLE options (
 
 CREATE TABLE tariff (
   id int NOT NULL AUTO_INCREMENT,
-  name varchar(15),
+  name varchar(255),
   price DOUBLE,
-  option_id int,
-  PRIMARY KEY (id),
-  FOREIGN KEY(option_id) REFERENCES eCare_db.options(id)
+  PRIMARY KEY (id)
 );
 
 CREATE TABLE tariff_option(
@@ -29,24 +27,22 @@ CREATE TABLE tariff_option(
 
 CREATE TABLE сontract(
 	id int NOT NULL AUTO_INCREMENT,
-	number varchar(20),
+	number varchar(255),
     tariff_id int,
-    option_id int,  
     PRIMARY KEY(id),
-    FOREIGN KEY (tariff_id) REFERENCES eCare_db.tariff(id),
-    FOREIGN KEY (option_id) REFERENCES eCare_db.options(id)    
+    FOREIGN KEY (tariff_id) REFERENCES eCare_db.tariff(id)
 );
 /*TO DO about customer_details  */
 CREATE TABLE customer(
     id int NOT NULL AUTO_INCREMENT,
-	name varchar(25),
-	surname varchar(25),
+	name varchar(255),
+	surname varchar(255),
 	birth_date DATE,
-	passport_details varchar(150),
-    address  varchar(150),
+	passport_details varchar(255),
+    address  varchar(255),
     сontract_id int,
-    email varchar(25),
-    customer_password VARCHAR(60),   
+    email varchar(255),
+    customer_password VARCHAR(255),
     enabled tinyint(1),
 	PRIMARY KEY (id),
     FOREIGN KEY(сontract_id) REFERENCES eCare_db.сontract(id)

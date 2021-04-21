@@ -18,22 +18,27 @@ public class Main {
         SessionFactory sessionFactory= new Configuration()
                 .configure("hibernate.cfg.xml")
                 .addAnnotatedClass(Contract.class)
+                .addAnnotatedClass(Customer.class)
+                .addAnnotatedClass(Option.class)
+                .addAnnotatedClass(Tariff.class)
                 .buildSessionFactory();
         Session session=sessionFactory.getCurrentSession();
-        Option option=new Option("unlInternet",50.00,0.00,new ArrayList<>());
-        List<Option> firstListOption=new ArrayList<>();
-        firstListOption.add(option);
-        Tariff firstTariff=new Tariff("unlimited",123.99,firstListOption);
-        Contract firstContract=new Contract("89500148710", firstTariff,firstListOption);
-        List<Contract>firstListContract=new ArrayList<>();
-        firstListContract.add(firstContract);
-        Customer firstCustomer=new Customer("Ivan","Ivanov", LocalDate.of(2017, Month.NOVEMBER, 30),"1234 987654 SPb TP№70"
-        ,"Spb,Planernay 71,86",firstListContract,"aasd.spb@mail.ru","12345",true);
+        Option option=new Option("unlInternet",50.00,0.00);
+        Tariff firstTariff=new Tariff("unlimited",123.99);
+        firstTariff.addOptionToTariff(option);
+      Customer firstCustomer=new Customer("Ivan","Ivanov", LocalDate.of(2017, Month.NOVEMBER, 30),"1234 987654 SPb TP№70"
+                ,"Spb,Planernay 71,86","aasd.spb@mail.ru","12345",true);
+        Contract firstContract=new Contract("89500148710", firstTariff);
+
+        firstCustomer.addContractToCustumer(firstContract);
+     //   System.out.println(firstCustomer.getContractIdList());
+
+  //      firstContract.addOptionToContract(option);
         session.beginTransaction();
-        session.save(option);
-        session.save(firstTariff);
-        session.save(firstContract);
-        session.save(firstCustomer);
+        session.persist(option);
+        session.persist(firstTariff);
+        session.persist(firstContract);
+        session.persist(firstCustomer);
         session.getTransaction().commit();
         session.close();
     }

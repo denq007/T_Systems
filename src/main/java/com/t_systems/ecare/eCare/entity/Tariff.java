@@ -1,6 +1,7 @@
 package com.t_systems.ecare.eCare.entity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -15,20 +16,33 @@ public class Tariff {
     @Column(name = "price")
     private double price;
         //TO DO about CascadeType.ALL
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade=CascadeType.ALL/*{CascadeType.PERSIST,CascadeType.MERGE, CascadeType.REFRESH,CascadeType.DETACH}*/,fetch = FetchType.EAGER)
     @JoinTable(name = "tariff_option", joinColumns = @JoinColumn(name = "tariff_id"),
             inverseJoinColumns =@JoinColumn(name = "option_id"))
-    private List<Option> optionId;
+    private List<Option> optionIdList;
 
     public Tariff() {
     }
 
-    public Tariff(String name, double price, List<Option> optionId) {
+    public Tariff(String name, double price) {
         this.name = name;
         this.price = price;
-        this.optionId = optionId;
     }
+    public void addOptionToTariff(Option option)
+    {
+        if(optionIdList==null)
+            optionIdList=new ArrayList<>();
+        optionIdList.add(option);
 
+    }
+    @Override
+    public String toString() {
+        return "Tariff{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", price=" + price +
+                '}';
+    }
     public int getId() {
         return id;
     }
@@ -53,11 +67,11 @@ public class Tariff {
         this.price = price;
     }
 
-    public List<Option> getOptionId() {
-        return optionId;
+    public List<Option> getOptionIdList() {
+        return optionIdList;
     }
 
-    public void setOptionId(List<Option> optionId) {
-        this.optionId = optionId;
+    public void setOptionIdList(List<Option> optionIdList) {
+        this.optionIdList = optionIdList;
     }
 }

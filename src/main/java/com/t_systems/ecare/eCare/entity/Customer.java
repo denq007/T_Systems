@@ -2,6 +2,7 @@ package com.t_systems.ecare.eCare.entity;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -21,9 +22,10 @@ public class Customer {
     private String passportDetails;
     @Column(name = "address")
     private String address;
-    @OneToMany(mappedBy = "id")
-    @Column(name = "contract_id")
-    private List<Contract> contractId;
+    //it's work @OneToMany(mappedBy ="id",cascade = CascadeType.ALL/*{CascadeType.PERSIST,CascadeType.MERGE, CascadeType.REFRESH,CascadeType.DETACH}*/)
+    @OneToMany(cascade = CascadeType.ALL/*{CascadeType.PERSIST,CascadeType.MERGE, CascadeType.REFRESH,CascadeType.DETACH}*/,fetch = FetchType.EAGER)
+    @JoinColumn(name = "contract_id")//contract_id
+    private List<Contract> contractIdList;
     @Column(name = "email")
     private String email;
     @Column(name = "customer_password")
@@ -34,18 +36,36 @@ public class Customer {
     public Customer() {
     }
 
-    public Customer(String name, String surname, LocalDate birthDate, String passportDetails, String address, List<Contract> contractId, String email, String password, boolean check) {
+    public Customer(String name, String surname, LocalDate birthDate, String passportDetails, String address, String email, String password, boolean check) {
         this.name = name;
         this.surname = surname;
         this.birthDate = birthDate;
         this.passportDetails = passportDetails;
         this.address = address;
-        this.contractId = contractId;
         this.email = email;
         this.password = password;
         this.check = check;
     }
-
+    public void addContractToCustumer(Contract contract)
+    {
+        if(contractIdList==null)
+            contractIdList=new ArrayList<>();
+        contractIdList.add(contract);
+    }
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", birthDate=" + birthDate +
+                ", passportDetails='" + passportDetails + '\'' +
+                ", address='" + address + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", check=" + check +
+                '}';
+    }
     public int getId() {
         return id;
     }
@@ -94,12 +114,12 @@ public class Customer {
         this.address = address;
     }
 
-    public List<Contract> getContractId() {
-        return contractId;
+    public List<Contract> getContractIdList() {
+        return contractIdList;
     }
 
-    public void setContractId(List<Contract> contractId) {
-        this.contractId = contractId;
+    public void setContractIdList(List<Contract> contractId) {
+        this.contractIdList = contractId;
     }
 
     public String getEmail() {

@@ -1,6 +1,7 @@
 package com.t_systems.ecare.eCare.entity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -16,12 +17,18 @@ public class Option {
     private double price;
     @Column(name = "connection_cost")
     private double connectionCost;
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL/*{CascadeType.PERSIST,CascadeType.MERGE, CascadeType.REFRESH,CascadeType.DETACH}*/,fetch = FetchType.EAGER)
     @JoinTable(name = "tariff_option",joinColumns = @JoinColumn(name="option_id"),
             inverseJoinColumns = @JoinColumn(name = "tariff_id")
     )
-    private List<Tariff> tariff;
+    private List<Tariff> tariffsList;
 
+    public void addTariffToOption(Tariff tariff)
+    {
+        if(tariffsList==null)
+            tariffsList=new ArrayList<>();
+        tariffsList.add(tariff);
+    }
     public Option() {
     }
 
@@ -29,13 +36,20 @@ public class Option {
         return id;
     }
 
-    public Option(String name, double price, double connectionCost, List<Tariff> tariff) {
+    public Option(String name, double price, double connectionCost) {
         this.name = name;
         this.price = price;
         this.connectionCost = connectionCost;
-        this.tariff = tariff;
     }
-
+    @Override
+    public String toString() {
+        return "Option{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", price=" + price +
+                ", connectionCost=" + connectionCost +
+                '}';
+    }
     public void setId(int id) {
         this.id = id;
     }
@@ -64,12 +78,12 @@ public class Option {
         this.connectionCost = connectionCost;
     }
 
-    public List<Tariff> getTariff() {
-        return tariff;
+    public List<Tariff> getTariffsList() {
+        return tariffsList;
     }
 
-    public void setTariff(List<Tariff> tariff) {
-        this.tariff = tariff;
+    public void setTariffsList(List<Tariff> tariff) {
+        this.tariffsList = tariff;
     }
 
 
