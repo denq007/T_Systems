@@ -28,7 +28,7 @@ public class Main {
         firstTariff.addOptionToTariff(option);
       Customer firstCustomer=new Customer("Ivan","Ivanov", LocalDate.of(2017, Month.NOVEMBER, 30),"1234 987654 SPb TP№70"
                 ,"Spb,Planernay 71,86","aasd.spb@mail.ru","12345",true);
-        Contract firstContract=new Contract("89500148710", firstTariff);
+        Contract firstContract=new Contract("89500148710", firstTariff,firstCustomer);
 
         firstCustomer.addContractToCustumer(firstContract);
      //   System.out.println(firstCustomer.getContractIdList());

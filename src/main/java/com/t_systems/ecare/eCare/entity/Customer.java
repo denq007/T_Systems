@@ -50,6 +50,7 @@ public class Customer {
         if(contractIdList==null)
             contractIdList=new ArrayList<>();
         contractIdList.add(contract);
+        contract.setCustomerId(this);
     }
     @Override
     public String toString() {

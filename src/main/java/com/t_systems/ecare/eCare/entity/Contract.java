@@ -23,10 +23,20 @@ public class Contract {
     public Contract() {
     }
 
-    public Contract( String number, Tariff tariffId) {
+    public Customer getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(Customer customerId) {
+        this.customerId = customerId;
+    }
+
+    public Contract(String number, Tariff tariffId, Customer customerId) {
         this.number = number;
         this.tariffId = tariffId;
+        this.customerId = customerId;
     }
+
   /*  public void addOptionToContract(Option option)
     {
         if(optionIdList==null)
