@@ -23,8 +23,7 @@ public class Customer {
     @Column(name = "address")
     private String address;
     //it's work @OneToMany(mappedBy ="id",cascade = CascadeType.ALL/*{CascadeType.PERSIST,CascadeType.MERGE, CascadeType.REFRESH,CascadeType.DETACH}*/)
-    @OneToMany(cascade = CascadeType.ALL/*{CascadeType.PERSIST,CascadeType.MERGE, CascadeType.REFRESH,CascadeType.DETACH}*/,fetch = FetchType.EAGER)
-    @JoinColumn(name = "contract_id")//contract_id
+    @OneToMany(mappedBy = "id")
     private List<Contract> contractIdList;
     @Column(name = "email")
     private String email;

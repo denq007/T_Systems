@@ -16,6 +16,9 @@ public class Contract {
     @ManyToOne(cascade = {CascadeType.PERSIST,CascadeType.MERGE, CascadeType.REFRESH,CascadeType.DETACH},fetch = FetchType.EAGER)
     @JoinColumn(name = "tariff_id",referencedColumnName = "id")
     private Tariff tariffId;
+    @ManyToOne(cascade = {CascadeType.PERSIST,CascadeType.MERGE, CascadeType.REFRESH,CascadeType.DETACH},fetch = FetchType.EAGER)
+    @JoinColumn(name = "customer_id",referencedColumnName = "id")
+    private Customer customerId;
 
     public Contract() {
     }
