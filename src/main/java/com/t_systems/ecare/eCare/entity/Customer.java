@@ -23,7 +23,7 @@ public class Customer {
     @Column(name = "address")
     private String address;
     //it's work @OneToMany(mappedBy ="id",cascade = CascadeType.ALL/*{CascadeType.PERSIST,CascadeType.MERGE, CascadeType.REFRESH,CascadeType.DETACH}*/)
-    @OneToMany(mappedBy = "id")
+    @OneToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE, CascadeType.REFRESH,CascadeType.DETACH},mappedBy = "id")
     private List<Contract> contractIdList;
     @Column(name = "email")
     private String email;

@@ -37,7 +37,6 @@ CREATE TABLE customer
     birth_date        DATE,
     passport_details  varchar(255),
     address           varchar(255),
-    сontract_id       int,
     email             varchar(255),
     customer_password VARCHAR(255),
     enabled           tinyint(1),
@@ -53,7 +52,3 @@ CREATE TABLE сontract
     FOREIGN KEY (tariff_id) REFERENCES eCare_db.tariff (id),
     FOREIGN KEY (customer_id) REFERENCES eCare_db.customer (id)
 );
-ALTER TABLE customer
-    ADD constraint fk_customer_сontract
-        FOREIGN KEY (сontract_id)
-            REFERENCES сontract (id)
