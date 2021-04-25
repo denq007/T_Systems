@@ -31,11 +31,11 @@ public class Customer {
     //TO DO add dependens after add table for security
     private String password;
     @Column(name = "enabled")
-    boolean check;
+    private int check;
     public Customer() {
     }
 
-    public Customer(String name, String surname, LocalDate birthDate, String passportDetails, String address, String email, String password, boolean check) {
+    public Customer(String name, String surname, LocalDate birthDate, String passportDetails, String address, String email, String password, int check) {
         this.name = name;
         this.surname = surname;
         this.birthDate = birthDate;
@@ -45,6 +45,8 @@ public class Customer {
         this.password = password;
         this.check = check;
     }
+
+
     public void addContractToCustumer(Contract contract)
     {
         if(contractIdList==null)
@@ -138,16 +140,11 @@ public class Customer {
         this.password = password;
     }
 
-    public boolean isCheck() {
+    public int getCheck() {
         return check;
     }
 
-    public void setCheck(boolean check) {
+    public void setCheck(int check) {
         this.check = check;
     }
-
-
-
-
-
 }

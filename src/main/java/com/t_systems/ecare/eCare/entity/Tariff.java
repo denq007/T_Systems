@@ -20,14 +20,27 @@ public class Tariff {
     @JoinTable(name = "tariff_option", joinColumns = @JoinColumn(name = "tariff_id"),
             inverseJoinColumns =@JoinColumn(name = "option_id"))
     private List<Option> optionIdList;
+    @Column(name="old")
+    boolean isOld;
+
 
     public Tariff() {
     }
 
-    public Tariff(String name, double price) {
+    public boolean isOld() {
+        return isOld;
+    }
+
+    public void setOld(boolean old) {
+        isOld = old;
+    }
+
+    public Tariff(String name, double price, boolean isOld) {
         this.name = name;
         this.price = price;
+        this.isOld = isOld;
     }
+
     public void addOptionToTariff(Option option)
     {
         if(optionIdList==null)

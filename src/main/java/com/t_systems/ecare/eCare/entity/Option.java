@@ -22,6 +22,9 @@ public class Option {
             inverseJoinColumns = @JoinColumn(name = "tariff_id")
     )
     private List<Tariff> tariffsList;
+    //TODO about ENUM
+    @Column(name = "group_id")
+    int numberGroup;
 
     public void addTariffToOption(Tariff tariff)
     {
@@ -32,15 +35,25 @@ public class Option {
     public Option() {
     }
 
+    public int getNumberGroup() {
+        return numberGroup;
+    }
+
+    public void setNumberGroup(int numberGroup) {
+        this.numberGroup = numberGroup;
+    }
+
     public int getId() {
         return id;
     }
 
-    public Option(String name, double price, double connectionCost) {
+    public Option(String name, double price, double connectionCost, int numberGroup) {
         this.name = name;
         this.price = price;
         this.connectionCost = connectionCost;
+        this.numberGroup = numberGroup;
     }
+
     @Override
     public String toString() {
         return "Option{" +

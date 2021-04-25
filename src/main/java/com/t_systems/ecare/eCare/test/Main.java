@@ -31,7 +31,7 @@ public class Main {
         Option option1=new Option("call",45.00,0.0);
         secondTariff.addOptionToTariff(option1);
       Customer firstCustomer=new Customer("Ivan","Ivanov", LocalDate.of(2017, Month.NOVEMBER, 30),"1234 987654 SPb TP№70"
-                ,"Spb,Planernay 71,86","aasd.spb@mail.ru","12345",true);
+                ,"Spb,Planernay 71,86","aasd.spb@mail.ru","12345",1);
         Contract firstContract=new Contract("89500148710", firstTariff,firstCustomer);
         Contract secondContract=new Contract("89500148711",secondTariff,firstCustomer);
         firstCustomer.addContractToCustumer(firstContract);

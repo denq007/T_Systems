@@ -29,6 +29,7 @@ CREATE TABLE tariff_option
     FOREIGN KEY (tariff_id) REFERENCES eCare_db.tariff (id),
     FOREIGN KEY (option_id) REFERENCES eCare_db.options (id)
 );
+/* 1 -ok, 0-blocked by User,2 - blocked by Admin*/
 CREATE TABLE customer
 (
     id                int NOT NULL AUTO_INCREMENT,
