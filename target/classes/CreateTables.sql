@@ -10,6 +10,7 @@ CREATE TABLE options
     name            varchar(255),
     price           DOUBLE,
     connection_cost DOUBLE,
+    group_id int,
     PRIMARY KEY (id)
 );
 
@@ -18,6 +19,7 @@ CREATE TABLE tariff
     id    int NOT NULL AUTO_INCREMENT,
     name  varchar(255),
     price DOUBLE,
+    old BOOL,
     PRIMARY KEY (id)
 );
 

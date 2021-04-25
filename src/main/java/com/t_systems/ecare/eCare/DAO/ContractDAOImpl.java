@@ -12,14 +12,5 @@ public class ContractDAOImpl implements ContractDAO{
 
    private SessionFactory sessionFactory;
 
-    @Override
-    public List<Contract> getAllContracts() {
-        return null;
-    }
-
-    @Override
-    public Contract getContract(int id) {
-        return null;
-    }
 
 }

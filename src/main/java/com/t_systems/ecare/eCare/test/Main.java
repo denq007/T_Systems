@@ -15,7 +15,7 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        SessionFactory sessionFactory= new Configuration()
+      /*  SessionFactory sessionFactory= new Configuration()
                 .configure("hibernate.cfg.xml")
                 .addAnnotatedClass(Contract.class)
                 .addAnnotatedClass(Customer.class)
@@ -48,6 +48,6 @@ public class Main {
         session.persist(secondTariff);
         session.persist(secondContract);
         session.getTransaction().commit();
-        session.close();
+        session.close();*/
     }
 }
