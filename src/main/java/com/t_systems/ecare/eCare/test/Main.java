@@ -7,6 +7,9 @@ import com.t_systems.ecare.eCare.entity.Tariff;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.time.LocalDate;
 import java.time.Month;
@@ -14,21 +17,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
+
+
     public static void main(String[] args) {
-      /*  SessionFactory sessionFactory= new Configuration()
-                .configure("hibernate.cfg.xml")
-                .addAnnotatedClass(Contract.class)
-                .addAnnotatedClass(Customer.class)
-                .addAnnotatedClass(Option.class)
-                .addAnnotatedClass(Tariff.class)
-                .buildSessionFactory();
+
+/*        ClassPathXmlApplicationContext context=new ClassPathXmlApplicationContext("E:\\T-Systems учеба\\eCare\\src\\main\\webapp\\WEB-INF\\applicationContext.xml");
+        SessionFactory sessionFactory=context.getBean("sessionFactory",SessionFactory.class);
         Session session=sessionFactory.getCurrentSession();
-        Option option=new Option("unlInternet",50.00,0.00);
-        Tariff firstTariff=new Tariff("unlimited",123.99);
+        Option option=new Option("unlInternet",50.00,0.00,1);
+        Tariff firstTariff=new Tariff("unlimited",123.99,true);
         firstTariff.addOptionToTariff(option);
-        Tariff secondTariff=new Tariff("Best",123.99);
+        Tariff secondTariff=new Tariff("Best",123.99,true);
         secondTariff.addOptionToTariff(option);
-        Option option1=new Option("call",45.00,0.0);
+        Option option1=new Option("call",45.00,0.0,1);
         secondTariff.addOptionToTariff(option1);
       Customer firstCustomer=new Customer("Ivan","Ivanov", LocalDate.of(2017, Month.NOVEMBER, 30),"1234 987654 SPb TP№70"
                 ,"Spb,Planernay 71,86","aasd.spb@mail.ru","12345",1);

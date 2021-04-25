@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.io.Serializable;
 import java.util.List;
 
-public abstract class AbstractHibernateDAO< T extends Serializable>{
+public abstract class AbstractHibernateDAO< T >{
     private Class< T > clazz;
 
     @Autowired

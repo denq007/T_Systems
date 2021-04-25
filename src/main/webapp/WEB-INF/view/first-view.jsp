@@ -3,7 +3,7 @@
 
 <body>
 
-<h2>I wish you luck in Spring MVC learning</h2>
+<h2>You have been added</h2>
 <br>
 
 </body>

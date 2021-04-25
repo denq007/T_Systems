@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
@@ -21,5 +22,19 @@ public class CustomerController {
     List<Customer> listCustomer= customerService.getAllCustomer();
     model.addAttribute("allCustomer",listCustomer);
     return "all-customer";
+    }
+
+    @RequestMapping("/addNewCustomer")
+    public String addNewCustomer(Model model)
+    {
+        Customer customer=new Customer();
+        model.addAttribute("customer",customer);
+        return "customer-info";
+    }
+    @RequestMapping("/saveCustumer")
+    public String saveCustomer(@ModelAttribute("customer")Customer customer)
+    {
+        customerService.saveCustomer(customer);
+        return "redirect:/showallcustomer";
     }
 }
