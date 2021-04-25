@@ -1,5 +1,7 @@
 package com.t_systems.ecare.eCare.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -17,6 +19,7 @@ public class Customer {
     @Column(name = "surname")
     private String surname;
     @Column(name="birth_date")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate birthDate;
     @Column(name="passport_details")
     private String passportDetails;
