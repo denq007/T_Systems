@@ -15,7 +15,6 @@ public class CustomerService {
     @Autowired
     CustomerDAO customerDAO;
 
-
     @Transactional
     public List<Customer>getAllCustomer()
     {
