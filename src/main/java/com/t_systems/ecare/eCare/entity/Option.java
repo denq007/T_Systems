@@ -1,10 +1,17 @@
 package com.t_systems.ecare.eCare.entity;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Getter
+@Setter
 @Entity
+@NoArgsConstructor
 @Table(name = "options")
 public class Option {
     @Id
@@ -32,20 +39,6 @@ public class Option {
             tariffsList=new ArrayList<>();
         tariffsList.add(tariff);
     }
-    public Option() {
-    }
-
-    public int getNumberGroup() {
-        return numberGroup;
-    }
-
-    public void setNumberGroup(int numberGroup) {
-        this.numberGroup = numberGroup;
-    }
-
-    public int getId() {
-        return id;
-    }
 
     public Option(String name, double price, double connectionCost, int numberGroup) {
         this.name = name;
@@ -63,42 +56,5 @@ public class Option {
                 ", connectionCost=" + connectionCost +
                 '}';
     }
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
-    public double getConnectionCost() {
-        return connectionCost;
-    }
-
-    public void setConnectionCost(double connectionCost) {
-        this.connectionCost = connectionCost;
-    }
-
-    public List<Tariff> getTariffsList() {
-        return tariffsList;
-    }
-
-    public void setTariffsList(List<Tariff> tariff) {
-        this.tariffsList = tariff;
-    }
-
-
 
 }

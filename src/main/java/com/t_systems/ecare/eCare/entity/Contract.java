@@ -1,10 +1,13 @@
 package com.t_systems.ecare.eCare.entity;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
-
+@Getter
+@Setter
 @Entity
+@NoArgsConstructor
 @Table(name = "сontract")
 public class Contract {
     @Id
@@ -20,30 +23,11 @@ public class Contract {
     @JoinColumn(name = "customer_id",referencedColumnName = "id")
     private Customer customerId;
 
-    public Contract() {
-    }
-
-    public Customer getCustomerId() {
-        return customerId;
-    }
-
-    public void setCustomerId(Customer customerId) {
-        this.customerId = customerId;
-    }
-
     public Contract(String number, Tariff tariffId, Customer customerId) {
         this.number = number;
         this.tariffId = tariffId;
         this.customerId = customerId;
     }
-
-  /*  public void addOptionToContract(Option option)
-    {
-        if(optionIdList==null)
-            optionIdList=new ArrayList<>();
-        optionIdList.add(option);
-
-    }*/
 
     @Override
     public String toString() {
@@ -53,40 +37,5 @@ public class Contract {
                 ", tariffId=" + tariffId +
                 '}';
     }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getNumber() {
-        return number;
-    }
-
-    public void setNumber(String number) {
-        this.number = number;
-    }
-
-    public Tariff getTariffId() {
-        return tariffId;
-    }
-
-    public void setTariffId(Tariff tariffId) {
-        this.tariffId = tariffId;
-    }
-
-    /*public List<Option> getOptionIdList() {
-        return optionIdList;
-    }
-
-    public void setOptionIdList(List<Option> optionId) {
-        this.optionIdList = optionId;
-    }
-*/
-
-
 
 }

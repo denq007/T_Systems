@@ -1,5 +1,8 @@
 package com.t_systems.ecare.eCare.entity;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -7,7 +10,10 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+@Getter
+@Setter
 @Entity
+@NoArgsConstructor
 @Table(name = "customer")
 public class Customer {
     @Id
@@ -25,7 +31,6 @@ public class Customer {
     private String passportDetails;
     @Column(name = "address")
     private String address;
-    //it's work @OneToMany(mappedBy ="id",cascade = CascadeType.ALL/*{CascadeType.PERSIST,CascadeType.MERGE, CascadeType.REFRESH,CascadeType.DETACH}*/)
     @OneToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE, CascadeType.REFRESH,CascadeType.DETACH},mappedBy = "id")
     private List<Contract> contractIdList;
     @Column(name = "email")
@@ -35,8 +40,6 @@ public class Customer {
     private String password;
     @Column(name = "enabled")
     private int check;
-    public Customer() {
-    }
 
     public Customer(String name, String surname, LocalDate birthDate, String passportDetails, String address, String email, String password, int check) {
         this.name = name;
@@ -70,84 +73,5 @@ public class Customer {
                 ", password='" + password + '\'' +
                 ", check=" + check +
                 '}';
-    }
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getSurname() {
-        return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
-
-    public LocalDate getBirthDate() {
-        return birthDate;
-    }
-
-    public void setBirthDate(LocalDate birthDate) {
-        this.birthDate = birthDate;
-    }
-
-    public String getPassportDetails() {
-        return passportDetails;
-    }
-
-    public void setPassportDetails(String passportDetails) {
-        this.passportDetails = passportDetails;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public List<Contract> getContractIdList() {
-        return contractIdList;
-    }
-
-    public void setContractIdList(List<Contract> contractId) {
-        this.contractIdList = contractId;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public int getCheck() {
-        return check;
-    }
-
-    public void setCheck(int check) {
-        this.check = check;
     }
 }

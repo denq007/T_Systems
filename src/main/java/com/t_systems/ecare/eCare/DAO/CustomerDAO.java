@@ -9,5 +9,4 @@ public class CustomerDAO extends AbstractHibernateDAO{
         setClazz(Customer.class);
     }
 
-
 }

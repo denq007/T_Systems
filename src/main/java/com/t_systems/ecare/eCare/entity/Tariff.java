@@ -1,10 +1,17 @@
 package com.t_systems.ecare.eCare.entity;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Getter
+@Setter
 @Entity
+@NoArgsConstructor
 @Table(name = "tariff")
 public class Tariff {
     @Id
@@ -23,24 +30,11 @@ public class Tariff {
     @Column(name="old")
     boolean isOld;
 
-
-    public Tariff() {
-    }
-
-    public boolean isOld() {
-        return isOld;
-    }
-
-    public void setOld(boolean old) {
-        isOld = old;
-    }
-
     public Tariff(String name, double price, boolean isOld) {
         this.name = name;
         this.price = price;
         this.isOld = isOld;
     }
-
     public void addOptionToTariff(Option option)
     {
         if(optionIdList==null)
@@ -55,36 +49,5 @@ public class Tariff {
                 ", name='" + name + '\'' +
                 ", price=" + price +
                 '}';
-    }
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
-    public List<Option> getOptionIdList() {
-        return optionIdList;
-    }
-
-    public void setOptionIdList(List<Option> optionIdList) {
-        this.optionIdList = optionIdList;
     }
 }

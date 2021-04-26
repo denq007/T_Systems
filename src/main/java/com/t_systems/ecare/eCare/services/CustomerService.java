@@ -21,16 +21,7 @@ public class CustomerService {
     {
         return customerDAO.findAll();
     }
-/*    @Autowired
-    private SessionFactory sessionFactory;*/
- /*   @Transactional
-    public List<Customer>getAllCustomer1()
-    {
-        Session session = sessionFactory.getCurrentSession();
-        List<Customer> allEmployees = session.createQuery("from Customer", Customer.class).
-                getResultList();
-        return allEmployees;
-    }*/
+
     @Transactional
     public void saveCustomer(Customer customer)
     {

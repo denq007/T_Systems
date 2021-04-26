@@ -17,12 +17,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
-
+    @Autowired
+  static   private SessionFactory sessionFactory;
 
     public static void main(String[] args) {
 
-/*        ClassPathXmlApplicationContext context=new ClassPathXmlApplicationContext("E:\\T-Systems учеба\\eCare\\src\\main\\webapp\\WEB-INF\\applicationContext.xml");
-        SessionFactory sessionFactory=context.getBean("sessionFactory",SessionFactory.class);
+   //  ClassPathXmlApplicationContext context=new ClassPathXmlApplicationContext("E:\\T-Systems учеба\\eCare\\src\\main\\webapp\\WEB-INF\\applicationContext.xml");
         Session session=sessionFactory.getCurrentSession();
         Option option=new Option("unlInternet",50.00,0.00,1);
         Tariff firstTariff=new Tariff("unlimited",123.99,true);
@@ -49,6 +49,6 @@ public class Main {
         session.persist(secondTariff);
         session.persist(secondContract);
         session.getTransaction().commit();
-        session.close();*/
+        session.close();
     }
 }
