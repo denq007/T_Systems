@@ -31,7 +31,7 @@ public class CustomerController {
         model.addAttribute("customer",customer);
         return "customer-info";
     }
-    @RequestMapping("/saveCustumer")
+    @RequestMapping("/saveCustomer")
     public String saveCustomer(@ModelAttribute("customer")Customer customer)
     {
         customerService.saveCustomer(customer);
