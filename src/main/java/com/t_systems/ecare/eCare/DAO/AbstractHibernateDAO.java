@@ -3,8 +3,6 @@ package com.t_systems.ecare.eCare.DAO;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.hibernate.Session;
-import org.springframework.transaction.annotation.Transactional;
-
 import java.io.Serializable;
 import java.util.List;
 

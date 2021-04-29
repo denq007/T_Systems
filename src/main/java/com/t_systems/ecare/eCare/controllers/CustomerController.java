@@ -2,6 +2,7 @@ package com.t_systems.ecare.eCare.controllers;
 
 import com.t_systems.ecare.eCare.DAO.CustomerDAO;
 import com.t_systems.ecare.eCare.entity.Customer;
+import com.t_systems.ecare.eCare.entity.User;
 import com.t_systems.ecare.eCare.services.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,12 +25,12 @@ public class CustomerController {
     return "all-customer";
     }
 
-    @RequestMapping("/addNewCustomer")
+    @RequestMapping("/addnewcostumer")
     public String addNewCustomer(Model model)
     {
         Customer customer=new Customer();
         model.addAttribute("customer",customer);
-        return "customer-info";
+        return "addnewcostumer";
     }
     @RequestMapping("/saveCustomer")
     public String saveCustomer(@ModelAttribute("customer")Customer customer)
@@ -37,4 +38,6 @@ public class CustomerController {
         customerService.saveCustomer(customer);
         return "redirect:/showallcustomer";
     }
+
+
 }

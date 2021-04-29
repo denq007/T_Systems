@@ -27,10 +27,6 @@
     <br><br>
     Email <form:input path="email"/>
     <br><br>
-    Password <form:input path="password"/>
-    <br><br>
-    Enabled <form:input path="check"/>
-    <br><br>
     <input type="submit" value="Save">
 </form:form>
 </body>

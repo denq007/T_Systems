@@ -1,3 +1,4 @@
+/*
 import org.hibernate.SessionFactory;
 import com.t_systems.ecare.eCare.entity.Contract;
 import com.t_systems.ecare.eCare.entity.Customer;
@@ -37,3 +38,4 @@ public class TestDao {
 
     }
 }
+*/

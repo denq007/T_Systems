@@ -35,23 +35,15 @@ public class Customer {
     private List<Contract> contractIdList;
     @Column(name = "email")
     private String email;
-    @Column(name = "customer_password")
-    //TO DO add dependens after add table for security
-    private String password;
-    @Column(name = "enabled")
-    private int check;
 
-    public Customer(String name, String surname, LocalDate birthDate, String passportDetails, String address, String email, String password, int check) {
+    public Customer(String name, String surname, LocalDate birthDate, String passportDetails, String address, String email) {
         this.name = name;
         this.surname = surname;
         this.birthDate = birthDate;
         this.passportDetails = passportDetails;
         this.address = address;
         this.email = email;
-        this.password = password;
-        this.check = check;
     }
-
 
     public void addContractToCustumer(Contract contract)
     {
@@ -59,19 +51,5 @@ public class Customer {
             contractIdList=new ArrayList<>();
         contractIdList.add(contract);
         contract.setCustomerId(this);
-    }
-    @Override
-    public String toString() {
-        return "Customer{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", birthDate=" + birthDate +
-                ", passportDetails='" + passportDetails + '\'' +
-                ", address='" + address + '\'' +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", check=" + check +
-                '}';
     }
 }

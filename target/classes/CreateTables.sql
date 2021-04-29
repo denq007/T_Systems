@@ -41,8 +41,6 @@ CREATE TABLE customer
     passport_details  varchar(255),
     address           varchar(255),
     email             varchar(255),
-    customer_password VARCHAR(255),
-    enabled           tinyint(1),
     PRIMARY KEY (id)
 );
 CREATE TABLE сontract
@@ -51,7 +49,26 @@ CREATE TABLE сontract
     number      varchar(255),
     tariff_id   int,
     customer_id int,
+    blocked_by_user tinyint(1),
+    blocked_by_admin tinyint(1),
     PRIMARY KEY (id),
     FOREIGN KEY (tariff_id) REFERENCES eCare_db.tariff (id),
     FOREIGN KEY (customer_id) REFERENCES eCare_db.customer (id)
+);
+CREATE TABLE user(
+    id          int NOT NULL AUTO_INCREMENT,
+    customer_id int ,
+    login varchar(255),
+    password VARCHAR(255),
+    blocked tinyint(1),
+    PRIMARY KEY(id),
+    FOREIGN KEY(customer_id) REFERENCES eCare_db.customer (id)
+);
+
+CREATE TABLE user_role
+(
+    customer_id int NOT NULL,
+    roles enum("Customer","Admin","Employee"),
+    PRIMARY KEY(customer_id,roles),
+    FOREIGN KEY(customer_id) REFERENCES eCare_db.user(customer_id)
 );

@@ -8,11 +8,11 @@
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.82.0">
     <title>Pricing example · Bootstrap v5.0</title>
-
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
     <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/pricing/">
 
     <!-- Bootstrap core CSS -->
-    <link href="../static/css/bootstrap.min.css" rel="stylesheet">
+   <%-- <link href="<c:url value="../static/css/bootstrap.min.css"/>" rel="stylesheet">--%>
 
     <style>
         .bd-placeholder-img {
@@ -31,7 +31,7 @@
     </style>
 
     <!-- Custom styles for this template -->
-    <link href="../static/css/pricing.css" rel="stylesheet">
+    <link href="<c:url value="../static/css/pricing.css"/>" rel="stylesheet">
 </head>
 <body>
 
@@ -50,9 +50,9 @@
         </a>
 
         <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
-            <a class="me-3 py-2 text-dark text-decoration-none" href="#">Features</a>
+            <a class="me-3 py-2 text-dark text-decoration-none" href="/sign-in">Sign-in</a>
             <a class="me-3 py-2 text-dark text-decoration-none" href="#">Enterprise</a>
-            <a class="me-3 py-2 text-dark text-decoration-none" href="#">Support</a>
+            <a class="me-3 py-2 text-dark text-decoration-none" href="">Support</a>
             <a class="py-2 text-dark text-decoration-none" href="#">Pricing</a>
         </nav>
     </header>
@@ -212,6 +212,6 @@
         </div>
     </footer>
 </div>
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
 </body>
 </html>

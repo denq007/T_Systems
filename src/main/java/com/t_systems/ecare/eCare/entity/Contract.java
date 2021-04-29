@@ -22,11 +22,17 @@ public class Contract {
     @ManyToOne(cascade = {CascadeType.PERSIST,CascadeType.MERGE, CascadeType.REFRESH,CascadeType.DETACH},fetch = FetchType.EAGER)
     @JoinColumn(name = "customer_id",referencedColumnName = "id")
     private Customer customerId;
+    @Column(name = "blocked_by_user")
+    boolean blockedByUser;
+    @Column(name = "blocked_by_admin")
+    boolean blockedByAdmin;
 
-    public Contract(String number, Tariff tariffId, Customer customerId) {
+    public Contract(String number, Tariff tariffId, Customer customerId, boolean blockedByUser, boolean blockedByAdmin) {
         this.number = number;
         this.tariffId = tariffId;
         this.customerId = customerId;
+        this.blockedByUser = blockedByUser;
+        this.blockedByAdmin = blockedByAdmin;
     }
 
     @Override
