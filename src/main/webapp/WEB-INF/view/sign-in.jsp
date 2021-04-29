@@ -65,12 +65,12 @@
         <input type="checkbox" value="remember-me"> Remember me
       </label>
     </div>
-    <form action="index.jsp" method="get">
+    <form action="index.jsp" method="get" >
     <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
     </form>
-    <form action="/eCare_war_exploded/registration" method="get">
+    <form action="/registration" method="get">
     <button class="w-100 btn btn-lg btn-primary" type="submit">Registration</button>
-    <p class="mt-5 mb-3 text-muted">&copy; 2017–2021</p>
+      <p class="mt-5 mb-3 text-muted">&copy; 2021–2021</p>
      </form>
   </form>
 </main>
