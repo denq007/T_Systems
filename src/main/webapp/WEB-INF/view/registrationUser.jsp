@@ -46,24 +46,23 @@
 </head>
 <body class="text-center">
 
-<main class="form-signin">
-    <form>
-        <img class="mb-4" src="../assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
-        <h1 class="h3 mb-3 fw-normal">Please write your email and password</h1>
+<main class="form-signin" style="width:100%; max-width: 330px; padding: 15px; margin: auto">
 
+
+<form:form action="saveuser" modelAttribute="user">
+
+        <h1 class="h3 mb-3 fw-normal">Please write your email and password</h1>
         <div class="form-floating">
-            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+            <form:input path="login" class="form-control" id="floatingInput" placeholder="name@example.com"/>
             <label for="floatingInput">Email address</label>
         </div>
         <div class="form-floating">
-            <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+            <form:input path="password" class="form-control" id="floatingPassword" placeholder="Password"/>
             <label for="floatingPassword">Password</label>
         </div>
-
-        <form action="index.jsp" method="get">
             <button class="w-100 btn btn-lg btn-primary" type="submit">Sign up</button>
-        </form>
-    </form>
+</form:form>
+
 </main>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>

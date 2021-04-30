@@ -46,9 +46,8 @@
 </head>
 <body class="text-center">
 
-<main class="form-signin">
+<main class="form-signin" style="width:100%; max-width: 330px; padding: 15px; margin: auto">
   <form>
-    <img class="mb-4" src="../assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
     <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
 
     <div class="form-floating">
@@ -68,7 +67,7 @@
     <form action="index.jsp" method="get" >
     <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
     </form>
-    <form action="/registration" method="get">
+    <form action="/user/registration" method="get">
     <button class="w-100 btn btn-lg btn-primary" type="submit">Registration</button>
       <p class="mt-5 mb-3 text-muted">&copy; 2021–2021</p>
      </form>

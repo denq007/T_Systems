@@ -6,7 +6,7 @@ import org.hibernate.Session;
 import java.io.Serializable;
 import java.util.List;
 
-public abstract class AbstractHibernateDAO< T >{
+public abstract class AbstractHibernateDAO< T  >{
     private Class< T > clazz;
 
     @Autowired
@@ -19,6 +19,10 @@ public abstract class AbstractHibernateDAO< T >{
     public T findOne(long id) {
         return (T) getCurrentSession().get( clazz, id );
     }
+
+   /* public T findByName(String name) {
+        return (T) getCurrentSession().get( clazz, name );
+    }*/
 
     public List< T > findAll() {
         return getCurrentSession()

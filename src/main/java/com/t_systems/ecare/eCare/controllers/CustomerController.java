@@ -8,8 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,25 +19,26 @@ public class CustomerController {
     @Autowired
     private CustomerService customerService;
 
-        @RequestMapping("/showallcustomer")
+    @RequestMapping("/showallcustomer")
     public String showAllCustomer(Model model) {
     List<Customer> listCustomer= customerService.getAllCustomer();
     model.addAttribute("allCustomer",listCustomer);
     return "all-customer";
     }
 
-    @RequestMapping("/addnewcostumer")
+    @GetMapping("/addnewcustomer")
     public String addNewCustomer(Model model)
     {
         Customer customer=new Customer();
         model.addAttribute("customer",customer);
-        return "addnewcostumer";
+        return "addnewcustomer";
     }
-    @RequestMapping("/saveCustomer")
+
+    @PostMapping(value = "/saveCustomer")
     public String saveCustomer(@ModelAttribute("customer")Customer customer)
     {
         customerService.saveCustomer(customer);
-        return "redirect:/showallcustomer";
+        return "home";
     }
 
 
