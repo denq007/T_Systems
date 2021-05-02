@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.io.Serializable;
 import java.util.List;
 @Service
-public class CustomerService {
+public class CustomerServiceImpl implements CustomerService{
     @Autowired
     CustomerDAO customerDAO;
 

@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.io.Serializable;
 
 @Service
-public class UserService {
+public class UserServiceImpl implements UserService{
     @Autowired
     UserDao userDao;
 

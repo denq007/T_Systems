@@ -31,7 +31,9 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 .antMatchers("/","/registration","/showallcustomer","/saveCustomer","/user/**","/customer/**","/saveUser").permitAll()
-                .anyRequest().authenticated()
+                //.anyRequest().authenticated()
+              //  .antMatchers().hasRole("ANONYMOUS")
+                //.anonymous()
                 .and()
                 .formLogin()
                 .loginPage("/login")

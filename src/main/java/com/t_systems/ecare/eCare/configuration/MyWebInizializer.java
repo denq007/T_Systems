@@ -1,3 +1,4 @@
+/*
 package com.t_systems.ecare.eCare.configuration;
 
 import org.springframework.web.WebApplicationInitializer;
@@ -19,3 +20,4 @@ public class MyWebInizializer implements WebApplicationInitializer {
         dispatcher.addMapping("/");
     }
 }
+*/
