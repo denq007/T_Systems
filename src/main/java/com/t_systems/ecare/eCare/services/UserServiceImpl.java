@@ -23,4 +23,8 @@ public class UserServiceImpl implements UserService{
         }
         userDao.save( user);
     }
+    public void findUserByName(User user)
+    {
+        User fromDB= userDao.getUserByUsername(user.getLogin());
+    }
 }

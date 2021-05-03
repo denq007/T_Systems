@@ -1,7 +1,6 @@
 package com.t_systems.ecare.eCare.entity;
 
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -28,15 +27,12 @@ public class User {
     @Column(name = "roles")
     @Enumerated(EnumType.STRING)
     private Set<Role> roles;
-
     public User() {
         roles=new HashSet<>();
         roles.add(Role.Customer);
     }
-
     public User(String login, String password) {
         this.login = login;
         this.password = password;
-
     }
 }

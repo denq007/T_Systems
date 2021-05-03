@@ -2,7 +2,6 @@ package com.t_systems.ecare.eCare.DAO;
 
 import com.t_systems.ecare.eCare.entity.User;
 import org.springframework.stereotype.Repository;
-
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;

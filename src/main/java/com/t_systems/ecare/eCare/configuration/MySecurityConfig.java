@@ -23,20 +23,21 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
                 .dataSource(dataSource)
                 .passwordEncoder(NoOpPasswordEncoder.getInstance())
                 .usersByUsernameQuery("select login,password,blocked from user where login=?")
-                .authoritiesByUsernameQuery("select u.login,ur.roles from user u inner join user_role ur on u.customer_id=ur.customer_id where u.login=?");
+                .authoritiesByUsernameQuery("select u.login,ur.roles from user u inner join user_role ur on u.id=ur.user_id where u.login=?");
     }
    //https://spring.io/guides/gs/securing-web/
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/","/registration","/showallcustomer","/saveCustomer","/user/**","/customer/**","/saveUser").permitAll()
+                .antMatchers("/","/registration","/showallcustomer","/saveCustomer","/saveUser","/user/**").permitAll()
                 //.anyRequest().authenticated()
               //  .antMatchers().hasRole("ANONYMOUS")
                 //.anonymous()
+                .antMatchers("/customer/**").hasRole("Customer")
                 .and()
                 .formLogin()
-                .loginPage("/login")
+                .loginPage("/user/login")
                 .permitAll()
                 .and()
                 .logout()

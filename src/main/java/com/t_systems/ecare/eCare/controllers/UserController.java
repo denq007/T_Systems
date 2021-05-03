@@ -27,13 +27,22 @@ public class UserController {
     public String addUser(@ModelAttribute("user") User user)
     {
         userService.saveUser(user);
-        return "home";
+        return "redirect:/sign-in";
     }
 
-    @RequestMapping("/sign-in")
-    public String signIn()
+    @GetMapping("/sign-in")
+    public String signIn(Model model)
     {
+        User user=new User();
+        model.addAttribute("usersign-in",user);
         return "sign-in";
+    }
+
+    @PostMapping("/sign-in")
+    public String login(@ModelAttribute("usersign-in")User user)
+    {
+        userService.findUserByName(user);
+        return "redirect:/login";
     }
 
 }

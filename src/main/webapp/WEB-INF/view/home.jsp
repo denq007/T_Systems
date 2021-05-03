@@ -50,6 +50,15 @@
         </a>
 
         <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
+         <%--   <c:if test="${pageContext.request.isUserInRole('Customer')}">
+                <p>This will be displayed only if the user has the role "admin".</p>
+            </c:if>--%>
+          <%--  <%if(roles.equals("admin")){%>
+            <jsp:include page="../menu/admin_menu.jsp" />
+            <%}%>
+            <%if(userRole.equals("user")){%>
+            <jsp:include page="../menu/user_menu.jsp" />
+            <%}%>--%>
             <a class="me-3 py-2 text-dark text-decoration-none" href="/user/sign-in">Sign-in</a>
             <a class="me-3 py-2 text-dark text-decoration-none" href="#">Enterprise</a>
             <a class="me-3 py-2 text-dark text-decoration-none" href="">Support</a>
