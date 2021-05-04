@@ -1,4 +1,5 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: dennn
@@ -47,21 +48,22 @@
 <body class="text-center">
 
 <main class="form-signin" style="width:100%; max-width: 330px; padding: 15px; margin: auto">
-    <form>
-        <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
-        <form:form action="sign-in" modelAttribute="usersign-in" method="post">
-            <div class="form-floating">
-                <form:input path="login" class="form-control" id="floatingInput" placeholder="name@example.com"/>
-                <label for="floatingInput">Email address</label>
+    <form role="form" action="<c:url value='/login' />" method='POST'>
+        <fieldset>
+            <div class="form-group">
+                <input id="login" class="form-control" placeholder="9062107057" name="username"
+                       type="text"
+                       autofocus>
             </div>
-            <div class="form-floating">
-                <form:input path="password" class="form-control" id="floatingPassword" placeholder="Password"/>
-                <label for="floatingPassword">Password</label>
+            <div class="form-group">
+                <input id="password" class="form-control" placeholder="password" name="password"
+                       type="password"
+                       value="">
             </div>
-            <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
-        </form:form>
-
-    </form>
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+            <input class="btn btn-lg btn-success btn-block" name="submit" type="submit"
+                   value="Sign in"/>
+        </fieldset>
       <%--  <main class="form-signin" style="width:100%; max-width: 330px; padding: 15px; margin: auto">
             <form action="/user/sign-in" method="post">
                 <h1 class="h3 mb-3 fw-normal">Please sign in</h1>

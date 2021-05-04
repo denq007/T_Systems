@@ -59,7 +59,7 @@
             <%if(userRole.equals("user")){%>
             <jsp:include page="../menu/user_menu.jsp" />
             <%}%>--%>
-            <a class="me-3 py-2 text-dark text-decoration-none" href="/user/sign-in">Sign-in</a>
+            <a class="me-3 py-2 text-dark text-decoration-none" href="/login">Sign-in</a>
             <a class="me-3 py-2 text-dark text-decoration-none" href="#">Enterprise</a>
             <a class="me-3 py-2 text-dark text-decoration-none" href="">Support</a>
             <a class="py-2 text-dark text-decoration-none" href="#">Pricing</a>

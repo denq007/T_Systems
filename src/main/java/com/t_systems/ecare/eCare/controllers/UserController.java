@@ -9,9 +9,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping("/user")
+//@RequestMapping("/user")
 public class UserController {
     @Autowired
     UserService userService;
@@ -27,22 +28,21 @@ public class UserController {
     public String addUser(@ModelAttribute("user") User user)
     {
         userService.saveUser(user);
-        return "redirect:/sign-in";
+        return "redirect:/";
     }
 
-    @GetMapping("/sign-in")
-    public String signIn(Model model)
+    @GetMapping("/login")
+    public ModelAndView signIn(String error)
     {
-        User user=new User();
-        model.addAttribute("usersign-in",user);
-        return "sign-in";
+        ModelAndView model = new ModelAndView();
+        return model;
     }
 
-    @PostMapping("/sign-in")
+  /*  @PostMapping("/login")
     public String login(@ModelAttribute("usersign-in")User user)
     {
         userService.findUserByName(user);
         return "redirect:/login";
-    }
+    }*/
 
 }

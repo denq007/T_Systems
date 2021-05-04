@@ -16,12 +16,17 @@ public class UserDao extends AbstractHibernateDAO{
     }
 
     public User getUserByUsername(String login) {
-       try {
-           return entityManager.createQuery("from User where login=:login",User.class).setParameter("login", login)
-                   .getSingleResult();
-       }catch (NoResultException e)
-       {
-           return new User();
-       }
+     try {
+         User user=getCurrentSession().createQuery("from User u where u.login =: login", User.class)
+                 .setParameter("login", login)
+                 .getSingleResult();
+         return user;
+     }catch (NoResultException e)
+     {
+         User user= new User();
+         return user;
+     }
+
     }
+
 }
