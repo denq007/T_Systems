@@ -4,11 +4,14 @@ import com.t_systems.ecare.eCare.DTO.OptionDTO;
 import com.t_systems.ecare.eCare.DTO.TariffDTO;
 import com.t_systems.ecare.eCare.entity.Option;
 import com.t_systems.ecare.eCare.entity.Tariff;
+import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.stream.Collectors;
-
+@Repository
+@NoArgsConstructor
 public class TariffConverterImpl implements TariffConverter {
     @Autowired
     OptionConverter optionConverter;

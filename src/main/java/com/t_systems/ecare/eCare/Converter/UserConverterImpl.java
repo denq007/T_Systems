@@ -2,7 +2,11 @@ package com.t_systems.ecare.eCare.Converter;
 
 import com.t_systems.ecare.eCare.DTO.UserDTO;
 import com.t_systems.ecare.eCare.entity.User;
+import lombok.NoArgsConstructor;
+import org.springframework.stereotype.Repository;
 
+@Repository
+@NoArgsConstructor
 public class UserConverterImpl implements UserConverter{
 
 
@@ -14,6 +18,7 @@ public class UserConverterImpl implements UserConverter{
       user.setPassword(userDTO.getUserPassword());
       user.setRoles(userDTO.getUserRoles());
       user.setId(userDTO.getUserId());
+
         return user;
     }
 

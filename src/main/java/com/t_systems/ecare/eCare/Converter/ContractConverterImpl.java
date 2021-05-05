@@ -2,8 +2,12 @@ package com.t_systems.ecare.eCare.Converter;
 
 import com.t_systems.ecare.eCare.DTO.ContractDTO;
 import com.t_systems.ecare.eCare.entity.Contract;
+import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
+@Repository
+@NoArgsConstructor
 public class ContractConverterImpl implements ContractConverter{
     @Autowired
     CustomerConverter customerConverter;

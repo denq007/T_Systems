@@ -12,18 +12,5 @@ import java.io.Serializable;
 import java.util.List;
 @Service
 public class CustomerServiceImpl implements CustomerService{
-    @Autowired
-    CustomerDAO customerDAO;
 
-    @Transactional
-    public List<Customer>getAllCustomer()
-    {
-        return customerDAO.findAll();
-    }
-
-    @Transactional
-    public void saveCustomer(Customer customer)
-    {
-        customerDAO.save( customer);
-    }
 }

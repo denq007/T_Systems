@@ -1,5 +1,6 @@
 package com.t_systems.ecare.eCare.DTO;
 
+import com.t_systems.ecare.eCare.entity.User;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -12,6 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 public class CustomerDTO {
     private int customerID;
+    private UserDTO userDTO;
     private String customerName;
     private String customerSurname;
     private LocalDate customerBirthDate;

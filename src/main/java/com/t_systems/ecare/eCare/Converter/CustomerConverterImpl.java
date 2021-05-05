@@ -4,15 +4,21 @@ import com.t_systems.ecare.eCare.DTO.ContractDTO;
 import com.t_systems.ecare.eCare.DTO.CustomerDTO;
 import com.t_systems.ecare.eCare.entity.Contract;
 import com.t_systems.ecare.eCare.entity.Customer;
+import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-
+@NoArgsConstructor
+@Repository
 public class CustomerConverterImpl implements CustomerConverter{
     @Autowired
     ContractConverter contractConverter;
+    @Autowired
+    UserConverter userConverter;
     @Override
     public Customer converterCustomerDTOToCustomer(CustomerDTO customerDTO) {
         Customer customer=new Customer();
@@ -26,6 +32,7 @@ public class CustomerConverterImpl implements CustomerConverter{
         List<ContractDTO> customerDTOList=customerDTO.getCustomerDTOListContract();        ;
         customer.setContractIdList(customerDTOList.stream().map((s)->
                 contractConverter.converterContractDTOToContract(s)).collect(Collectors.toList()));
+        customer.setUser(userConverter.converterUSERDTOToUser(customerDTO.getUserDTO()));
         return customer;
     }
 
@@ -42,6 +49,7 @@ public class CustomerConverterImpl implements CustomerConverter{
         List<Contract> contractList=customer.getContractIdList();
         customerDTO.setCustomerDTOListContract(contractList.stream().
                 map(s->contractConverter.convertContractToContractDTO(s)).collect(Collectors.toList()));
+        customerDTO.setUserDTO(userConverter.converterUserToUserDTO(customer.getUser()));
         return customerDTO;
     }
 }

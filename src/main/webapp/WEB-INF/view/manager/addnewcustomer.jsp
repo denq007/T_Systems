@@ -17,8 +17,6 @@
 
 
 <form:form  action="saveCustomer" modelAttribute="customer">
-    User id <form:input path="user"/>
-    <br><br>
     Name <form:input path="name"/>
     <br><br>
     Surname <form:input path="surname"/>

@@ -9,8 +9,7 @@ import javax.persistence.PersistenceContext;
 
 @Repository
 public class UserDao extends AbstractHibernateDAO{
-    @PersistenceContext
-    EntityManager entityManager;
+
     public UserDao() {
         setClazz(User.class);
     }
@@ -23,7 +22,7 @@ public class UserDao extends AbstractHibernateDAO{
          return user;
      }catch (NoResultException e)
      {
-         User user= new User();
+         User user= null;
          return user;
      }
 

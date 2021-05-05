@@ -13,20 +13,15 @@
         <th>BirthDate</th>
         <th>Passport</th>
         <th>Address</th>
-        <th>Email</th>
-        <th>CustomerPassword</th>
-        <th>Enabled</th>
+
     </tr>
     <c:forEach var="customer" items="${allCustomer}">
         <tr>
-            <td>${customer.name}</td>
-            <td>${customer.surname}</td>
-            <td>${customer.birthDate}</td>
-            <td>${customer.passportDetails}</td>
-            <td>${customer.address}</td>
-            <td>${customer.email}</td>
-            <td>${customer.password}</td>
-            <td>${customer.check}</td>
+            <td>${customer.customerName}</td>
+            <td>${customer.customerSurname}</td>
+            <td>${customer.customerBirthDate}</td>
+            <td>${customer.customerPassportDetails}</td>
+            <td>${customer.customerAdress}</td>
         </tr>
     </c:forEach>
 </table>
