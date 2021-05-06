@@ -17,17 +17,15 @@
 
 
 <form:form  action="saveCustomer" modelAttribute="customer">
-    Name <form:input path="name"/>
+    Name <form:input path="customerName"/>
     <br><br>
-    Surname <form:input path="surname"/>
+    Surname <form:input path="customerSurname"/>
     <br><br>
-    Birth date <form:input path="birthDate"/>
+    Birth date <form:input path="customerBirthDate"/>
     <br><br>
-    Passport <form:input path="passportDetails"/>
+    Passport <form:input path="customerPassportDetails"/>
     <br><br>
-    Adress <form:input path="address"/>
-    <br><br>
-    Email <form:input path="email"/>
+    Adress <form:input path="customerAdress"/>
     <br><br>
     <input type="submit" value="Save">
 </form:form>

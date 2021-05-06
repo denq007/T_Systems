@@ -1,7 +1,11 @@
 package com.t_systems.ecare.eCare.services;
 
+import com.t_systems.ecare.eCare.Converter.CustomerConverter;
+import com.t_systems.ecare.eCare.DAO.CustomerDAO;
 import com.t_systems.ecare.eCare.DAO.UserDao;
+import com.t_systems.ecare.eCare.DTO.CustomerDTO;
 import com.t_systems.ecare.eCare.DTO.UserDTO;
+import com.t_systems.ecare.eCare.entity.Customer;
 import com.t_systems.ecare.eCare.entity.Role;
 import com.t_systems.ecare.eCare.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,13 +13,18 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService{
     @Autowired
     UserDao userDao;
-
+    @Autowired
+    CustomerDAO customerDAO;
+    @Autowired
+    CustomerConverter customerConverter;
     @Autowired
     PasswordEncoder passwordEncoder;
 
@@ -28,17 +37,31 @@ public class UserServiceImpl implements UserService{
             return Optional.of("This user is already registered");
         }
         fromDB=new User( );
-        fromDB.setRole(Role.CUSTOMER);
+        fromDB.setRole(Role.ROLE_CUSTOMER);
        // fromDB.setId(user.getUserId());
         fromDB.setPassword(passwordEncoder.encode(user.getUserPassword()));
-        fromDB.setLogin(user.getUserLogin());
-        userDao.save(fromDB);
+       fromDB.setLogin(user.getUserLogin());
+     //   userDao.save(fromDB);
         user.setUserId(fromDB.getId());
-        user.setUserPassword(null);
+     //   user.setUserPassword(fromDB.getPassword());
+      /*  CustomerDTO customerDTO=new CustomerDTO();
+        customerDTO.setUserDTO(user);
+        customerDAO.save(customerConverter.converterCustomerDTOToCustomer(customerDTO));*/
+        Customer customer=new Customer();
+        customer.setUser(fromDB);
+        customerDAO.save(customer);
         return Optional.empty();
     }
     public void findUserByName(User user)
     {
         User fromDB= userDao.getUserByUsername(user.getLogin());
+    }
+
+    public void authWithHttpServletRequest(HttpServletRequest request, String username, String password) {
+        try {
+            request.login(username, password);
+        } catch (ServletException e) {
+            System.out.println("Error while login "+ e.getMessage());
+        }
     }
 }

@@ -35,4 +35,13 @@ public class ManagerServiceImpl implements ManagerService{
         customerDAO.save( customer);
         return Optional.empty();
     }
+    public void ubdateData(Customer customer,CustomerDTO customerDTO)
+    {
+        customer.setName(customerDTO.getCustomerName());
+        customer.setSurname(customerDTO.getCustomerSurname());
+        customer.setAddress(customerDTO.getCustomerAdress());
+        customer.setBirthDate(customerDTO.getCustomerBirthDate());
+        customer.setPassportDetails(customerDTO.getCustomerPassportDetails());
+
+    }
 }

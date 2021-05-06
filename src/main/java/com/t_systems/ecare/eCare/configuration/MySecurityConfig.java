@@ -13,6 +13,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
 import javax.sql.DataSource;
 
 @ComponentScan(basePackages = "com.t_systems.ecare.eCare")
@@ -36,10 +38,11 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
               //  .antMatchers().hasRole("ANONYMOUS")
                 //.anonymous()
                 .antMatchers("/customer/**").hasRole("CUSTOMER")
-             //   .antMatchers("/employee/**").hasRole("EMPLOYEE")
+                .antMatchers("/employee/**").hasRole("EMPLOYEE")
                 .and()
                 .formLogin()
                 .loginPage("/login")
+                .defaultSuccessUrl("/success", true)
                 .permitAll()
                 .and()
                 .logout()
@@ -49,5 +52,7 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
+
 }
 
