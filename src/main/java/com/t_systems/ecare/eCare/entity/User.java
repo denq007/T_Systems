@@ -13,6 +13,7 @@ import java.util.Set;
 @Entity
 @NoArgsConstructor
 @Table(name = "user")
+@NamedQueries({@NamedQuery (name="User.findByUer",  query = "SELECT u FROM User u where u.login = :login") })
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

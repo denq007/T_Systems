@@ -38,13 +38,14 @@ public class UserController {
     public String addUser(@ModelAttribute("user") UserDTO user,Model model,HttpServletRequest request)
     {
         Optional<String> error=userService.saveUser(user);
-
         if (error.isPresent()) {
             model.addAttribute(MESSAGE, error.get());
             return SIGN_UP;
         }
         userService.authWithHttpServletRequest(request,user.getUserLogin(),user.getUserPassword());
-        return "customer/showCustomerInformation";
+       // return "customer/showCustomerInformation";
+       // return "customer/createCustomer";
+        return "redirect:/customer/showcustomerinformation";
     }
 
     @GetMapping("/login")
@@ -73,12 +74,5 @@ public class UserController {
         }
 
     }
-
-  /*  @PostMapping("/login")
-    public String login(@ModelAttribute("usersign-in")User user)
-    {
-        userService.findUserByName(user);
-        return "redirect:/login";
-    }*/
 
 }

@@ -29,10 +29,10 @@ public class CustomerConverterImpl implements CustomerConverter{
         customer.setAddress(customerDTO.getCustomerAdress());
         customer.setEmail(customerDTO.getCustomerEmail());
         customer.setSurname(customerDTO.getCustomerSurname());
-        List<ContractDTO> customerDTOList=customerDTO.getCustomerDTOListContract();        ;
+      /*  List<ContractDTO> customerDTOList=customerDTO.getCustomerDTOListContract();
         customer.setContractIdList(customerDTOList.stream().map((s)->
                 contractConverter.converterContractDTOToContract(s)).collect(Collectors.toList()));
-        customer.setUser(userConverter.converterUSERDTOToUser(customerDTO.getUserDTO()));
+        customer.setUser(userConverter.converterUSERDTOToUser(customerDTO.getUserDTO()));*/
         return customer;
     }
 
@@ -46,10 +46,10 @@ public class CustomerConverterImpl implements CustomerConverter{
         customerDTO.setCustomerSurname(customer.getSurname());
         customerDTO.setCustomerBirthDate(customer.getBirthDate());
         customerDTO.setCustomerPassportDetails(customer.getPassportDetails());
-        List<Contract> contractList=customer.getContractIdList();
+       /* List<Contract> contractList=customer.getContractIdList();
         customerDTO.setCustomerDTOListContract(contractList.stream().
                 map(s->contractConverter.convertContractToContractDTO(s)).collect(Collectors.toList()));
-        customerDTO.setUserDTO(userConverter.converterUserToUserDTO(customer.getUser()));
+        customerDTO.setUserDTO(userConverter.converterUserToUserDTO(customer.getUser()));*/
         return customerDTO;
     }
 }

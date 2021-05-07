@@ -1,3 +1,4 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%--
   Created by IntelliJ IDEA.
   User: dennn
@@ -49,7 +50,7 @@
 
             <h2>Personal Information</h2>
         </div>
-
+       <form:form method="POST" modelAttribute="customer">
         <div class="row g-5">
 
             <div class="col-md-7 col-lg-8">
@@ -58,7 +59,8 @@
                     <div class="row g-3">
                         <div class="col-sm-6">
                             <label for="firstName" class="form-label">First name</label>
-                            <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
+                            <form:input path="customerName" value="${customer.customerName}" class="form-control" id="firstName"/>
+                          <%--  <input type="text" class="form-control" id="firstName" placeholder="" value="" required>--%>
                             <div class="invalid-feedback">
                                 Valid first name is required.
                             </div>
@@ -66,54 +68,38 @@
 
                         <div class="col-sm-6">
                             <label for="lastName" class="form-label">Last name</label>
-                            <input type="text" class="form-control" id="lastName" placeholder="" value="" required>
+                            <form:input path="customerSurname" value="${customer.customerSurname}" class="form-control" id="lastName"/>
+                        <%--    <input type="text" class="form-control" id="lastName" placeholder="" value="" required>--%>
                             <div class="invalid-feedback">
                                 Valid last name is required.
                             </div>
                         </div>
 
-                      <%--  <div class="col-12">
-                            <label for="username" class="form-label">Username</label>
-                            <div class="input-group has-validation">
-                                <span class="input-group-text">@</span>
-                                <input type="text" class="form-control" id="username" placeholder="Username" required>
-                                <div class="invalid-feedback">
-                                    Your username is required.
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-12">
-                            <label for="email" class="form-label">Email <span class="text-muted">(Optional)</span></label>
-                            <input type="email" class="form-control" id="email" placeholder="you@example.com">
-                            <div class="invalid-feedback">
-                                Please enter a valid email address for shipping updates.
-                            </div>
-                        </div>--%>
-
                         <div class="col-12">
                             <label for="address" class="form-label">Address</label>
-                            <input type="text" class="form-control" id="address" placeholder="1234 Main St" required>
+                            <form:input path="customerAdress" value="${customer.customerAdress}" class="form-control" id="address"/>
+                           <%-- <input type="text" class="form-control" id="address" placeholder="1234 Main St" required>--%>
                             <div class="invalid-feedback">
                                 Please enter your shipping address.
                             </div>
                         </div>
 
                         <div class="col-12">
-                            <label for="address2" class="form-label">Passport <span class="text-muted"></span></label>
-                            <input type="text" class="form-control" id="address2" placeholder="Apartment or suite">
+                            <label for="passport" class="form-label">Passport <span class="text-muted"></span></label>
+                            <form:input path="customerPassportDetails" value="${customer.customerPassportDetails}" class="form-control" id="passport"/>
+                           <%-- <input type="text" class="form-control" id="address2" placeholder="Apartment or suite">--%>
                         </div>
 
 
 
                     <hr class="my-4">
 
-                    <button class="w-100 btn btn-primary btn-lg" type="submit">Continue to checkout</button>
-                </form>
+                    <button class="w-100 btn btn-primary btn-lg" type="submit">Edit data</button>
+
             </div>
-        </div>
 
 
+</form:form>
     </main>
 
     <footer class="my-5 pt-5 text-muted text-center text-small">

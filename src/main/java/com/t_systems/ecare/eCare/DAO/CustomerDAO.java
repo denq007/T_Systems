@@ -5,12 +5,13 @@ import com.t_systems.ecare.eCare.entity.User;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.NoResultException;
+import javax.transaction.Transactional;
 
 @Repository
-public class CustomerDAO extends AbstractHibernateDAO{
-    public CustomerDAO() {
+public class CustomerDAO extends GenericDAO<Customer>{
+   /* public CustomerDAO() {
         setClazz(Customer.class);
-    }
+    }*/
 
     public Customer getCustomerByPassport(String passportDetails) {
         try {
@@ -24,4 +25,18 @@ public class CustomerDAO extends AbstractHibernateDAO{
         }
 
     }
+
+    public Customer getCustomerIDBYUserID(int userID) {
+        try {
+            Customer customer=sessionFactory.getCurrentSession().createQuery("from Customer u where u.user.id =: user_id", Customer.class)
+                    .setParameter("user_id", userID)
+                    .getSingleResult();
+            return customer;
+        }catch (NoResultException e)
+        {
+            return null;
+        }
+
+    }
+
 }

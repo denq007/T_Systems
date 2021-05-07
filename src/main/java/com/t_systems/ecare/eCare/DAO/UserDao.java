@@ -5,18 +5,16 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 
 
 @Repository
-public class UserDao extends AbstractHibernateDAO{
+public class UserDao extends GenericDAO<User>{
 
-    public UserDao() {
-        setClazz(User.class);
-    }
 
     public User getUserByUsername(String login) {
      try {
-         User user=getCurrentSession().createQuery("from User u where u.login =: login", User.class)
+         User user=sessionFactory.getCurrentSession().createQuery("from User u where u.login =: login", User.class)
                  .setParameter("login", login)
                  .getSingleResult();
          return user;
@@ -27,5 +25,14 @@ public class UserDao extends AbstractHibernateDAO{
      }
 
     }
+
+  /*  public User getUserByName(String login)
+    {
+        int i=0;
+        return (User) entityManager.
+                createNamedQuery("User.findByUer", User.class)
+                .setParameter("login", login)
+                .getSingleResult();
+    }*/
 
 }

@@ -41,4 +41,6 @@ public class ManagerController {
         managerService.saveCustomer(customerDTO);
         return "redirect:manager/all-customer";
     }
+
+
 }

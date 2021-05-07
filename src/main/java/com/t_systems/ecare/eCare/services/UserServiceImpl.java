@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
 
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
     @Autowired
     UserDao userDao;
     @Autowired
@@ -29,39 +29,31 @@ public class UserServiceImpl implements UserService{
     PasswordEncoder passwordEncoder;
 
     @Transactional
-    public Optional<String> saveUser(UserDTO user)
-    {
-        User fromDB=userDao.getUserByUsername(user.getUserLogin());
-        if(fromDB!=null)
-        {
+    public Optional<String> saveUser(UserDTO user) {
+        User fromDB = userDao.getUserByUsername(user.getUserLogin());
+        if (fromDB != null) {
             return Optional.of("This user is already registered");
         }
-        fromDB=new User( );
+        fromDB = new User();
         fromDB.setRole(Role.ROLE_CUSTOMER);
-       // fromDB.setId(user.getUserId());
         fromDB.setPassword(passwordEncoder.encode(user.getUserPassword()));
-       fromDB.setLogin(user.getUserLogin());
-     //   userDao.save(fromDB);
+        fromDB.setLogin(user.getUserLogin());
         user.setUserId(fromDB.getId());
-     //   user.setUserPassword(fromDB.getPassword());
-      /*  CustomerDTO customerDTO=new CustomerDTO();
-        customerDTO.setUserDTO(user);
-        customerDAO.save(customerConverter.converterCustomerDTOToCustomer(customerDTO));*/
-        Customer customer=new Customer();
+        Customer customer = new Customer();
         customer.setUser(fromDB);
         customerDAO.save(customer);
         return Optional.empty();
     }
-    public void findUserByName(User user)
-    {
-        User fromDB= userDao.getUserByUsername(user.getLogin());
+
+    public void findUserByName(User user) {
+        User fromDB = userDao.getUserByUsername(user.getLogin());
     }
 
     public void authWithHttpServletRequest(HttpServletRequest request, String username, String password) {
         try {
             request.login(username, password);
         } catch (ServletException e) {
-            System.out.println("Error while login "+ e.getMessage());
+            System.out.println("Error while login " + e.getMessage());
         }
     }
 }
