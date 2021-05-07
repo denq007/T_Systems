@@ -5,17 +5,17 @@ import com.t_systems.ecare.eCare.services.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Optional;
 @Slf4j
@@ -74,5 +74,22 @@ public class UserController {
         }
 
     }
+/*    @RequestMapping(value = {"/logout"}, method = RequestMethod.GET)
+    public String logoutDo(HttpServletRequest request,HttpServletResponse response){
+        HttpSession session= request.getSession(false);
+        SecurityContextHolder.clearContext();
+        session= request.getSession(false);
+        if(session != null) {
+            session.invalidate();
+        }
+        for(Cookie cookie : request.getCookies()) {
+            cookie.setMaxAge(0);
+        }
 
+        return "home";
+    }*/
+/*    @RequestMapping("/logout")
+    public String logout() {
+        return "redirect:/";
+    }*/
 }

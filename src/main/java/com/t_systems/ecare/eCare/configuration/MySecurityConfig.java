@@ -12,9 +12,12 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
 @ComponentScan(basePackages = "com.t_systems.ecare.eCare")
@@ -36,17 +39,28 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/","/registration","/showallcustomer","/saveCustomer","/saveUser","/employee/**","/customer**").permitAll()
                 //.anyRequest().authenticated()
               //  .antMatchers().hasRole("ANONYMOUS")
-                //.anonymous()
+               // .anonymous()
                 .antMatchers("/customer/**").hasRole("CUSTOMER")
                 .antMatchers("/employee/**").hasRole("EMPLOYEE")
+                .and()
+                .anonymous()
                 .and()
                 .formLogin()
                 .loginPage("/login")
                 .defaultSuccessUrl("/success", true)
-                .permitAll()
-                .and()
-                .logout()
-                .permitAll();
+                .permitAll().and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                .logoutSuccessUrl("/").deleteCookies("JSESSIONID")
+                .invalidateHttpSession(true);
+        // .and()
+               // .logout().logoutUrl("/logout").permitAll().logoutSuccessUrl("/").deleteCookies("auth_code", "JSESSIONID").invalidateHttpSession(true)
+               /* .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                .logoutSuccessUrl("/").deleteCookies("JSESSIONID")
+                .invalidateHttpSession(true);*/
+
+               /* .and()
+                .exceptionHandling().accessDeniedPage("/errorAccessPage");*/
+
+
     }
     @Bean
     public PasswordEncoder passwordEncoder() {

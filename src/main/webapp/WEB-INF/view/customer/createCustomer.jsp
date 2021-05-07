@@ -41,6 +41,7 @@
 
     <!-- Custom styles for this template -->
     <link href="form-validation.css" rel="stylesheet">
+    <jsp:include page="../header.jsp" />
 </head>
 <body class="bg-light">
 
@@ -90,16 +91,17 @@
                            <%-- <input type="text" class="form-control" id="address2" placeholder="Apartment or suite">--%>
                         </div>
 
-
-
                     <hr class="my-4">
+                   </form:form>
 
-                    <button class="w-100 btn btn-primary btn-lg" type="submit">Edit data</button>
+           <form:form  action="editcustomer" modelAttribute="customer">
+
+                    <button class="w-100 btn btn-primary btn-lg" type="submit" href="/editcustomer" >Edit data</button>
 
             </div>
 
 
-</form:form>
+                    </form:form>
     </main>
 
     <footer class="my-5 pt-5 text-muted text-center text-small">

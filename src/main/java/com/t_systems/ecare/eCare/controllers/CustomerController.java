@@ -31,12 +31,12 @@ public class CustomerController {
         return "customer/createCustomer";
     }
 
-    @GetMapping("/editcustomer")
-    public String editClient(@RequestParam("id") int id, Model model) {
+    /*@GetMapping("/editcustomer")
+    public String editClient(@RequestParam("customer") CustomerDTO customerDTO, Model model) {
       //  CustomerDTO customerDTO=customerService.getCustomerDTOwithoutContracts(id);
      //  model.addAttribute("customer", customerDTO);
         return "customer/createCustomer";
-    }
+    }*/
 
     @PostMapping("/editcustomer")
     public String editClient(@ModelAttribute("customer")  CustomerDTO dto, Model model, RedirectAttributes attr) {
