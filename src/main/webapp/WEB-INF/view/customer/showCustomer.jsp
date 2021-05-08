@@ -47,14 +47,13 @@
 </head>
 <body class="bg-light">
 
-<div class="container">
+<%--<div class="container">
     <main>
         <div class="py-5 text-center">
 
             <h2>Personal Information</h2>
         </div>
-
-       <form:form  modelAttribute="customer" method="post">
+       <form:form  modelAttribute="customer">
         <div class="row g-5">
 
             <div class="col-md-7 col-lg-8">
@@ -64,7 +63,7 @@
                         <div class="col-sm-6">
                             <label for="firstName" class="form-label">First name</label>
                             <form:input path="customerName" value="${customer.customerName}" class="form-control" id="firstName"/>
-                          <%--  <input type="text" class="form-control" id="firstName" placeholder="" value="" required>--%>
+                          &lt;%&ndash;  <input type="text" class="form-control" id="firstName" placeholder="" value="" required>&ndash;%&gt;
                             <div class="invalid-feedback">
                                 Valid first name is required.
                             </div>
@@ -73,7 +72,7 @@
                         <div class="col-sm-6">
                             <label for="lastName" class="form-label">Last name</label>
                             <form:input path="customerSurname" value="${customer.customerSurname}" class="form-control" id="lastName"/>
-                        <%--    <input type="text" class="form-control" id="lastName" placeholder="" value="" required>--%>
+                        &lt;%&ndash;    <input type="text" class="form-control" id="lastName" placeholder="" value="" required>&ndash;%&gt;
                             <div class="invalid-feedback">
                                 Valid last name is required.
                             </div>
@@ -82,7 +81,7 @@
                         <div class="col-12">
                             <label for="address" class="form-label">Address</label>
                             <form:input path="customerAdress" value="${customer.customerAdress}" class="form-control" id="address"/>
-                           <%-- <input type="text" class="form-control" id="address" placeholder="1234 Main St" required>--%>
+                           &lt;%&ndash; <input type="text" class="form-control" id="address" placeholder="1234 Main St" required>&ndash;%&gt;
                             <div class="invalid-feedback">
                                 Please enter your shipping address.
                             </div>
@@ -91,17 +90,23 @@
                         <div class="col-12">
                             <label for="passport" class="form-label">Passport <span class="text-muted"></span></label>
                             <form:input path="customerPassportDetails" value="${customer.customerPassportDetails}" class="form-control" id="passport"/>
-                           <%-- <input type="text" class="form-control" id="address2" placeholder="Apartment or suite">--%>
+                           &lt;%&ndash; <input type="text" class="form-control" id="address2" placeholder="Apartment or suite">&ndash;%&gt;
                         </div>
 
-                        <form:hidden path="customerID" value="${customer.customerID}"/>
-                      <%--  <form:hidden path="userDTO" value="${customer.userDTO.userId}"/>--%>
 
                     <hr class="my-4">
-          <%-- <c:url var="updateButton"  value="/customer/editcustomer">
-            <c:param name="customerID" value="${customer.customerID}"/>
-           </c:url>--%>
-                    <button class="w-100 btn btn-primary btn-lg" type="submit" href="/editcustomer"<%--'${updateButton}'--%> >Edit data</button>
+
+                      &lt;%&ndash;  <form action="/customer/editcustomer" method="post">
+                            <form:hidden path="customerID" value="${customer.customerID}"/>&ndash;%&gt;
+                     &lt;%&ndash;   <form action="" method="get">
+                            <input type="hidden" name="id" value=${customer.customerID}>&ndash;%&gt;
+                        <form action="/customer/editcustomer" method="get">
+                            <input type="hidden" name="customerID" value=${customer.customerID}>
+                            <input type="submit" value="Edit info" class="btn btn-warning"></form>
+
+                        <a class="me-3 py-2 text-dark text-decoration-none" name="customerID" value=${customer.customerID} href="/customer/editcustomer">Edit info</a>
+                           &lt;%&ndash; <input type="submit" value="Edit info" class="btn btn-warning" href ="/customer/editcustomer"></form>&ndash;%&gt;
+                      &lt;%&ndash;  </form>&ndash;%&gt;
             </div>
                     </form:form>
     </main>
@@ -109,9 +114,9 @@
     <footer class="my-5 pt-5 text-muted text-center text-small">
         <p class="mb-1">&copy; 2021–2021</p>
         <ul class="list-inline">
-<%--            <li class="list-inline-item"><a href="#">Privacy</a></li>
+&lt;%&ndash;            <li class="list-inline-item"><a href="#">Privacy</a></li>
             <li class="list-inline-item"><a href="#">Terms</a></li>
-            <li class="list-inline-item"><a href="#">Support</a></li>--%>
+            <li class="list-inline-item"><a href="#">Support</a></li>&ndash;%&gt;
         </ul>
     </footer>
 </div>
@@ -120,5 +125,49 @@
 <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
 
 <script src="form-validation.js"></script>
+</body>
+</html>--%>
+<div class="container">
+    <span class="pull-right"><a href="clients" class="btn btn-info" role="button">Back to clients</a></span>
+    <h3>Client details</h3>
+    <table class="table table-striped">
+        <thead>
+        <th style="width:20%"></th>
+        <th style="width:80%"></th>
+        </thead>
+        <tbody>
+        <tr>
+            <td >Id:</td>
+            <td>${customer.customerID} </td>
+        </tr>
+        <tr>
+            <td>Name:</td>
+            <td>${customer.customerName} </td>
+        </tr>
+        <tr>
+            <td>Surname:</td>
+            <td>${customer.customerSurname} </td>
+        </tr>
+        <tr>
+            <td>Birthday:</td>
+            <td>${customer.customerBirthDate} </td>
+        </tr>
+
+        <tr>
+            <td>Address:</td>
+            <td>${customer.customerAdress} </td>
+        </tr>
+        <tr>
+            <td>Passport:</td>
+            <td>${customer.customerPassportDetails} </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <form action="/customer/editcustomer" method="get">
+        <input type="hidden" name="customerID" value=${customer.customerID}>
+      <%--  <input type="hidden" name="userDTO.userId" value=${customer.userDTO.userId}>--%>
+        <input type="submit" value="Edit info" class="btn btn-warning"></form>
+</div>
 </body>
 </html>

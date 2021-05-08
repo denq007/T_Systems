@@ -9,5 +9,7 @@ import java.util.Optional;
 public interface CustomerService {
     public CustomerDTO getCustomerDTOwithoutContractsByEmailUser(String username);
     public Optional<String> update(CustomerDTO dto);
+    public CustomerDTO findById(int id);
+
 
 }
