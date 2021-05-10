@@ -10,4 +10,6 @@ public interface UserService {
     public Optional<String> saveUser(UserDTO user);
     public void findUserByName(User user);
     public void authWithHttpServletRequest(HttpServletRequest request, String username, String password);
+    public UserDTO convertToDto(User user);
+    public User convertToEntity(UserDTO userDto);
 }

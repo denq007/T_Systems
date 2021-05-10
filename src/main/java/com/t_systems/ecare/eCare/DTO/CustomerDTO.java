@@ -12,13 +12,13 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 public class CustomerDTO {
-    private int customerID;
-    private UserDTO userDTO;
-    private String customerName;
-    private String customerSurname;
-    private LocalDate customerBirthDate;
-    private String customerPassportDetails;
-    private String customerAdress;
-    private String customerEmail;
-    private List<ContractDTO> customerDTOListContract;
+    private int id;
+    private UserDTO user;
+    private String name;
+    private String surname;
+    private LocalDate birthDate;
+    private String passportDetails;
+    private String address;
+    private String email;
+    private List<ContractDTO> contractIdList;
 }

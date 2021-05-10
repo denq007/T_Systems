@@ -63,7 +63,7 @@
                     <div class="row g-3">
                         <div class="col-sm-6">
                             <label for="firstName" class="form-label">First name</label>
-                            <form:input path="customerName" value="${customer.customerName}" class="form-control" id="firstName"/>
+                            <form:input path="name" value="${customer.name}" class="form-control" id="firstName"/>
                           <%--  <input type="text" class="form-control" id="firstName" placeholder="" value="" required>--%>
                             <div class="invalid-feedback">
                                 Valid first name is required.
@@ -72,7 +72,7 @@
 
                         <div class="col-sm-6">
                             <label for="lastName" class="form-label">Last name</label>
-                            <form:input path="customerSurname" value="${customer.customerSurname}" class="form-control" id="lastName"/>
+                            <form:input path="surname" value="${customer.surname}" class="form-control" id="lastName"/>
                         <%--    <input type="text" class="form-control" id="lastName" placeholder="" value="" required>--%>
                             <div class="invalid-feedback">
                                 Valid last name is required.
@@ -81,7 +81,7 @@
 
                         <div class="col-12">
                             <label for="address" class="form-label">Address</label>
-                            <form:input path="customerAdress" value="${customer.customerAdress}" class="form-control" id="address"/>
+                            <form:input path="address" value="${customer.address}" class="form-control" id="address"/>
                            <%-- <input type="text" class="form-control" id="address" placeholder="1234 Main St" required>--%>
                             <div class="invalid-feedback">
                                 Please enter your shipping address.
@@ -90,18 +90,18 @@
 
                         <div class="col-12">
                             <label for="passport" class="form-label">Passport <span class="text-muted"></span></label>
-                            <form:input path="customerPassportDetails" value="${customer.customerPassportDetails}" class="form-control" id="passport"/>
+                            <form:input path="passportDetails" value="${customer.passportDetails}" class="form-control" id="passport"/>
                            <%-- <input type="text" class="form-control" id="address2" placeholder="Apartment or suite">--%>
                         </div>
 
-                        <form:hidden path="customerID" value="${customer.customerID}"/>
+                        <form:hidden path="id" value="${customer.id}"/>
                       <%--  <form:hidden path="userDTO" value="${customer.userDTO.userId}"/>--%>
 
                     <hr class="my-4">
           <%-- <c:url var="updateButton"  value="/customer/editcustomer">
             <c:param name="customerID" value="${customer.customerID}"/>
            </c:url>--%>
-                    <button class="w-100 btn btn-primary btn-lg" type="submit" href="/editcustomer"<%--'${updateButton}'--%> >Edit data</button>
+                    <button class="w-100 btn btn-primary btn-lg" type="submit" href="/editcontract"<%--'${updateButton}'--%> >Edit data</button>
             </div>
                     </form:form>
     </main>

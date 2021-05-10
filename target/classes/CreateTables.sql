@@ -71,3 +71,21 @@ CREATE TABLE user_role
     PRIMARY KEY (user_id, roles),
     FOREIGN KEY (user_id) REFERENCES eCare_db.user (id)
 );
+/*dont't work*/
+/*CREATE SEQUENCE phonenumber_seq
+ (
+    AS BIGINT
+    START WITH 9210010000
+    INCREMENT BY 1
+    MINVALUE 9210010000
+    MAXVALUE 9220000000
+    NO CYCLE
+);*/
+
+create table phonenumber_seq
+(
+    id  int AUTO_INCREMENT,
+    nextPhonenumber bigint null,
+        PRIMARY KEY(id)
+)
+ALTER TABLE penguins AUTO_INCREMENT=9210010000;

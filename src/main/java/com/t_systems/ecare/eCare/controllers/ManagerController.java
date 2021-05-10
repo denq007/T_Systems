@@ -24,7 +24,7 @@ public class ManagerController {
     public String showAllCustomer(Model model) {
         List<CustomerDTO> listCustomer= managerService.getAllCustomer();
         model.addAttribute("allCustomer",listCustomer);
-        return "manager/all-customer";
+        return "employee/all-customer";
     }
 
     @GetMapping("/addnewcustomer")

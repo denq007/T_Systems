@@ -1,3 +1,4 @@
+/*
 package com.t_systems.ecare.eCare.Converter;
 
 import com.t_systems.ecare.eCare.DTO.ContractDTO;
@@ -7,3 +8,4 @@ public interface ContractConverter {
     public Contract converterContractDTOToContract(ContractDTO contractDTO);
     public ContractDTO convertContractToContractDTO(Contract contract);
 }
+*/

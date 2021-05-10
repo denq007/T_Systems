@@ -1,6 +1,5 @@
 package com.t_systems.ecare.eCare.services;
 
-import com.t_systems.ecare.eCare.Converter.CustomerConverter;
 import com.t_systems.ecare.eCare.DAO.CustomerDAO;
 import com.t_systems.ecare.eCare.DAO.UserDao;
 import com.t_systems.ecare.eCare.DTO.CustomerDTO;
@@ -8,6 +7,7 @@ import com.t_systems.ecare.eCare.DTO.UserDTO;
 import com.t_systems.ecare.eCare.entity.Customer;
 import com.t_systems.ecare.eCare.entity.Role;
 import com.t_systems.ecare.eCare.entity.User;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -24,9 +24,22 @@ public class UserServiceImpl implements UserService {
     @Autowired
     CustomerDAO customerDAO;
     @Autowired
-    CustomerConverter customerConverter;
+    private ModelMapper modelMapper;
     @Autowired
     PasswordEncoder passwordEncoder;
+
+    public UserDTO convertToDto(User user) {
+        return modelMapper.map(user, UserDTO.class);
+    }
+
+    public User convertToEntity(UserDTO userDto) {
+        User userEntity = modelMapper.map(userDto, User.class);
+        userEntity.setPassword(passwordEncoder.encode(userDto.getUserPassword()));
+        return userEntity;
+    }
+
+
+
 
     @Transactional
     public Optional<String> saveUser(UserDTO user) {

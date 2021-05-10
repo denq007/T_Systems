@@ -138,36 +138,75 @@
         <tbody>
         <tr>
             <td >Id:</td>
-            <td>${customer.customerID} </td>
+            <td>${customer.id} </td>
         </tr>
         <tr>
             <td>Name:</td>
-            <td>${customer.customerName} </td>
+            <td>${customer.name} </td>
         </tr>
         <tr>
             <td>Surname:</td>
-            <td>${customer.customerSurname} </td>
+            <td>${customer.surname} </td>
         </tr>
         <tr>
             <td>Birthday:</td>
-            <td>${customer.customerBirthDate} </td>
+            <td>${customer.birthDate} </td>
         </tr>
 
         <tr>
             <td>Address:</td>
-            <td>${customer.customerAdress} </td>
+            <td>${customer.address} </td>
         </tr>
         <tr>
             <td>Passport:</td>
-            <td>${customer.customerPassportDetails} </td>
+            <td>${customer.passportDetails} </td>
         </tr>
         </tbody>
     </table>
 
     <form action="/customer/editcustomer" method="get">
-        <input type="hidden" name="customerID" value=${customer.customerID}>
+        <input type="hidden" name="customerID" value=${customer.id}>
       <%--  <input type="hidden" name="userDTO.userId" value=${customer.userDTO.userId}>--%>
         <input type="submit" value="Edit info" class="btn btn-warning"></form>
+    <h3>Client contracts</h3>
+    <td></td>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Phone number</th>
+            <th>Name of the tariff</th>
+            <th>Blocked</th>
+            <th>Block</th>
+        </tr>
+        </thead>
+        <tbody>
+        <c:forEach items="${customer.contractIdList}" var="contract">
+            <tr>
+                <td>${contract.number} </td>
+                <td>${contract.tariffId}</td>
+                <td><c:if test="${contract.blockedByCustomer}"><span class="label label-danger">Block</span></c:if></td>
+                <td><c:if test="${contract.blockedByAdmin}"><span class="label label-danger">Block</span></c:if></td>
+                <td>
+                    <form action="editContract" method="get">
+                        <input type="hidden" name="id" value=${contract.id} >
+                        <input type="submit" value="Edit" class="btn btn-warning"></form>
+                </td>
+                <td>
+                    <form action="showContract" method="get">
+                        <input type="hidden" name="id" value=${contract.id} >
+                        <input type="submit" value="Show details" class="btn btn-info"></form>
+                </td>
+
+            </tr>
+        </c:forEach>
+        </tbody>
+    </table>
+
+    <form action="/contract/createcontract" method="get">
+        <input type="hidden" name="customerID" value=${customer.id}>
+        <input type="submit" value="Create contract" class="btn btn-warning" ></form>
+    <br>
+
 </div>
 </body>
 </html>
