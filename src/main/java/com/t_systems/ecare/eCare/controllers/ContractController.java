@@ -1,8 +1,6 @@
 package com.t_systems.ecare.eCare.controllers;
 import com.t_systems.ecare.eCare.DTO.ContractDTO;
-import com.t_systems.ecare.eCare.DTO.CustomerDTO;
 import com.t_systems.ecare.eCare.services.ContractService;
-import com.t_systems.ecare.eCare.services.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,17 +17,17 @@ public class ContractController {
     @Autowired
     ContractService contractService;
 
-
  @GetMapping("/contract/createcontract")
  public String createContract(@RequestParam("customerID")int customerID, Model model)
  {
      ContractDTO contractDTO=new ContractDTO(customerID);
      model.addAttribute("contract",contractDTO);
-     //add contractDTO in
+     contractService.showTariffandOptions(contractDTO);//for show all tariffs and options in jsp
      return "contract/createContract";
  }
-    @PostMapping("/contract/editcontract")
+    @PostMapping("/contract/createcontract")
     public String editClient(@ModelAttribute("contract") ContractDTO contractDTO , Model model  /*RedirectAttributes attr*/) {
+      int i=0;
         Optional<String> error=contractService.update(contractDTO);
         if (error.isPresent()) {
             model.addAttribute("contract", contractDTO);
@@ -45,5 +43,4 @@ public class ContractController {
         model.addAttribute("contract", contractService.getDto(id));
         return "contract/showContract";
     }
-
 }

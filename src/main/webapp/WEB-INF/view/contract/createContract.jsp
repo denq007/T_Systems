@@ -12,7 +12,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
+   <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
@@ -20,9 +20,19 @@
     <title>Checkout example · Bootstrap v5.0</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
     <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/checkout/">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.2/css/bootstrap-select.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.2/js/bootstrap-select.min.js"></script>
 
-    <!-- Bootstrap core CSS -->
-    <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="<c:url value="/WEB-INF/static/js/jquery.bootstrap-duallistbox.js"/>"></script>
+    <link rel="stylesheet" type="text/css" href="<c:url value="/WEB-INF/static/css/bootstrap-duallistbox.css"/>">
+
+    <%--   <script src="/WEB-INF/static/js/jquery.bootstrap-duallistbox.js"></script>
+    <link rel="stylesheet" type="text/css" href="/WEB-INF/static/css/bootstrap-duallistbox.css"/>--%>
 
     <style>
         .bd-placeholder-img {
@@ -53,8 +63,9 @@
 
             <h2>Your Contract</h2>
         </div>
+       <%-- <c:if test="${not empty message}"><p class="bg-danger">${message}</p></c:if>--%>
 
-        <form:form  modelAttribute="contract" method="post">
+        <form:form  modelAttribute="contract" method="post" >
         <div class="row g-5">
 
             <div class="col-md-7 col-lg-8">
@@ -71,10 +82,10 @@
                             </div>
                         </div>
 
-                       <%-- <div class="col-12">
+                        <div class="col-12">
                             <label for="address" class="form-label">Blocked by Admin</label>
                             <form:input path="blockedByAdmin" value="${contract.blockedByAdmin}" class="form-control" id="address"/>
-                                &lt;%&ndash; <input type="text" class="form-control" id="address" placeholder="1234 Main St" required>&ndash;%&gt;
+                                <%-- <input type="text" class="form-control" id="address" placeholder="1234 Main St" required>--%>
                             <div class="invalid-feedback">
                                 Please enter your shipping address.
                             </div>
@@ -83,13 +94,11 @@
                         <div class="col-12">
                             <label for="passport" class="form-label">User blocked <span class="text-muted"></span></label>
                             <form:input path="blockedByCustomer" value="${contract.blockedByCustomer}" class="form-control" id="passport"/>
-                                &lt;%&ndash; <input type="text" class="form-control" id="address2" placeholder="Apartment or suite">&ndash;%&gt;
-                        </div>--%>
+                                <%-- <input type="text" class="form-control" id="address2" placeholder="Apartment or suite">--%>
+                        </div>
 
-                        <div class="col-12">
-
-                            <label for="passport" class="form-label" >Tariff <span class="text-muted"></span></label>
-
+                        <div class="form-group">
+                            <label for="tr" class="form-label" >Tariffs <span class="text-muted"></span></label>
                                 <form:select path="tariffId" id="tr" class="selectpicker"
                                              data-live-search="true" data-size="5" data-actions-box="true" data-width="75%">
                                     <c:forEach items="${contract.allTariffs}" var="item">
@@ -97,25 +106,28 @@
                                     </c:forEach>
                                 </form:select>
                             </div>
-
-                                <%-- <input type="text" class="form-control" id="address2" placeholder="Apartment or suite">--%>
                         </div>
 
-                        <div class="col-12">
-                            <label for="passport" class="form-label" >Tariff <span class="text-muted"></span></label>
-                            <form:input path="number" value="${contract.number}" class="form-control" id="passport" placeholder="Choose a tariff"/>
-                                <%-- <input type="text" class="form-control" id="address2" placeholder="Apartment or suite">--%>
-                        </div>
+                    <div class="form-group">
+                        <label for="opt">Set options:</label>
+                        <form:select path="allOptions" multiple="multiple" id="opt">
+                            <c:forEach items="${contract.allOptions}" var="item">
+                                <form:option label="${item.key}" value="${item.value}"/>
+                            </c:forEach>
+                        </form:select>
+                    </div>
+
+
 
                         <form:hidden path="id" value="${contract.id}"/>
-                            <%--  <form:hidden path="userDTO" value="${customer.userDTO.userId}"/>--%>
 
                         <hr class="my-4">
                             <%-- <c:url var="updateButton"  value="/customer/editcustomer">
                               <c:param name="customerID" value="${customer.customerID}"/>
                              </c:url>--%>
-                        <button class="w-100 btn btn-primary btn-lg" type="submit" href="/contract/editcontract"<%--'${updateButton}'--%> >Save</button>
-                        <button class="w-100 btn btn-primary btn-lg" type="submit" href="/tariff/choose"<%--'${updateButton}'--%> >Choose a tariff</button>
+                       <%-- <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />--%>
+                        <button class="w-100 btn btn-primary btn-lg" type="submit"  >Save</button>
+
                     </div>
                     </form:form>
     </main>
@@ -130,9 +142,12 @@
     </footer>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+<%--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
 <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
 
-<script src="form-validation.js"></script>
+<script src="form-validation.js"></script>--%>
+<script>
+    $("#opt").bootstrapDualListbox();
+</script>
 </body>
 </html>

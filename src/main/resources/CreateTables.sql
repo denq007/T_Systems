@@ -88,4 +88,4 @@ create table phonenumber_seq
     nextPhonenumber bigint null,
         PRIMARY KEY(id)
 )
-ALTER TABLE penguins AUTO_INCREMENT=9210010000;
+ALTER TABLE phonenumber_seq AUTO_INCREMENT=9210010000;

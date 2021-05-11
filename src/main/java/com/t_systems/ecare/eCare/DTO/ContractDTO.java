@@ -18,6 +18,7 @@ public class ContractDTO {
     boolean blockedByCustomer;
     boolean blockedByAdmin;
     private Map<String, Integer> allTariffs = new HashMap<>();
+    private Map<String, Integer> allOptions = new HashMap<>();
 
     public ContractDTO(int customerID)
     {
