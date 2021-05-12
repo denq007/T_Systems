@@ -1,9 +1,10 @@
 package com.t_systems.ecare.eCare.services;
 
-import com.t_systems.ecare.eCare.DAO.CustomerDAO;
+import com.t_systems.ecare.eCare.DAO.ContractDao;
+import com.t_systems.ecare.eCare.DAO.CustomerDAOImpl;
 import com.t_systems.ecare.eCare.DAO.UserDao;
-import com.t_systems.ecare.eCare.DTO.CustomerDTO;
 import com.t_systems.ecare.eCare.DTO.UserDTO;
+import com.t_systems.ecare.eCare.entity.Contract;
 import com.t_systems.ecare.eCare.entity.Customer;
 import com.t_systems.ecare.eCare.entity.Role;
 import com.t_systems.ecare.eCare.entity.User;
@@ -18,15 +19,18 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
 
 @Service
+@Transactional
 public class UserServiceImpl implements UserService {
     @Autowired
     UserDao userDao;
     @Autowired
-    CustomerDAO customerDAO;
+    CustomerDAOImpl customerDAO;
     @Autowired
     private ModelMapper modelMapper;
     @Autowired
     PasswordEncoder passwordEncoder;
+    @Autowired
+    ContractDao contractDao;
 
     public UserDTO convertToDto(User user) {
         return modelMapper.map(user, UserDTO.class);
@@ -38,7 +42,19 @@ public class UserServiceImpl implements UserService {
         return userEntity;
     }
 
+    @Override
+    public void block(int id) {
+        Contract contract=contractDao.findOne(id);
+        contract.setBlockedByAdmin(true);
+        contractDao.update(contract);
+    }
 
+    @Override
+    public void unblock(int id) {
+        Contract contract=contractDao.findOne(id);
+        contract.setBlockedByAdmin(false);
+        contractDao.update(contract);
+    }
 
 
     @Transactional

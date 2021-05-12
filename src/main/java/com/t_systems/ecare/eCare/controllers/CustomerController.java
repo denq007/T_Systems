@@ -9,7 +9,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.Optional;
 @Slf4j
@@ -24,7 +23,7 @@ public class CustomerController {
     public String showCustomer( Model model)
     {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        CustomerDTO customerDTO=customerService.getCustomerDTOwithoutContractsByEmailUser(auth.getName());
+        CustomerDTO customerDTO=customerService.getCustomerDTOByEmailUser(auth.getName());
          model.addAttribute("customer",customerDTO);
         return "customer/showCustomer";
     }

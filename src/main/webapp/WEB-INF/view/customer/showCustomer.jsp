@@ -175,19 +175,19 @@
         <tr>
             <th>Phone number</th>
             <th>Name of the tariff</th>
-            <th>Blocked</th>
-            <th>Block</th>
+            <th>Blocked Number</th>
+            <th>Blocked Number by Admin</th>
         </tr>
         </thead>
         <tbody>
         <c:forEach items="${customer.contractIdList}" var="contract">
             <tr>
                 <td>${contract.number} </td>
-                <td>${contract.tariffId}</td>
-                <td><c:if test="${contract.blockedByCustomer}"><span class="label label-danger">Block</span></c:if></td>
-                <td><c:if test="${contract.blockedByAdmin}"><span class="label label-danger">Block</span></c:if></td>
+                <td>${contract.tariffId.name}</td>
+                <td>${contract.blockedByUser}></td>
+                <td>${contract.blockedByAdmin}></td>
                 <td>
-                    <form action="editContract" method="get">
+                    <form action="/contract/editcontract" method="get">
                         <input type="hidden" name="id" value=${contract.id} >
                         <input type="submit" value="Edit" class="btn btn-warning"></form>
                 </td>

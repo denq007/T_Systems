@@ -15,7 +15,7 @@ public class Contract {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Column(name = "number")
-    private int number;
+    private String number;
     @ManyToOne(cascade = {CascadeType.PERSIST,CascadeType.MERGE, CascadeType.REFRESH,CascadeType.DETACH},fetch = FetchType.EAGER)
     @JoinColumn(name = "tariff_id",referencedColumnName = "id")
     private Tariff tariffId;
@@ -27,7 +27,7 @@ public class Contract {
     @Column(name = "blocked_by_admin")
     boolean blockedByAdmin;
 
-    public Contract(int number, Tariff tariffId, Customer customerId, boolean blockedByUser, boolean blockedByAdmin) {
+    public Contract(String number, Tariff tariffId, Customer customerId, boolean blockedByUser, boolean blockedByAdmin) {
         this.number = number;
         this.tariffId = tariffId;
         this.customerId = customerId;

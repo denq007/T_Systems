@@ -64,7 +64,9 @@
             <h2>Your Contract</h2>
         </div>
        <%-- <c:if test="${not empty message}"><p class="bg-danger">${message}</p></c:if>--%>
-
+        <c:if test="${not empty message}">
+            <div id="error">${message}</div>
+        </c:if>
         <form:form  modelAttribute="contract" method="post" >
         <div class="row g-5">
 
@@ -97,6 +99,12 @@
                                 <%-- <input type="text" class="form-control" id="address2" placeholder="Apartment or suite">--%>
                         </div>
 
+                        <div class="col-12">
+                            <label for="numbor" class="form-label">Phone Number <span class="text-muted"></span></label>
+                            <form:input path="number" value="${contract.number}" class="form-control" id="numbor" readonly="true"/>
+                                <%-- <input type="text" class="form-control" id="address2" placeholder="Apartment or suite">--%>
+                        </div>
+
                         <div class="form-group">
                             <label for="tr" class="form-label" >Tariffs <span class="text-muted"></span></label>
                                 <form:select path="tariffId" id="tr" class="selectpicker"
@@ -108,9 +116,12 @@
                             </div>
                         </div>
 
+
+            </div>
+
                     <div class="form-group">
                         <label for="opt">Set options:</label>
-                        <form:select path="allOptions" multiple="multiple" id="opt">
+                        <form:select path="optionsIds" multiple="multiple" id="opt">
                             <c:forEach items="${contract.allOptions}" var="item">
                                 <form:option label="${item.key}" value="${item.value}"/>
                             </c:forEach>

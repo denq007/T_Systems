@@ -4,6 +4,7 @@ import com.t_systems.ecare.eCare.DTO.ContractDTO;
 import com.t_systems.ecare.eCare.DTO.CustomerDTO;
 import com.t_systems.ecare.eCare.entity.Contract;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface ContractService {
@@ -12,4 +13,8 @@ public interface ContractService {
     public ContractDTO convertToDto(Contract contract);
     public Contract convertToEntity(ContractDTO contractDTO);
     public void showTariffandOptions(ContractDTO dto);
+
+    Optional<String> create(ContractDTO contractDTO);
+
+
 }

@@ -1,7 +1,7 @@
 package com.t_systems.ecare.eCare.services;
 
 
-import com.t_systems.ecare.eCare.DAO.CustomerDAO;
+import com.t_systems.ecare.eCare.DAO.CustomerDAOImpl;
 import com.t_systems.ecare.eCare.DTO.CustomerDTO;
 import com.t_systems.ecare.eCare.entity.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 @Service
 public class ManagerServiceImpl implements ManagerService{
     @Autowired
-    CustomerDAO customerDAO;
+    CustomerDAOImpl customerDAO;
     @Autowired
     CustomerService customerService;
 

@@ -7,10 +7,11 @@ import java.util.List;
 import java.util.Optional;
 
 public interface CustomerService {
-    public CustomerDTO getCustomerDTOwithoutContractsByEmailUser(String username);
+    public CustomerDTO getCustomerDTOByEmailUser(String username);
     public Optional<String> update(CustomerDTO dto);
     public CustomerDTO findById(int id);
     public CustomerDTO convertToDto(Customer customer);
     public Customer convertToEntity(CustomerDTO customerDTO);
 
+    public CustomerDTO findByPhoneNumber(String phone);
 }

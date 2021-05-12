@@ -1,5 +1,6 @@
 package com.t_systems.ecare.eCare.DTO;
 
+import com.t_systems.ecare.eCare.entity.Contract;
 import com.t_systems.ecare.eCare.entity.User;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,5 +21,5 @@ public class CustomerDTO {
     private String passportDetails;
     private String address;
     private String email;
-    private List<ContractDTO> contractIdList;
+    private List<Contract> contractIdList;
 }

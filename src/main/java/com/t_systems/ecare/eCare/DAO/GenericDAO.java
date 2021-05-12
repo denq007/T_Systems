@@ -59,6 +59,11 @@ public class GenericDAO<T> implements IGenericDAO<T> {
     }
 
     @Override
+    public void save1(T entity) {
+       sessionFactory.getCurrentSession().save(entity);
+    }
+
+    @Override
     public void update(T entity) {
         sessionFactory.getCurrentSession().merge(entity);
     }

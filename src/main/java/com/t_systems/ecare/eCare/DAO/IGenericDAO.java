@@ -12,6 +12,7 @@ public interface IGenericDAO <T>{
     List<T> getLast(int limit);
 
     int save(final T entity);
+    void save1(final T entity);
 
     void update(final T entity);
 

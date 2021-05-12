@@ -4,13 +4,11 @@ import com.t_systems.ecare.eCare.DTO.CustomerDTO;
 import com.t_systems.ecare.eCare.entity.Customer;
 import com.t_systems.ecare.eCare.services.CustomerService;
 import com.t_systems.ecare.eCare.services.ManagerService;
+import com.t_systems.ecare.eCare.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 @Controller
@@ -19,6 +17,10 @@ public class ManagerController {
 
     @Autowired
     private ManagerService managerService ;
+    @Autowired
+    UserService userService;
+    @Autowired
+    CustomerService customerService;
 
     @RequestMapping("/showallcustomer")
     public String showAllCustomer(Model model) {
@@ -40,6 +42,25 @@ public class ManagerController {
     {
         managerService.saveCustomer(customerDTO);
         return "redirect:manager/all-customer";
+    }
+
+    @GetMapping("/user/block")
+    public String blockContract(@RequestParam("id") int id, Model model) {
+        userService.block(id);
+        return "";
+    }
+
+    @GetMapping("/user/unblock")
+    public String unblockContract(@RequestParam("id") int id, Model model) {
+        userService.unblock(id);
+        return "";
+    }
+
+    @GetMapping("/findClientByPhoneNumber")
+    public String findByPhoneNumber(@RequestParam(value = "number") String phone,Model model) {
+        CustomerDTO customerDTO= customerService.findByPhoneNumber(phone);
+        model.addAttribute("customer",customerDTO);
+        return "redirect:/customer/showcustomerinformation";
     }
 
 

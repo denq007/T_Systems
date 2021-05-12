@@ -1,34 +1,31 @@
 package com.t_systems.ecare.eCare.services;
 
 
-import com.t_systems.ecare.eCare.DAO.CustomerDAO;
+import com.t_systems.ecare.eCare.DAO.ContractDao;
+import com.t_systems.ecare.eCare.DAO.CustomerDAOImpl;
 import com.t_systems.ecare.eCare.DAO.UserDao;
 import com.t_systems.ecare.eCare.DTO.CustomerDTO;
-import com.t_systems.ecare.eCare.DTO.UserDTO;
 import com.t_systems.ecare.eCare.entity.Customer;
 import com.t_systems.ecare.eCare.entity.User;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.io.Serializable;
-import java.util.List;
 import java.util.Optional;
 
 @Service
 public class CustomerServiceImpl implements CustomerService{
     @Autowired
-    CustomerDAO customerDAO;
+    CustomerDAOImpl customerDAO;
     @Autowired
     UserDao userDao;
     @Autowired
     ModelMapper modelMapper;
     @Autowired
     UserService userService;
-
+    @Autowired
+    ContractDao contractDao;
 
     public CustomerDTO convertToDto(Customer customer) {
         return modelMapper.map(customer, CustomerDTO.class);
@@ -39,10 +36,18 @@ public class CustomerServiceImpl implements CustomerService{
         return customer;
     }
 
+    @Override
+    public CustomerDTO findByPhoneNumber(String phone) {
+        CustomerDTO сustomerDTO=convertToDto(customerDAO.getCustomerByPhoneNumber(phone));
+        return  сustomerDTO;
+    }
+
     @Transactional
-    public CustomerDTO getCustomerDTOwithoutContractsByEmailUser(String username){
-        return convertToDto(customerDAO.getCustomerIDBYUserID(
+    public CustomerDTO getCustomerDTOByEmailUser(String username){
+        CustomerDTO сustomerDTO=convertToDto(customerDAO.getCustomerIDBYUserID(
                 userDao.getUserByUsername(username).getId()));
+        сustomerDTO.setContractIdList(contractDao.getClientContracts(сustomerDTO.getId()));
+        return сustomerDTO;
     }
 
 

@@ -12,4 +12,8 @@ public interface UserService {
     public void authWithHttpServletRequest(HttpServletRequest request, String username, String password);
     public UserDTO convertToDto(User user);
     public User convertToEntity(UserDTO userDto);
+
+    void block(int id);
+
+    void unblock(int id);
 }

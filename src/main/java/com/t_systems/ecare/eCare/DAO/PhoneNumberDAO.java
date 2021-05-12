@@ -1,15 +1,14 @@
 package com.t_systems.ecare.eCare.DAO;
 
-import com.t_systems.ecare.eCare.entity.Contract;
+import com.t_systems.ecare.eCare.entity.PhoneNumber;
+import com.t_systems.ecare.eCare.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class ContractDAO extends GenericDAO<Contract>{
-
+public class PhoneNumberDAO extends GenericDAO<PhoneNumber>{
     @Autowired
     public void setClass() {
-        this.setClass(Contract.class);
+        this.setClass(PhoneNumber.class);
     }
-
 }
