@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.HashSet;
 import java.util.Set;
 @Getter
 @Setter
@@ -15,5 +16,14 @@ public class UserDTO {
     private String userPassword;
     private boolean userBlocked;
     private Set<Role> userRoles;
-    //User
+
+
+
+    public void setUserRole(Role roleCustomer) {
+        if(this.userRoles==null)
+            this.userRoles=new HashSet<>();
+        this.userRoles.add(roleCustomer);
+    }
+
+//User
 }

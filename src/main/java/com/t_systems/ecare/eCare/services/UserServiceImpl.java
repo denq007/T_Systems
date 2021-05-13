@@ -43,14 +43,28 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void block(int id) {
+    public void blockByEmployee(int id) {
         Contract contract=contractDao.findOne(id);
         contract.setBlockedByAdmin(true);
         contractDao.update(contract);
     }
 
     @Override
-    public void unblock(int id) {
+    public void unblockByEmployee(int id) {
+        Contract contract=contractDao.findOne(id);
+        contract.setBlockedByAdmin(false);
+        contractDao.update(contract);
+    }
+
+    @Override
+    public void blockByCustomer(int id) {
+        Contract contract=contractDao.findOne(id);
+        contract.setBlockedByUser(true);
+        contractDao.update(contract);
+    }
+
+    @Override
+    public void unblockByCustomer(int id) {
         Contract contract=contractDao.findOne(id);
         contract.setBlockedByAdmin(false);
         contractDao.update(contract);
@@ -68,6 +82,7 @@ public class UserServiceImpl implements UserService {
         fromDB.setPassword(passwordEncoder.encode(user.getUserPassword()));
         fromDB.setLogin(user.getUserLogin());
         user.setUserId(fromDB.getId());
+        user.setUserRole(Role.ROLE_CUSTOMER);
         Customer customer = new Customer();
         customer.setUser(fromDB);
         customerDAO.save(customer);

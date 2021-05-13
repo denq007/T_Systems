@@ -69,6 +69,7 @@ public class CustomerServiceImpl implements CustomerService{
         Customer customer=  customerDAO.findOne(id);
         customerDTO=convertToDto(customer);
         customerDTO.setUser(userService.convertToDto(customer.getUser()));
+        customerDTO.setContractIdList(contractDao.getClientContracts(id));
         return  customerDTO;
     }
 

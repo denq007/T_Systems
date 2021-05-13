@@ -50,7 +50,6 @@
 
 
 <form:form action="saveuser" modelAttribute="user">
-
         <h1 class="h3 mb-3 fw-normal">Please write your email and password</h1>
         <div class="form-floating">
             <form:input path="userLogin" class="form-control" id="floatingInput" placeholder="name@example.com"/>

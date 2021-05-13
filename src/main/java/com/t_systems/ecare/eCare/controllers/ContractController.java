@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.Optional;
 
@@ -29,15 +30,15 @@ public class ContractController {
      return "contract/createContract";
  }
     @PostMapping("/contract/createcontract")
-    public String createContract(@ModelAttribute("contract") ContractDTO contractDTO , Model model  /*RedirectAttributes attr*/) {
+    public String createContract(@ModelAttribute("contract") ContractDTO contractDTO , Model model  , RedirectAttributes attr) {
         Optional<String> error=contractService.create(contractDTO);
         if (error.isPresent()) {
             model.addAttribute("message", error.get());
             contractService.showTariffandOptions(contractDTO);
             return "contract/createContract";
         }
-        /*  attr.addAttribute("id", customerDTO.getCustomerID());*/
-        return "redirect:/customer/showcustomerinformation";
+        attr.addAttribute("id", contractDTO.getCustomerId());
+        return "redirect:/employee/showcustomer";
     }
 
     @GetMapping("/contract/editcontract")
@@ -50,7 +51,7 @@ public class ContractController {
     }
 
     @PostMapping("/contract/editcontract")
-    public String editContract(@ModelAttribute("contract") ContractDTO contractDTO , Model model)
+    public String editContract(@ModelAttribute("contract") ContractDTO contractDTO , Model model, RedirectAttributes attr)
     {
         Optional<String> error = contractService.update(contractDTO);
         if (error.isPresent()) {
@@ -59,9 +60,9 @@ public class ContractController {
             model.addAttribute("contract", contractDTO);
             return "contract/createContract";
         }
-
         contractService.update(contractDTO);
-        return "redirect:/customer/showcustomerinformation";
+        attr.addAttribute("id", contractDTO.getCustomerId());
+        return "redirect:/customer/showcustomer";
     }
 
     @GetMapping("/contract/showcontract")

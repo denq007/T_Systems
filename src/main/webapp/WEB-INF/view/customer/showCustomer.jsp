@@ -1,5 +1,6 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <%--
   Created by IntelliJ IDEA.
@@ -18,7 +19,8 @@
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.82.0">
     <title>Checkout example · Bootstrap v5.0</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
     <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/checkout/">
 
     <!-- Bootstrap core CSS -->
@@ -43,7 +45,7 @@
 
     <!-- Custom styles for this template -->
     <link href="form-validation.css" rel="stylesheet">
-    <jsp:include page="../header.jsp" />
+    <jsp:include page="../header.jsp"/>
 </head>
 <body class="bg-light">
 
@@ -128,7 +130,7 @@
 </body>
 </html>--%>
 <div class="container">
-    <span class="pull-right"><a href="clients" class="btn btn-info" role="button">Back to clients</a></span>
+    <span class="pull-right"><a href="../home.jsp" class="btn btn-info" role="button">Back</a></span>
     <h3>Client details</h3>
     <table class="table table-striped">
         <thead>
@@ -137,7 +139,7 @@
         </thead>
         <tbody>
         <tr>
-            <td >Id:</td>
+            <td>Id:</td>
             <td>${customer.id} </td>
         </tr>
         <tr>
@@ -163,11 +165,16 @@
         </tr>
         </tbody>
     </table>
+   <%-- <sec:authorize access="hasRole('EMPLOYEE')">
+    <form action="/employee/editcustomer" method="get">
+        </sec:authorize>
+    <sec:authorize access="hasRole('CUSTOMER')">--%>
+    <form action="/customer/editcustomer" method="get"><%--</sec:authorize>--%>
 
-    <form action="/customer/editcustomer" method="get">
         <input type="hidden" name="customerID" value=${customer.id}>
-      <%--  <input type="hidden" name="userDTO.userId" value=${customer.userDTO.userId}>--%>
-        <input type="submit" value="Edit info" class="btn btn-warning"></form>
+        <%--  <input type="hidden" name="userDTO.userId" value=${customer.userDTO.userId}>--%>
+        <input type="submit" value="Edit info" class="btn btn-warning">
+            </form>
     <h3>Client contracts</h3>
     <td></td>
     <table class="table table-striped">
@@ -187,13 +194,18 @@
                 <td>${contract.blockedByUser}></td>
                 <td>${contract.blockedByAdmin}></td>
                 <td>
+                    <c:if test="${!contract.blockedByUser || !contract.blockedByAdmin}">
                     <form action="/contract/editcontract" method="get">
-                        <input type="hidden" name="id" value=${contract.id} >
+                        <input type="hidden" name="id" value=${contract.id}>
                         <input type="submit" value="Edit" class="btn btn-warning"></form>
+                    </c:if>
                 </td>
+                <c:if test="${contract.blockedByUser && !contract.blockedByAdmin}">
+                    <a href="/customer/user/unblock" role="button" class="btn btn-success">Unblock number</a>
+                </c:if>
                 <td>
                     <form action="showContract" method="get">
-                        <input type="hidden" name="id" value=${contract.id} >
+                        <input type="hidden" name="id" value=${contract.id}>
                         <input type="submit" value="Show details" class="btn btn-info"></form>
                 </td>
 
@@ -202,11 +214,12 @@
         </tbody>
     </table>
 
+    <sec:authorize access="hasRole('EMPLOYEE')">
     <form action="/contract/createcontract" method="get">
-        <input type="hidden" name="customerID" value=${customer.id}>
-        <input type="submit" value="Create contract" class="btn btn-warning" ></form>
-    <br>
-
+            <input type="hidden" name="customerID" value=${customer.id}>
+            <input type="submit" value="Create contract" class="btn btn-warning"></form>
+        <br>
+    </sec:authorize>
 </div>
 </body>
 </html>

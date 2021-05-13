@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
@@ -35,17 +36,17 @@ public class UserController {
         return "registrationUser";
     }
     @PostMapping("/user/saveuser")
-    public String addUser(@ModelAttribute("user") UserDTO user,Model model,HttpServletRequest request)
+    public String addUser(@ModelAttribute("user") UserDTO user, Model model, HttpServletRequest request, RedirectAttributes attr)
     {
         Optional<String> error=userService.saveUser(user);
         if (error.isPresent()) {
             model.addAttribute(MESSAGE, error.get());
             return SIGN_UP;
         }
-        userService.authWithHttpServletRequest(request,user.getUserLogin(),user.getUserPassword());
-       // return "customer/showCustomerInformation";
-       // return "customer/createCustomer";
-        return "redirect:/customer/showcustomerinformation";
+        attr.addAttribute("login",user.getUserLogin());
+        attr.addAttribute("id");
+     //   userService.authWithHttpServletRequest(request,user.getUserLogin(),user.getUserPassword());
+        return "redirect:/employee/showcustomerinformation/{}";
     }
 
     @GetMapping("/login")
@@ -70,7 +71,7 @@ public class UserController {
             response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/customer/showcustomerinformation"));
         }
         else if(role.contains("ROLE_EMPLOYEE")) {
-            response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/employee/showcontract"));
+            response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/employee/employeecabinet"));
         }
 
     }

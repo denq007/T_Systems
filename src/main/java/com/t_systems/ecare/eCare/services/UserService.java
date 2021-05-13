@@ -13,7 +13,9 @@ public interface UserService {
     public UserDTO convertToDto(User user);
     public User convertToEntity(UserDTO userDto);
 
-    void block(int id);
+    public void blockByEmployee(int id);
+    public void unblockByEmployee(int id);
+    public void blockByCustomer(int id);
+    public void unblockByCustomer(int id);
 
-    void unblock(int id);
 }
