@@ -10,8 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ContractServiceImp implements ContractService {
@@ -72,8 +75,7 @@ public class ContractServiceImp implements ContractService {
     @Transactional
     public Optional<String> create(ContractDTO contractDTO) {
         Contract contract = new Contract();
-        int id=contractDTO.getTariffId();
-        Tariff tariff = tariffDAO.findOne(id);
+        Tariff tariff = tariffDAO.findOne(contractDTO.getTariffId());
         contract.setTariffId(tariff);
         contract.setBlockedByUser(contractDTO.isBlockedByCustomer());
         contract.setBlockedByAdmin(contractDTO.isBlockedByAdmin());
@@ -81,7 +83,15 @@ public class ContractServiceImp implements ContractService {
         contract.setCustomerId(customerDAO.findOne(contractDTO.getCustomerId()));
         contract.setNumber(contractDTO.getNumber());
         contractDTO.setId(contractDAO.save(contract));
+        contractDTO.setTariffName(tariff.getName());
         return Optional.empty();
+    }
+
+    @Override
+    @Transactional
+    public List<ContractDTO> showAllContracts() {
+        List<Contract> list=contractDAO.findAll();
+        return list.stream().map(s->convertToDto(s)).collect(Collectors.toList());
     }
 
 

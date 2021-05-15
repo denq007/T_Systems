@@ -1,5 +1,6 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <%--
   Created by IntelliJ IDEA.
@@ -57,31 +58,37 @@
         </thead>
         <tbody>
         <tr>
-            <td >Id:</td>
-            <td>${contract.id} </td>
+            <td hidden>Id:</td>
+            <td hidden>${contract.id} </td>
         </tr>
         <tr>
-            <td>Name:</td>
+            <td>Phone number</td>
             <td>${contract.number} </td>
         </tr>
         <tr>
-            <td>Surname:</td>
+            <td>Tariff</td>
             <td>${contract.tariffId} </td>
         </tr>
         <tr>
-            <td>Birthday:</td>
+            <td>Block</td>
             <td>${contract.blockedByCustomer} </td>
         </tr>
-
+        <sec:authorize access="hasRole('EMPLOYEE')">
         <tr>
-            <td>Address:</td>
+            <td>Block by admin</td>
             <td>${contract.blockedByAdmin} </td>
         </tr>
+        </sec:authorize>
+        <tr>
+            <td>Tariff:</td>
+            <td>${contract.tariffName} </td>
+        </tr>
+
 
         </tbody>
     </table>
 
-    <input type="submit" value="Save" class="btn btn-success"/>
+    <input type="submit" value="Show options" class="btn btn-success"/>
 
    <%-- <form action="createContract" method="get">
         <input type="hidden" name="customerID" value=${customer.id}>

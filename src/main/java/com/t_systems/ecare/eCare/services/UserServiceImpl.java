@@ -43,17 +43,19 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void blockByEmployee(int id) {
+    public int blockByEmployee(int id) {
         Contract contract=contractDao.findOne(id);
         contract.setBlockedByAdmin(true);
         contractDao.update(contract);
+        return contract.getCustomerId().getId();
     }
 
     @Override
-    public void unblockByEmployee(int id) {
+    public int unblockByEmployee(int id) {
         Contract contract=contractDao.findOne(id);
         contract.setBlockedByAdmin(false);
         contractDao.update(contract);
+        return contract.getCustomerId().getId();
     }
 
     @Override
@@ -66,7 +68,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public void unblockByCustomer(int id) {
         Contract contract=contractDao.findOne(id);
-        contract.setBlockedByAdmin(false);
+        contract.setBlockedByUser(false);
         contractDao.update(contract);
     }
 

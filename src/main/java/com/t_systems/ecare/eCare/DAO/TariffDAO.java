@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface TariffDAO extends IGenericDAO<Tariff>{
     public List<Object[]> getAllTariffNamesAndIds();
+
+    public Tariff findByName(String tariffName);
 }

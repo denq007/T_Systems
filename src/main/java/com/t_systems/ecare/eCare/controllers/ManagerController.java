@@ -28,13 +28,7 @@ public class ManagerController {
     {
         return "employee/employeeCabinet";
     }
-  /*  @GetMapping("/showcustomerinformation/{}")
-    public String showCustomer( @RequestParam("id") int id,Model model)
-    {
-        CustomerDTO customerDTO=customerService.findById(id);
-        model.addAttribute("customer",customerDTO);
-        return "customer/showCustomer";
-    }*/
+
     @GetMapping("/showcustomerinformation/{}")
     public String showCustomer( @RequestParam("login") String login,Model model)
     {
@@ -42,23 +36,6 @@ public class ManagerController {
         model.addAttribute("customer",customerDTO);
         return "customer/showCustomer";
     }
-
-/*    @GetMapping("/editcustomer")
-    public String editClient(@RequestParam("customerID") int id, Model model) {
-
-        model.addAttribute("customer",customerService.findById(id));
-        return "customer/createCustomer";
-    }
-
-    @PostMapping("/editcustomer")
-    public String editClient(@ModelAttribute("customer") CustomerDTO customerDTO , Model model ) {
-        Optional<String> error = customerService.update(customerDTO);
-        if (error.isPresent()) {
-            model.addAttribute("customer", customerDTO);
-            return "customer/createCustomer";
-        }
-        return "redirect:/employee/showcustomerinformation/{}";
-    }*/
 
     @RequestMapping("/showallcustomer")
     public String showAllCustomer(Model model) {
@@ -85,21 +62,23 @@ public class ManagerController {
 
     @GetMapping("/user/block")
     public String blockContract(@RequestParam("id") int id, Model model) {
-        userService.blockByEmployee(id);
-        return "";
+        int idCustomer=userService.blockByEmployee(id);
+        model.addAttribute("id",idCustomer);
+        return "redirect:/customer/showcustomer";
     }
 
     @GetMapping("/user/unblock")
     public String unblockContract(@RequestParam("id") int id, Model model) {
-        userService.unblockByEmployee(id);
-        return "";
+        int idCustomer=userService.unblockByEmployee(id);
+        model.addAttribute("id",idCustomer);
+        return "redirect:/customer/showcustomer";
     }
 
     @GetMapping("/findClientByPhoneNumber")
     public String findByPhoneNumber(@RequestParam(value = "number") String phone,Model model) {
         CustomerDTO customerDTO= customerService.findByPhoneNumber(phone);
-        model.addAttribute("customer",customerDTO);
-        return "redirect:/customer/showcustomerinformation";
+        model.addAttribute("id",customerDTO.getId());
+        return "redirect:/customer/showcustomer";
     }
 
 

@@ -37,6 +37,7 @@ public class CustomerServiceImpl implements CustomerService{
     }
 
     @Override
+    @Transactional
     public CustomerDTO findByPhoneNumber(String phone) {
         CustomerDTO сustomerDTO=convertToDto(customerDAO.getCustomerByPhoneNumber(phone));
         return  сustomerDTO;

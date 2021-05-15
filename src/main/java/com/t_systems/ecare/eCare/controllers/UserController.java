@@ -23,8 +23,7 @@ import java.util.Optional;
 @Controller
 //@RequestMapping("/user")
 public class UserController {
-    private static final String MESSAGE = "message";
-    private static final String SIGN_UP = "sign-up";
+
     @Autowired
     UserService userService;
 
@@ -40,12 +39,10 @@ public class UserController {
     {
         Optional<String> error=userService.saveUser(user);
         if (error.isPresent()) {
-            model.addAttribute(MESSAGE, error.get());
-            return SIGN_UP;
+            model.addAttribute("message", error.get());
+            return "login";
         }
         attr.addAttribute("login",user.getUserLogin());
-        attr.addAttribute("id");
-     //   userService.authWithHttpServletRequest(request,user.getUserLogin(),user.getUserPassword());
         return "redirect:/employee/showcustomerinformation/{}";
     }
 
@@ -54,7 +51,7 @@ public class UserController {
     {
         ModelAndView model = new ModelAndView();
         if (error != null) {
-            model.addObject(MESSAGE, "Wrong login or password");
+            model.addObject("message", "Wrong login or password");
         }
         return model;
     }

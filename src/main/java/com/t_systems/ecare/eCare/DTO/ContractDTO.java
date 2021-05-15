@@ -17,6 +17,7 @@ public class ContractDTO {
     private String number;
     private int tariffId;
     private int customerId;
+    private String tariffName;
     boolean blockedByCustomer;
     boolean blockedByAdmin;
     private Map<String, Integer> allTariffs = new HashMap<>();

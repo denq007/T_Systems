@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.Optional;
 @Slf4j
 @Controller
@@ -25,7 +26,7 @@ public class CustomerController {
     @Autowired
     UserService userService;
     @GetMapping("/showcustomerinformation")
-    public String showCustomer( Model model)
+    public String showCustomer(Model model)
     {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         CustomerDTO customerDTO=customerService.getCustomerDTOByEmailUser(auth.getName());
@@ -58,22 +59,18 @@ public class CustomerController {
         return "customer/showCustomer";
     }
 
-    @RequestMapping("/showcontract")
-    public String showContract()
-    {
-        return null;
-    }
+
 
     @GetMapping("/user/block")
     public String blockContract(@RequestParam("id") int id, Model model) {
         userService.blockByCustomer(id);
-        return "";
+        return "redirect:/customer/showcustomerinformation";
     }
 
     @GetMapping("/user/unblock")
     public String unblockContract(@RequestParam("id") int id, Model model) {
         userService.unblockByCustomer(id);
-        return "";
+        return "redirect:/customer/showcustomerinformation";
     }
    /* @GetMapping("{id}")
     public String customerEditInformation(@PathVariable int id, Model model)

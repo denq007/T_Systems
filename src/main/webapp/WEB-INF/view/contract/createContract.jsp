@@ -1,5 +1,6 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <%--
   Created by IntelliJ IDEA.
@@ -83,7 +84,7 @@
                                 Valid last name is required.
                             </div>
                         </div>
-
+                        <sec:authorize access="hasRole('EMPLOYEE')">
                         <div class="col-12">
                             <label for="address" class="form-label">Blocked by Admin</label>
                             <form:input path="blockedByAdmin" value="${contract.blockedByAdmin}" class="form-control" id="address"/>
@@ -92,7 +93,7 @@
                                 Please enter your shipping address.
                             </div>
                         </div>
-
+                        </sec:authorize>
                         <div class="col-12">
                             <label for="passport" class="form-label">User blocked <span class="text-muted"></span></label>
                             <form:input path="blockedByCustomer" value="${contract.blockedByCustomer}" class="form-control" id="passport"/>

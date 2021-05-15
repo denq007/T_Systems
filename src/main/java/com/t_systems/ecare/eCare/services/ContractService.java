@@ -17,4 +17,5 @@ public interface ContractService {
     Optional<String> create(ContractDTO contractDTO);
 
 
+    List<ContractDTO> showAllContracts();
 }

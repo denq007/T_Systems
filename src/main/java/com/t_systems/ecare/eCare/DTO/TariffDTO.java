@@ -4,7 +4,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -14,4 +17,5 @@ public class TariffDTO {
     private double tariffPrice;
     boolean tariffCheckOld;
     private List<OptionDTO> tariffOption;
+    private Map<String, Integer> allOptions = new HashMap<>();
 }

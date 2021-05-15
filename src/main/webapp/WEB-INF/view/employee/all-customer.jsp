@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <body>
-
+<span class="pull-right"><a href="/employee/employeecabinet" class="btn btn-info" role="button">Back</a></span>
 <h2>All Customer</h2>
 <br>
 

@@ -49,88 +49,8 @@
 </head>
 <body class="bg-light">
 
-<%--<div class="container">
-    <main>
-        <div class="py-5 text-center">
-
-            <h2>Personal Information</h2>
-        </div>
-       <form:form  modelAttribute="customer">
-        <div class="row g-5">
-
-            <div class="col-md-7 col-lg-8">
-                <h4 class="mb-3">Your data:</h4>
-                <form class="needs-validation" novalidate>
-                    <div class="row g-3">
-                        <div class="col-sm-6">
-                            <label for="firstName" class="form-label">First name</label>
-                            <form:input path="customerName" value="${customer.customerName}" class="form-control" id="firstName"/>
-                          &lt;%&ndash;  <input type="text" class="form-control" id="firstName" placeholder="" value="" required>&ndash;%&gt;
-                            <div class="invalid-feedback">
-                                Valid first name is required.
-                            </div>
-                        </div>
-
-                        <div class="col-sm-6">
-                            <label for="lastName" class="form-label">Last name</label>
-                            <form:input path="customerSurname" value="${customer.customerSurname}" class="form-control" id="lastName"/>
-                        &lt;%&ndash;    <input type="text" class="form-control" id="lastName" placeholder="" value="" required>&ndash;%&gt;
-                            <div class="invalid-feedback">
-                                Valid last name is required.
-                            </div>
-                        </div>
-
-                        <div class="col-12">
-                            <label for="address" class="form-label">Address</label>
-                            <form:input path="customerAdress" value="${customer.customerAdress}" class="form-control" id="address"/>
-                           &lt;%&ndash; <input type="text" class="form-control" id="address" placeholder="1234 Main St" required>&ndash;%&gt;
-                            <div class="invalid-feedback">
-                                Please enter your shipping address.
-                            </div>
-                        </div>
-
-                        <div class="col-12">
-                            <label for="passport" class="form-label">Passport <span class="text-muted"></span></label>
-                            <form:input path="customerPassportDetails" value="${customer.customerPassportDetails}" class="form-control" id="passport"/>
-                           &lt;%&ndash; <input type="text" class="form-control" id="address2" placeholder="Apartment or suite">&ndash;%&gt;
-                        </div>
-
-
-                    <hr class="my-4">
-
-                      &lt;%&ndash;  <form action="/customer/editcustomer" method="post">
-                            <form:hidden path="customerID" value="${customer.customerID}"/>&ndash;%&gt;
-                     &lt;%&ndash;   <form action="" method="get">
-                            <input type="hidden" name="id" value=${customer.customerID}>&ndash;%&gt;
-                        <form action="/customer/editcustomer" method="get">
-                            <input type="hidden" name="customerID" value=${customer.customerID}>
-                            <input type="submit" value="Edit info" class="btn btn-warning"></form>
-
-                        <a class="me-3 py-2 text-dark text-decoration-none" name="customerID" value=${customer.customerID} href="/customer/editcustomer">Edit info</a>
-                           &lt;%&ndash; <input type="submit" value="Edit info" class="btn btn-warning" href ="/customer/editcustomer"></form>&ndash;%&gt;
-                      &lt;%&ndash;  </form>&ndash;%&gt;
-            </div>
-                    </form:form>
-    </main>
-
-    <footer class="my-5 pt-5 text-muted text-center text-small">
-        <p class="mb-1">&copy; 2021–2021</p>
-        <ul class="list-inline">
-&lt;%&ndash;            <li class="list-inline-item"><a href="#">Privacy</a></li>
-            <li class="list-inline-item"><a href="#">Terms</a></li>
-            <li class="list-inline-item"><a href="#">Support</a></li>&ndash;%&gt;
-        </ul>
-    </footer>
-</div>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
-<script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
-
-<script src="form-validation.js"></script>
-</body>
-</html>--%>
 <div class="container">
-    <span class="pull-right"><a href="../home.jsp" class="btn btn-info" role="button">Back</a></span>
+    <span class="pull-right"><a href="/" class="btn btn-info" role="button">Back</a></span>
     <h3>Client details</h3>
     <table class="table table-striped">
         <thead>
@@ -139,8 +59,10 @@
         </thead>
         <tbody>
         <tr>
+            <sec:authorize access="hasRole('EMPLOYEE')">
             <td>Id:</td>
             <td>${customer.id} </td>
+            </sec:authorize>
         </tr>
         <tr>
             <td>Name:</td>
@@ -201,14 +123,40 @@
                     </c:if>
                 </td>
                 <c:if test="${contract.blockedByUser && !contract.blockedByAdmin}">
-                    <a href="/customer/user/unblock" role="button" class="btn btn-success">Unblock number</a>
+                    <sec:authorize access="!hasRole('EMPLOYEE')">
+                <form action="/customer/user/unblock" method="get">
+                    <input type="hidden" name="id" value=${contract.id}>
+                    <input type="submit" value="Unblock number" class="btn btn-warning"></form>
+                    </sec:authorize>
                 </c:if>
                 <td>
-                    <form action="showContract" method="get">
+                    <form action="/contract/showcontract" method="get">
                         <input type="hidden" name="id" value=${contract.id}>
                         <input type="submit" value="Show details" class="btn btn-info"></form>
                 </td>
-
+                <c:if test="${!contract.blockedByUser && !contract.blockedByAdmin}">
+                    <sec:authorize access="!hasRole('EMPLOYEE')">
+                <td>
+                    <form action="/customer/user/block" method="get">
+                        <input type="hidden" name="id" value=${contract.id}>
+                        <input type="submit" value="Block number" class="btn btn-info"></form>
+                </td>
+                    </sec:authorize>
+                    <sec:authorize access="hasRole('EMPLOYEE')">
+                        <td>
+                            <form action="/employee/user/block" method="get">
+                                <input type="hidden" name="id" value=${contract.id}>
+                                <input type="submit" value="Block number by admin" class="btn btn-info"></form>
+                        </td>
+                    </sec:authorize>
+                </c:if>
+                <c:if test="${contract.blockedByAdmin}">
+                    <sec:authorize access="hasRole('EMPLOYEE')">
+                    <form action="/employee/user/unblock" method="get">
+                        <input type="hidden" name="id" value=${contract.id}>
+                        <input type="submit" value="Unblock number" class="btn btn-warning"></form>
+                    </sec:authorize>
+                </c:if>
             </tr>
         </c:forEach>
         </tbody>
