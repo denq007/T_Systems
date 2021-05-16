@@ -55,7 +55,7 @@
     <jsp:include page="../header.jsp" />
 </head>
 <body class="bg-light">
-
+<span class="pull-right"><a href="/employee/employeecabinet" class="btn btn-info" role="button">Back</a></span>
 <div class="container">
     <main>
         <div class="py-5 text-center">
@@ -87,13 +87,18 @@
 
                         <div class="form-group">
 
-                            <c:forEach items="${tariff.tariffOption}" var="option">
+                            <c:forEach items="${tariff.optionName}" var="option">
                                 <tr>
-                                    <td>${option.optionName} </td>
+                                    <td>${option} </td>
                                 </tr>
                             </c:forEach>
                         </div>
-
+                        <sec:authorize access="hasRole('EMPLOYEE')">
+                        <form action="/employee/delete-tariff" method="get">
+                            <input hidden name="name" value=${tariff.tariffName}>
+                            <button class="w-100 btn btn-primary btn-lg" type="submit">Delete</button>
+                        </form>
+                        </sec:authorize>
                     <hr class="my-4">
                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
             </div>

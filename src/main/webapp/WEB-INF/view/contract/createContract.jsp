@@ -96,7 +96,7 @@
                         </sec:authorize>
                         <div class="col-12">
                             <label for="passport" class="form-label">User blocked <span class="text-muted"></span></label>
-                            <form:input path="blockedByCustomer" value="${contract.blockedByCustomer}" class="form-control" id="passport"/>
+                            <form:input path="blockedByUser" value="${contract.blockedByUser}" class="form-control" id="passport"/>
                                 <%-- <input type="text" class="form-control" id="address2" placeholder="Apartment or suite">--%>
                         </div>
 
@@ -118,7 +118,7 @@
                         </div>
 
 
-            </div>
+
 
                     <div class="form-group">
                         <label for="opt">Set options:</label>

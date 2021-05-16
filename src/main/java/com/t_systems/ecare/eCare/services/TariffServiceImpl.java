@@ -4,6 +4,7 @@ import com.t_systems.ecare.eCare.DAO.OptionDAO;
 import com.t_systems.ecare.eCare.DAO.TariffDAO;
 import com.t_systems.ecare.eCare.DTO.TariffDTO;
 import com.t_systems.ecare.eCare.DTO.UserDTO;
+import com.t_systems.ecare.eCare.entity.Option;
 import com.t_systems.ecare.eCare.entity.Tariff;
 import com.t_systems.ecare.eCare.entity.User;
 import org.modelmapper.ModelMapper;
@@ -12,9 +13,8 @@ import org.springframework.stereotype.Service;
 
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class TariffServiceImpl implements TariffService{
@@ -27,7 +27,14 @@ public class TariffServiceImpl implements TariffService{
 
     @Override
     public TariffDTO convertToDto(Tariff tariff) {
-        return modelMapper.map(tariff, TariffDTO.class);
+        TariffDTO tariffDTO=new TariffDTO();
+        tariffDTO.setTariffID(tariff.getId());
+        tariffDTO.setTariffName(tariff.getName());
+        tariffDTO.setTariffPrice(tariffDTO.getTariffPrice());
+        tariffDTO.setTariffCheckOld(tariff.isOld());
+        tariffDTO.setOptionName(tariff.getOptionIdList().stream().map(s->s.getName()).collect(Collectors.toList()));
+
+        return tariffDTO;
     }
 
     @Override
@@ -39,7 +46,30 @@ public class TariffServiceImpl implements TariffService{
     @Override
     @Transactional
     public TariffDTO findTariffByName(String name) {
-       return convertToDto(tariffDAO.findByName(name));
+      try {
+          Tariff tariff = tariffDAO.findByName(name);
+          return convertToDto(tariff);
+      }catch (NullPointerException e)
+      {
+          return null;
+      }
+
+    }
+
+    @Override
+    @Transactional
+    public Optional<String> deleteTariff(String name) {
+        Tariff tariff=tariffDAO.findByName(name);
+        if(tariff==null)
+        {
+            return Optional.of("tariff not found");
+        }
+        if (tariffDAO.isUsed(tariff.getId())) {
+            return Optional.of("tariff is used in some contracts");
+        }
+       tariffDAO.delete(tariff);
+
+        return Optional.empty();
     }
 
     @Override
@@ -56,8 +86,20 @@ public class TariffServiceImpl implements TariffService{
                 return Optional.of("This tariff's name is already exist");
             }
             newTariff=convertToEntity(tariffDTO);
+            newTariff.setOptionIdList(getOptionsById((tariffDTO.getTariffOption()).stream().collect(Collectors.toList())));
             tariffDAO.save(newTariff);
+            tariffDTO.setOptionName(newTariff.getOptionIdList().stream().map(s->s.getName()).collect(Collectors.toList()));
        return Optional.empty();
+    }
+
+    private List<Option> getOptionsById(List<Integer> listId)
+    {
+        List<Option> listOption=new ArrayList<>();
+        for (int a:listId
+             ) {
+            listOption.add(optionDAO.findOne(a));
+        }
+        return  listOption;
     }
 
 }

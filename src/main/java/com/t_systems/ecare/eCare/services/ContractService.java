@@ -13,9 +13,7 @@ public interface ContractService {
     public ContractDTO convertToDto(Contract contract);
     public Contract convertToEntity(ContractDTO contractDTO);
     public void showTariffandOptions(ContractDTO dto);
-
     Optional<String> create(ContractDTO contractDTO);
-
-
     List<ContractDTO> showAllContracts();
+    public boolean isContractBlocked(ContractDTO dto);
 }

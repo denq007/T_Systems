@@ -32,6 +32,15 @@ public class TariffDAOImpl extends GenericDAO<Tariff> implements TariffDAO{
         }
     }
 
+    @Override
+    public boolean isUsed(int id) {
+            return !sessionFactory.getCurrentSession()
+                    .createQuery("select c.id from Contract c where c.tariffId.id=:id")
+                    .setParameter("id",id)
+                    .setMaxResults(1)
+                    .getResultList().isEmpty();
+    }
+
     @Autowired
     public void setClass() {
         this.setClass(Tariff.class);

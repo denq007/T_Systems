@@ -8,4 +8,6 @@ public interface TariffDAO extends IGenericDAO<Tariff>{
     public List<Object[]> getAllTariffNamesAndIds();
 
     public Tariff findByName(String tariffName);
+
+    boolean isUsed(int id);
 }

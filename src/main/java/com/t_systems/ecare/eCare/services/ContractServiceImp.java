@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -52,7 +51,7 @@ public class ContractServiceImp implements ContractService {
         contract.setCustomerId(customer);
         Tariff tariff = tariffDAO.findOne(dto.getTariffId());
         contract.setTariffId(tariff);
-        contract.setBlockedByUser(dto.isBlockedByCustomer());
+        contract.setBlockedByUser(dto.isBlockedByUser());
         contract.setBlockedByAdmin(dto.isBlockedByAdmin());
         contractDAO.update(contract);
         return Optional.empty();
@@ -77,7 +76,7 @@ public class ContractServiceImp implements ContractService {
         Contract contract = new Contract();
         Tariff tariff = tariffDAO.findOne(contractDTO.getTariffId());
         contract.setTariffId(tariff);
-        contract.setBlockedByUser(contractDTO.isBlockedByCustomer());
+        contract.setBlockedByUser(contractDTO.isBlockedByUser());
         contract.setBlockedByAdmin(contractDTO.isBlockedByAdmin());
         // contract.setCustomerId(customerService.convertToEntity(customerService.findById(contractDTO.getCustomerId())));
         contract.setCustomerId(customerDAO.findOne(contractDTO.getCustomerId()));
@@ -92,6 +91,13 @@ public class ContractServiceImp implements ContractService {
     public List<ContractDTO> showAllContracts() {
         List<Contract> list=contractDAO.findAll();
         return list.stream().map(s->convertToDto(s)).collect(Collectors.toList());
+    }
+
+    @Override
+    public boolean isContractBlocked(ContractDTO dto) {
+       if(dto.isBlockedByAdmin()||dto.isBlockedByUser())
+           return true;
+       return false;
     }
 
 

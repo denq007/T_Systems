@@ -71,7 +71,7 @@
         </tr>
         <tr>
             <td>Block</td>
-            <td>${contract.blockedByCustomer} </td>
+            <td>${contract.blockedByUser} </td>
         </tr>
         <sec:authorize access="hasRole('EMPLOYEE')">
         <tr>

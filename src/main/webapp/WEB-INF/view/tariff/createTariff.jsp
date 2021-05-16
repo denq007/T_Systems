@@ -78,9 +78,7 @@
                                 <label for="Name" class="form-label">Tariff name</label>
                                 <form:input path="tariffName" value="${tariff.tariffName}" class="form-control" id="Name"/>
                                     <%--    <input type="text" class="form-control" id="lastName" placeholder="" value="" required>--%>
-                                <div class="invalid-feedback">
-                                    Valid last name is required.
-                                </div>
+
                             </div>
 
                             <div class="col-12">
@@ -88,7 +86,7 @@
                                 <form:input path="tariffPrice" value="${tariff.tariffPrice}" class="form-control" id="price"/>
                             </div>
 
-                            <div class="form-group">
+                         <div class="form-group">
                                 <label for="opt">Set options:</label>
                                 <form:select path="tariffOption" multiple="multiple" id="opt">
                                     <c:forEach items="${tariff.allOptions}" var="item">

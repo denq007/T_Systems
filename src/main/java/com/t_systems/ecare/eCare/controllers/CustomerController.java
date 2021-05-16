@@ -37,6 +37,11 @@ public class CustomerController {
     public String showCustomer( @RequestParam("id") int id,Model model)
     {
         CustomerDTO customerDTO=customerService.findById(id);
+        if(customerDTO ==null)
+        {
+            model.addAttribute("message", "Customer does not exist");
+            return "/tariff/showTariff";
+        }
         model.addAttribute("customer",customerDTO);
         return "customer/showCustomer";
     }

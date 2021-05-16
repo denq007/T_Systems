@@ -1,6 +1,5 @@
 package com.t_systems.ecare.eCare.controllers;
 import com.t_systems.ecare.eCare.DTO.ContractDTO;
-import com.t_systems.ecare.eCare.DTO.CustomerDTO;
 import com.t_systems.ecare.eCare.services.ContractService;
 import com.t_systems.ecare.eCare.services.PhoneNumberService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +43,11 @@ public class ContractController {
     public String editContract(@RequestParam("id") int id, Model model)
     {
         ContractDTO dto = contractService.getDto(id);
+        if(contractService.isContractBlocked(dto))
+        {
+            model.addAttribute("message","This contract is blocked");
+            return "redirect:/success";
+        }
         contractService.showTariffandOptions(dto);
         model.addAttribute("contract", dto);
         return "contract/createContract";

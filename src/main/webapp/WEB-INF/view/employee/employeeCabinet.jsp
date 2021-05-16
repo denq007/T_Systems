@@ -50,6 +50,9 @@
 
 <div class="container">
     <main>
+        <c:if test="${not empty message}">
+            <div id="error">${message}</div>
+        </c:if>
         <div class="py-5 text-center">
 
             <h2>Personal Information</h2>
@@ -75,6 +78,10 @@
         </form>
         <form action="/employee/create-tariff" method="get">
             <button class="w-100 btn btn-primary btn-lg" type="submit" >Create new tariff</button>
+        </form>
+        <form action="/show-tariff" method="get">
+            <input name="name" value=${tariff.name}>
+            <button class="w-100 btn btn-primary btn-lg" type="submit">Show Tariff</button>
         </form>
           <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 

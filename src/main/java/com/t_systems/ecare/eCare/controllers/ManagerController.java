@@ -33,6 +33,11 @@ public class ManagerController {
     public String showCustomer( @RequestParam("login") String login,Model model)
     {
         CustomerDTO customerDTO=customerService.getCustomerDTOByEmailUser(login);
+        if(customerDTO ==null)
+        {
+            model.addAttribute("message", "Customer does not exist");
+            return "/tariff/showTariff";
+        }
         model.addAttribute("customer",customerDTO);
         return "customer/showCustomer";
     }

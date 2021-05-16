@@ -52,6 +52,9 @@
 <div class="container">
     <span class="pull-right"><a href="/" class="btn btn-info" role="button">Back</a></span>
     <h3>Client details</h3>
+    <c:if test="${not empty message}">
+        <div id="error">${message}</div>
+    </c:if>
     <table class="table table-striped">
         <thead>
         <th style="width:20%"></th>
@@ -113,10 +116,10 @@
             <tr>
                 <td>${contract.number} </td>
                 <td>${contract.tariffId.name}</td>
-                <td>${contract.blockedByUser}></td>
-                <td>${contract.blockedByAdmin}></td>
+                <td>${contract.blockedByUser}</td>
+                <td>${contract.blockedByAdmin}</td>
                 <td>
-                    <c:if test="${!contract.blockedByUser || !contract.blockedByAdmin}">
+                    <c:if test="${contract.blockedByUser==false && contract.blockedByAdmin==false}">
                     <form action="/contract/editcontract" method="get">
                         <input type="hidden" name="id" value=${contract.id}>
                         <input type="submit" value="Edit" class="btn btn-warning"></form>

@@ -13,4 +13,6 @@ public interface TariffService {
     void showAllOptions(TariffDTO tariffDTO);
 
     public TariffDTO findTariffByName(String name);
+
+    public Optional<String> deleteTariff(String name);
 }
