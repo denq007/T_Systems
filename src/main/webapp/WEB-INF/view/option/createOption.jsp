@@ -54,7 +54,7 @@
             <h2>Create new option</h2>
         </div>
 
-        <form:form  modelAttribute="option" method="post">
+        <form:form  modelAttribute="option" method="post" >
         <div class="row g-5">
 
             <div class="col-md-7 col-lg-8">
@@ -62,8 +62,8 @@
                     <div class="row g-3">
                         <div class="col-sm-6">
                             <label for="optionName" class="form-label">Name</label>
-                            <form:input path="optionName" value="${option.optionName}" class="form-control" />
-                                <%--  <input type="text" class="form-control" id="firstName" placeholder="" value="" required>--%>
+                            <%--<form:input path="optionName" value="${option.optionName}" class="form-control" required=""/>--%>
+                                <input type="text" name="optionName"  class="form-control" id="optionName" placeholder="" value="${option.optionName}" required>
                             <div class="invalid-feedback">
                                 Valid first name is required.
                             </div>
@@ -71,8 +71,8 @@
 
                         <div class="col-sm-6">
                             <label for="Connection cost" class="form-label">Connection cost</label>
-                            <form:input path="optionConnectionCost" value="${option.optionConnectionCost}" class="form-control" id="Connection cost"/>
-                                <%--    <input type="text" class="form-control" id="lastName" placeholder="" value="" required>--%>
+                           <%-- <form:input path="optionConnectionCost" value="${option.optionConnectionCost}" class="form-control" id="Connection cost" required=""/>--%>
+                       <input type="text" name="optionConnectionCost" class="form-control" id="Connection cost" placeholder="" value="${option.optionConnectionCost}" required>
                             <div class="invalid-feedback">
                                 Valid last name is required.
                             </div>
@@ -80,8 +80,8 @@
 
                         <div class="col-12">
                             <label for="optionGroupNumber" class="form-label">Group number (0 - The option is compatible with all, 1 - Internet,  2 -Call)</label>
-                            <form:input path="optionGroupNumber" value="${option.optionGroupNumber}" class="form-control" id="optionGroupNumber"/>
-                                <%-- <input type="text" class="form-control" id="address" placeholder="1234 Main St" required>--%>
+                           <%-- <form:input path="optionGroupNumber" value="${option.optionGroupNumber}" class="form-control" id="optionGroupNumber" required=""/>--%>
+                              <input type="text" name="optionGroupNumber" class="form-control" id="optionGroupNumber" value="${option.optionGroupNumber}" placeholder="1 or 2 or 3" required>
                             <div class="invalid-feedback">
                                 Please enter your shipping address.
                             </div>
@@ -89,8 +89,8 @@
 
                         <div class="col-12">
                             <label for="optionPrice" class="form-label">Price <span class="text-muted"></span></label>
-                            <form:input path="optionPrice" value="${option.optionPrice}" class="form-control" id="optionPrice"/>
-                                <%-- <input type="text" class="form-control" id="address2" placeholder="Apartment or suite">--%>
+                            <%--<form:input path="optionPrice" value="${option.optionPrice}" class="form-control" id="optionPrice" required=""/>--%>
+                            <input type="text" name="optionPrice"  class="form-control" id="optionPrice" value="${option.optionPrice}" placeholder="">
                         </div>
 
                         <form:hidden path="optionId" value="${option.optionId}"/>
