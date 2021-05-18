@@ -24,7 +24,7 @@ public class ContractController {
      ContractDTO contractDTO=new ContractDTO(customerID);
      contractDTO.setNumber(Long.toString(phoneNumberService.createphoneNumber()));
      model.addAttribute("contract",contractDTO);
-     contractService.showTariffandOptions(contractDTO);//for show all tariffs and options in jsp
+     contractService.showTariffandOptions(contractDTO);
      return "contract/createContract";
  }
     @PostMapping("/contract/createcontract")
@@ -63,7 +63,7 @@ public class ContractController {
             model.addAttribute("contract", contractDTO);
             return "contract/createContract";
         }
-        contractService.update(contractDTO);
+   //     contractService.update(contractDTO);
         attr.addAttribute("id", contractDTO.getCustomerId());
         return "redirect:/customer/showcustomer";
     }

@@ -21,8 +21,8 @@ import java.util.Optional;
 public class CustomerController {
 
 
-  //  @Autowired
-    private final CustomerService customerService;
+    @Autowired
+    CustomerService customerService;
     @Autowired
     UserService userService;
     @GetMapping("/showcustomerinformation")
@@ -64,8 +64,6 @@ public class CustomerController {
         return "customer/showCustomer";
     }
 
-
-
     @GetMapping("/user/block")
     public String blockContract(@RequestParam("id") int id, Model model) {
         userService.blockByCustomer(id);
@@ -77,9 +75,4 @@ public class CustomerController {
         userService.unblockByCustomer(id);
         return "redirect:/customer/showcustomerinformation";
     }
-   /* @GetMapping("{id}")
-    public String customerEditInformation(@PathVariable int id, Model model)
-    {
-        return null;
-    }*/
 }

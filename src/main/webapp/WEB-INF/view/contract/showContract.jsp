@@ -85,6 +85,12 @@
             <td>Tariff:</td>
             <td>${contract.tariffName} </td>
         </tr>
+        <tr>
+            <td>Extra option's name:</td>
+            <c:forEach var="option" items="${contract.addNameOptions}">
+            <td>${option}</td>
+            </c:forEach>
+        </tr>
 
         </tbody>
     </table>

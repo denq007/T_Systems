@@ -7,6 +7,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -31,6 +32,11 @@ public class Option {
     private List<Tariff> tariffsList;
     @Column(name = "group_id")
     int numberGroup;
+    @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE, CascadeType.REFRESH,CascadeType.DETACH},fetch = FetchType.EAGER)
+    @JoinTable(name = "contract_option",joinColumns = @JoinColumn(name="option_id"),
+            inverseJoinColumns = @JoinColumn(name = "contract_id")
+    )
+    private Set<Contract> contractList;
 
     public void addTariffToOption(Tariff tariff)
     {

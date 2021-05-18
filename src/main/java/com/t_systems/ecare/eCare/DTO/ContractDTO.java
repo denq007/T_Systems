@@ -23,6 +23,7 @@ public class ContractDTO {
     private Map<String, Integer> allTariffs = new HashMap<>();
     private Map<String, Integer> allOptions = new HashMap<>();
     private Set<Integer> optionsIds = new HashSet<>();
+    private Set<String>  addNameOptions =new HashSet<>();
     public ContractDTO(int customerID)
     {
         this.customerId=customerID;

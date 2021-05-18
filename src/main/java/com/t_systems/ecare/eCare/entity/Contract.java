@@ -4,6 +4,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import javax.persistence.*;
+import java.util.List;
+import java.util.Set;
+
 @Getter
 @Setter
 @Entity
@@ -26,6 +29,10 @@ public class Contract {
     boolean blockedByUser;
     @Column(name = "blocked_by_admin")
     boolean blockedByAdmin;
+    @ManyToMany(cascade={CascadeType.PERSIST,CascadeType.MERGE, CascadeType.REFRESH,CascadeType.DETACH},fetch = FetchType.LAZY)
+    @JoinTable(name = "contract_option", joinColumns = @JoinColumn(name = "contract_id"),
+            inverseJoinColumns =@JoinColumn(name = "option_id"))
+    private Set<Option> addOptionIdList;
 
     public Contract(String number, Tariff tariffId, Customer customerId, boolean blockedByUser, boolean blockedByAdmin) {
         this.number = number;

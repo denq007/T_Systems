@@ -10,8 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.Access;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -48,5 +47,53 @@ public class OptionServiceImpl implements OptionService{
     @Transactional
     public List<OptionDTO> getAllOptions() {
         return optionDAO.findAll().stream().map(s->convertToDto(s)).collect(Collectors.toList());
+    }
+//check id and group
+    public Optional<String> checkСompatibilityOptions(Set<Integer> idOptionforAdd,List<Option> tariffOptionList)
+    {
+        if(idOptionforAdd.isEmpty())
+        {
+            return Optional.empty();
+        }
+        List<Integer> onlyNewOption= new ArrayList<>();
+        onlyNewOption.addAll(idOptionforAdd);
+        Set<Option> list = new HashSet<>();
+        for (int i = 0; i < onlyNewOption.size(); i++) {
+            list.add(optionDAO.findOne(onlyNewOption.get(i)));
+        }
+        list.addAll(tariffOptionList);
+        Map<Integer, Set<Option>> map2 = list.stream()
+                .collect(Collectors.groupingBy(Option::getNumberGroup, Collectors.toSet()));
+        for(Integer a :map2.keySet())
+        {
+            String str="";
+            Set<Option> set1=map2.get(a);
+            if(set1.size()>1)
+            {   Iterator<Option> itr = map2.get(a).iterator();
+                while (itr.hasNext())
+                {
+                    str+=itr.next().getName()+" and ";
+                }
+                return Optional.of("You are trying to add incompatible options - "+str.substring(0,str.length()-4)+" ");
+            }
+        }
+
+        return Optional.empty();
+    }
+    public Set<String> deleteOptionsAvailableTariffAnDADDNameOption(Set<Integer> idOptionforAdd,List<Option> tariffOptionList)
+    {
+        Set<String> setNameOption=new HashSet<>();
+        for(int i=0;i<tariffOptionList.size();i++)
+        {
+            if(idOptionforAdd.contains(tariffOptionList.get(i).getId()))
+            {
+                idOptionforAdd.remove(tariffOptionList.get(i).getId());
+            }
+            else
+            {
+                setNameOption.add(tariffOptionList.get(i).getName());
+            }
+        }
+        return setNameOption;
     }
 }

@@ -31,6 +31,8 @@ public class ContractServiceImp implements ContractService {
     CustomerDAOImpl customerDAO;
     @Autowired
     PhoneNumberDAO phoneNumberDAO;
+    @Autowired
+    OptionService optionService;
     @Override
     public ContractDTO convertToDto(Contract contract) {
         return modelMapper.map(contract, ContractDTO.class);
@@ -45,14 +47,20 @@ public class ContractServiceImp implements ContractService {
     @Override
     @Transactional
     public Optional<String> update(ContractDTO dto) {
+        Tariff tariff = tariffDAO.findOne(dto.getTariffId());
+        if(optionService.checkСompatibilityOptions(dto.getOptionsIds(),tariff.getOptionIdList()).isPresent())
+        {
+            return optionService.checkСompatibilityOptions(dto.getOptionsIds(),tariff.getOptionIdList());
+        }
+        dto.setAddNameOptions(optionService.deleteOptionsAvailableTariffAnDADDNameOption(dto.getOptionsIds(),tariff.getOptionIdList()));
         Contract contract = contractDAO.findOne(dto.getId());
         Customer customer = contract.getCustomerId();
         contract = convertToEntity(dto);
         contract.setCustomerId(customer);
-        Tariff tariff = tariffDAO.findOne(dto.getTariffId());
         contract.setTariffId(tariff);
         contract.setBlockedByUser(dto.isBlockedByUser());
         contract.setBlockedByAdmin(dto.isBlockedByAdmin());
+        contract.setAddOptionIdList(dto.getOptionsIds().stream().map(s-> optionDAO.findOne(s)).collect(Collectors.toSet()));
         contractDAO.update(contract);
         return Optional.empty();
     }
@@ -60,7 +68,10 @@ public class ContractServiceImp implements ContractService {
     @Override
     @Transactional
     public ContractDTO getDto(int id) {
-        return convertToDto(contractDAO.findOne(id));
+        Contract contract=contractDAO.findOne(id);
+        ContractDTO dto=convertToDto(contract);
+        dto.setAddNameOptions(contract.getAddOptionIdList().stream().map(s->s.getName()).collect(Collectors.toSet()));
+        return dto;
     }
 
     public void showTariffandOptions(ContractDTO dto) {

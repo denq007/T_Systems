@@ -22,7 +22,6 @@ public class Tariff {
     private String name;
     @Column(name = "price")
     private double price;
-        //TO DO about CascadeType.ALL
     @ManyToMany(cascade={CascadeType.PERSIST,CascadeType.MERGE, CascadeType.REFRESH,CascadeType.DETACH},fetch = FetchType.LAZY)
     @JoinTable(name = "tariff_option", joinColumns = @JoinColumn(name = "tariff_id"),
             inverseJoinColumns =@JoinColumn(name = "option_id"))
