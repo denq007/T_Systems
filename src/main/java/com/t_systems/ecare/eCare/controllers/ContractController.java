@@ -36,7 +36,7 @@ public class ContractController {
             return "contract/createContract";
         }
         attr.addAttribute("id", contractDTO.getCustomerId());
-        return "redirect:/employee/showcustomer";
+        return "redirect:/customer/showcustomer";
     }
 
     @GetMapping("/contract/editcontract")

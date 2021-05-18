@@ -82,11 +82,8 @@
 
                         <div class="col-sm-6">
                             <label for="lastName" class="form-label">Id Custumer</label>
-                            <form:input path="customerId" value="${contract.customerId}" class="form-control" id="lastName" />
-                                <%--    <input type="text" class="form-control" id="lastName" placeholder="" value="" required>--%>
-                            <div class="invalid-feedback">
-                                Valid last name is required.
-                            </div>
+                            <form:input path="customerId" value="${contract.customerId}" class="form-control" id="lastName" readonly="true"/>
+                         <%--     <input type="text" name="customerId" class="form-control" id="lastName" placeholder="" value="${contract.customerId}" readonly>  --%>
                         </div>
                         <sec:authorize access="hasRole('EMPLOYEE')">
                         <div class="col-12">
