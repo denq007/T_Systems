@@ -12,6 +12,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
 <html lang="en">
+<header>
+
+
+</header>
 <head>
    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -19,10 +23,10 @@
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.82.0">
     <title>Checkout example · Bootstrap v5.0</title>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
     <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/checkout/">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <link rel="stylesheet"
@@ -78,7 +82,7 @@
 
                         <div class="col-sm-6">
                             <label for="lastName" class="form-label">Id Custumer</label>
-                            <form:input path="customerId" value="${contract.customerId}" class="form-control" id="lastName"/>
+                            <form:input path="customerId" value="${contract.customerId}" class="form-control" id="lastName" />
                                 <%--    <input type="text" class="form-control" id="lastName" placeholder="" value="" required>--%>
                             <div class="invalid-feedback">
                                 Valid last name is required.
@@ -87,7 +91,7 @@
                         <sec:authorize access="hasRole('EMPLOYEE')">
                         <div class="col-12">
                             <label for="address" class="form-label">Blocked by Admin</label>
-                            <form:input path="blockedByAdmin" value="${contract.blockedByAdmin}" class="form-control" id="address"/>
+                            <form:input path="blockedByAdmin" value="${contract.blockedByAdmin}" class="form-control" id="address" required="" />
                                 <%-- <input type="text" class="form-control" id="address" placeholder="1234 Main St" required>--%>
                             <div class="invalid-feedback">
                                 Please enter your shipping address.
@@ -96,13 +100,13 @@
                         </sec:authorize>
                         <div class="col-12">
                             <label for="passport" class="form-label">User blocked <span class="text-muted"></span></label>
-                            <form:input path="blockedByUser" value="${contract.blockedByUser}" class="form-control" id="passport"/>
+                            <form:input path="blockedByUser" value="${contract.blockedByUser}" class="form-control" id="passport" required=""/>
                                 <%-- <input type="text" class="form-control" id="address2" placeholder="Apartment or suite">--%>
                         </div>
 
                         <div class="col-12">
                             <label for="numbor" class="form-label">Phone Number <span class="text-muted"></span></label>
-                            <form:input path="number" value="${contract.number}" class="form-control" id="numbor" readonly="true"/>
+                            <form:input path="number" value="${contract.number}" class="form-control" id="numbor" readonly="true" />
                                 <%-- <input type="text" class="form-control" id="address2" placeholder="Apartment or suite">--%>
                         </div>
 

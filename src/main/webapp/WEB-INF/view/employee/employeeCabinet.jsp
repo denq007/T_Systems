@@ -83,6 +83,13 @@
             <input name="name" value=${tariff.name}>
             <button class="w-100 btn btn-primary btn-lg" type="submit">Show Tariff</button>
         </form>
+        <form action="/show-all-tariffs" method="get">
+            <button class="w-100 btn btn-primary btn-lg" type="submit">Show all tariffs</button>
+        </form>
+        <form action="/show-all-options" method="get">
+            <button class="w-100 btn btn-primary btn-lg" type="submit">Show all options</button>
+        </form>
+
           <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 
 

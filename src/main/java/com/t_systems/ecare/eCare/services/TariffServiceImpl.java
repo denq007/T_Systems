@@ -2,11 +2,10 @@ package com.t_systems.ecare.eCare.services;
 
 import com.t_systems.ecare.eCare.DAO.OptionDAO;
 import com.t_systems.ecare.eCare.DAO.TariffDAO;
+import com.t_systems.ecare.eCare.DTO.RequiredOptionDTO;
 import com.t_systems.ecare.eCare.DTO.TariffDTO;
-import com.t_systems.ecare.eCare.DTO.UserDTO;
 import com.t_systems.ecare.eCare.entity.Option;
 import com.t_systems.ecare.eCare.entity.Tariff;
-import com.t_systems.ecare.eCare.entity.User;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,16 +23,20 @@ public class TariffServiceImpl implements TariffService{
     ModelMapper modelMapper;
     @Autowired
     OptionDAO optionDAO;
+    @Autowired
+    RequiredOptionServiceImpl requiredOptionService;
+
 
     @Override
     public TariffDTO convertToDto(Tariff tariff) {
         TariffDTO tariffDTO=new TariffDTO();
-        tariffDTO.setTariffID(tariff.getId());
-        tariffDTO.setTariffName(tariff.getName());
-        tariffDTO.setTariffPrice(tariffDTO.getTariffPrice());
-        tariffDTO.setTariffCheckOld(tariff.isOld());
+        tariffDTO.setId(tariff.getId());
+        tariffDTO.setName(tariff.getName());
+        tariffDTO.setPrice(tariffDTO.getPrice());
+        tariffDTO.setOld(tariff.isOld());
         tariffDTO.setOptionName(tariff.getOptionIdList().stream().map(s->s.getName()).collect(Collectors.toList()));
-
+        tariffDTO.setTariffOption(tariff.getOptionIdList().stream().map(s->s.getNumberGroup()).collect(Collectors.toSet()));
+        tariffDTO.setRequiredOption( showAllRequiredOptions(tariffDTO.getTariffOption()));
         return tariffDTO;
     }
 
@@ -42,7 +45,21 @@ public class TariffServiceImpl implements TariffService{
         Map<String, Integer> mapOptions = tariffDTO.getAllOptions();
         optionDAO.getAllOptionNamesAndIds().forEach(array -> mapOptions.put((String) array[1], (Integer) array[0]));
     }
-
+    @Override
+    public List<String> showAllRequiredOptions(Set<Integer> tariffOption) {
+        List<String> list = new ArrayList<>();
+        Set<Integer> set = tariffOption;
+        Map<Integer, List<RequiredOptionDTO>> map=requiredOptionService.findAllRequiredOption();
+        for (Integer i : set) {
+            if (map.containsKey(i)) {
+                List<RequiredOptionDTO> listRequired = map.get(i);
+                for (int j = 0; j < listRequired.size(); j++) {
+                    list.add(listRequired.get(j).getName());
+                }
+            }
+        }
+        return list;
+    }
     @Override
     @Transactional
     public TariffDTO findTariffByName(String name) {
@@ -73,6 +90,23 @@ public class TariffServiceImpl implements TariffService{
     }
 
     @Override
+    @Transactional
+    public List<TariffDTO> showAllTariffs() {
+       return tariffDAO.findAll().stream().map(s->convertToDto(s)).collect(Collectors.toList());
+    }
+
+    @Override
+    public Optional<String> update(TariffDTO tariffDTO) {
+        Tariff tariff=tariffDAO.findOne(tariffDTO.getId());
+        tariff=convertToEntity(tariffDTO);
+        tariff.setOptionIdList(getOptionsById((tariffDTO.getTariffOption()).stream().collect(Collectors.toList())));
+        tariffDAO.update(tariff);
+        return Optional.empty();
+    }
+
+
+
+    @Override
     public Tariff convertToEntity(TariffDTO tariffDTO) {
         Tariff tariff= modelMapper.map(tariffDTO, Tariff.class);
         return tariff;
@@ -80,7 +114,7 @@ public class TariffServiceImpl implements TariffService{
     @Override
     @Transactional
     public Optional<String> saveTariff(TariffDTO tariffDTO) {
-        Tariff newTariff=tariffDAO.findByName(tariffDTO.getTariffName());
+        Tariff newTariff=tariffDAO.findByName(tariffDTO.getName());
             if(newTariff !=null)
             {
                 return Optional.of("This tariff's name is already exist");

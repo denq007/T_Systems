@@ -29,7 +29,6 @@ public class Option {
             inverseJoinColumns = @JoinColumn(name = "tariff_id")
     )
     private List<Tariff> tariffsList;
-    //TODO about ENUM
     @Column(name = "group_id")
     int numberGroup;
 

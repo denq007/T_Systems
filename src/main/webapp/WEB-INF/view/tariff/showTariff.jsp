@@ -59,7 +59,7 @@
 <div class="container">
     <main>
         <div class="py-5 text-center">
-            <h2>Detail information</h2>
+            <h2>Tariff information</h2>
         </div>
         <%-- <c:if test="${not empty message}"><p class="bg-danger">${message}</p></c:if>--%>
         <c:if test="${not empty message}">
@@ -68,34 +68,46 @@
 
         <div class="row g-5">
             <div class="col-md-7 col-lg-8">
-                <h4 class="mb-3">Contract:</h4>
                     <div class="row g-3">
 
-                        <div class="col-sm-6">
+                        <div class="form-group">
                             <tr>
                                 <td hidden>Id:</td>
-                                <td hidden>${tariff.tariffID} </td>
-                            </tr>
-                        </div>
-
-                        <div class="col-12">
-                            <tr>
-                                <td>Name</td>
-                                <td>${tariff.tariffName} </td>
+                                <td hidden>${tariff.id} </td>
                             </tr>
                         </div>
 
                         <div class="form-group">
+                            <tr>
+                                <td>Tariff name:</td>
+                                <td>${tariff.name} </td>
+                            </tr>
+                        </div>
 
+                        <div class="form-group">
+                            <td>Options name:
                             <c:forEach items="${tariff.optionName}" var="option">
                                 <tr>
-                                    <td>${option} </td>
+                                    <td>${option}, </td>
                                 </tr>
                             </c:forEach>
+                            </td>
                         </div>
+                        <div class="form-group">
+                            <td>Required options name:
+                            <c:forEach items="${tariff.requiredOption}" var="requiredoption">
+                                <tr>
+
+                                    <td>${requiredoption},  </td>
+
+                                </tr>
+                            </c:forEach>
+                            </td>
+                        </div>
+
                         <sec:authorize access="hasRole('EMPLOYEE')">
                         <form action="/employee/delete-tariff" method="get">
-                            <input hidden name="name" value=${tariff.tariffName}>
+                            <input hidden name="name" value=${tariff.name}>
                             <button class="w-100 btn btn-primary btn-lg" type="submit">Delete</button>
                         </form>
                         </sec:authorize>

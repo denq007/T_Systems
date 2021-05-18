@@ -19,7 +19,8 @@
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.82.0">
     <title>Checkout example · Bootstrap v5.0</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
     <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/checkout/">
 
     <!-- Bootstrap core CSS -->
@@ -44,13 +45,16 @@
 
     <!-- Custom styles for this template -->
     <link href="form-validation.css" rel="stylesheet">
-    <jsp:include page="../header.jsp" />
+    <jsp:include page="../header.jsp"/>
 </head>
 <body class="bg-light">
 
 <div class="container">
-    <span class="pull-right"><a href="clients" class="btn btn-info" role="button">Back to costumer Info</a></span>
-    <h3>Contract details</h3>
+    <span class="pull-right"><a href="/" class="btn btn-info" role="button">Back</a></span>
+    <h3>Options details</h3>
+    <c:if test="${not empty message}">
+        <div id="error">${message}</div>
+    </c:if>
     <table class="table table-striped">
         <thead>
         <th style="width:20%"></th>
@@ -58,45 +62,39 @@
         </thead>
         <tbody>
         <tr>
-            <td hidden>Id:</td>
-            <td hidden>${contract.id} </td>
+            <sec:authorize access="hasRole('EMPLOYEE')">
+                <td>Id:</td>
+                <td>${tariff.id} </td>
+            </sec:authorize>
         </tr>
+    <h3>Optins</h3>
+    <td></td>
+    <table class="table table-striped">
+        <thead>
         <tr>
-            <td>Phone number</td>
-            <td>${contract.number} </td>
+            <th>Phone number</th>
+            <th>Name of the tariff</th>
+            <th>Blocked Number</th>
+            <th>Blocked Number by Admin</th>
         </tr>
-        <sec:authorize access="hasRole('EMPLOYEE')">
-        <tr>
-            <td>Tariff ID</td>
-            <td>${contract.tariffId} </td>
-        </tr>
-        </sec:authorize>
-        <tr>
-            <td>Block</td>
-            <td>${contract.blockedByUser} </td>
-        </tr>
-        <sec:authorize access="hasRole('EMPLOYEE')">
-        <tr>
-            <td>Block by admin</td>
-            <td>${contract.blockedByAdmin} </td>
-        </tr>
-        </sec:authorize>
-        <tr>
-            <td>Tariff:</td>
-            <td>${contract.tariffName} </td>
-        </tr>
+        </thead>
+        <tbody>
 
+        <c:forEach items="${tariff.tariffOption}" var="option">
+            <tr>
+                <td>${option} </td>
+
+
+        </c:forEach>
         </tbody>
     </table>
-    <form action="/show-tariff" method="get">
-        <input type="hidden" name="name" value=${contract.tariffName}>
-    <input type="submit" value="Show tariff and options" class="btn btn-success"/></form>
 
-   <%-- <form action="createContract" method="get">
-        <input type="hidden" name="customerID" value=${customer.id}>
-        <input type="submit" value="Create contract" class="btn btn-warning" ></form>
-    <br>--%>
-
+    <sec:authorize access="hasRole('EMPLOYEE')">
+        <form action="/contract/createcontract" method="get">
+            <input type="hidden" name="customerID" value=${customer.id}>
+            <input type="submit" value="Create contract" class="btn btn-warning"></form>
+        <br>
+    </sec:authorize>
 </div>
 </body>
 </html>

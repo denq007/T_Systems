@@ -1,7 +1,6 @@
 package com.t_systems.ecare.eCare.controllers;
 
 import com.t_systems.ecare.eCare.DTO.TariffDTO;
-import com.t_systems.ecare.eCare.entity.Tariff;
 import com.t_systems.ecare.eCare.services.TariffService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,7 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -32,7 +31,7 @@ public class TariffController {
             model.addAttribute("message", error.get());
             return "/sign-in";
         }
-        attr.addAttribute("name", tariffDTO.getTariffName());
+        attr.addAttribute("name", tariffDTO.getName());
         return "redirect:/show-tariff";
     }
     @GetMapping ("/show-tariff")
@@ -58,7 +57,7 @@ public class TariffController {
         }
         return "redirect:/employee/employeecabinet";
     }
-    @GetMapping("/edit-tariff")
+    @GetMapping("/employee/edit-tariff")
     public String editTariff(@RequestParam("name")String name,Model model)
     {
         TariffDTO tariffDTO= tariffService.findTariffByName(name);
@@ -67,7 +66,26 @@ public class TariffController {
             model.addAttribute("message", "Tariff not found");
             return "/success";
         }
-        return null;
+        return "tariff/showTariff";
+    }
+    @PostMapping("/employee/edit-tariff")
+    public String editTariff(@ModelAttribute("tariff") TariffDTO tariffDTO, Model model,  RedirectAttributes attr) {
+        Optional<String> error = tariffService.update(tariffDTO);
+        if (error.isPresent()) {
+            model.addAttribute("message", error.get());
+            return "/sign-in";
+        }
+        attr.addAttribute("name", tariffDTO.getName());
+        return "redirect:/show-tariff";
+    }
+
+
+    @RequestMapping("show-all-tariffs")
+    public String showAllTariffs(Model model)
+    {
+        List<TariffDTO> tariffDTOList=tariffService.showAllTariffs();
+        model.addAttribute("allTarifs",tariffDTOList);
+        return "tariff/showAllTariffs";
     }
 
 

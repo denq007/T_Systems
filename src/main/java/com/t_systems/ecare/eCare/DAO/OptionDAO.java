@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface OptionDAO extends IGenericDAO<Option>{
     List<Object[]> getAllOptionNamesAndIds();
+
+    Option findByName(String optionName);
 }

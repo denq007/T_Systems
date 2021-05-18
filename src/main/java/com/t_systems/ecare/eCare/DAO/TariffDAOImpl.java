@@ -1,6 +1,7 @@
 package com.t_systems.ecare.eCare.DAO;
 
 import com.t_systems.ecare.eCare.DTO.CustomerDTO;
+import com.t_systems.ecare.eCare.DTO.TariffDTO;
 import com.t_systems.ecare.eCare.entity.Customer;
 import com.t_systems.ecare.eCare.entity.Tariff;
 import com.t_systems.ecare.eCare.entity.User;
@@ -40,6 +41,7 @@ public class TariffDAOImpl extends GenericDAO<Tariff> implements TariffDAO{
                     .setMaxResults(1)
                     .getResultList().isEmpty();
     }
+
 
     @Autowired
     public void setClass() {

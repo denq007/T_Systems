@@ -76,14 +76,14 @@
 
                             <div class="col-sm-6">
                                 <label for="Name" class="form-label">Tariff name</label>
-                                <form:input path="tariffName" value="${tariff.tariffName}" class="form-control" id="Name"/>
+                                <form:input path="name" value="${tariff.name}" class="form-control" id="Name"/>
                                     <%--    <input type="text" class="form-control" id="lastName" placeholder="" value="" required>--%>
 
                             </div>
 
                             <div class="col-12">
                                 <label for="price" class="form-label">Price<span class="text-muted"></span></label>
-                                <form:input path="tariffPrice" value="${tariff.tariffPrice}" class="form-control" id="price"/>
+                                <form:input path="price" value="${tariff.price}" class="form-control" id="price"/>
                             </div>
 
                          <div class="form-group">
@@ -96,7 +96,7 @@
                             </div>
 
                 </div>
-                <form:hidden path="tariffID" value="${tariff.tariffID}"/>
+                <form:hidden path="id" value="${tariff.id}"/>
                 <hr class="my-4">
                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                 <button class="w-100 btn btn-primary btn-lg" type="submit"  >Save</button>

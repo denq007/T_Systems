@@ -10,12 +10,14 @@ import java.util.*;
 @Setter
 @NoArgsConstructor
 public class TariffDTO {
-    private int tariffID;
-    private String tariffName;
-    private double tariffPrice;
-    boolean tariffCheckOld;
+    private int id;
+    private String name;
+    private double price;
+    boolean isOld;
     private Set<Integer> tariffOption;
     private Map<String, Integer> allOptions = new HashMap<>();
     private List<String> optionName=new ArrayList<>();
+    private List<String> requiredOption;
+    
 
 }
