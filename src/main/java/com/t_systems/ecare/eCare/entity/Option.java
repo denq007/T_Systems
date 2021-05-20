@@ -6,6 +6,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -36,7 +37,7 @@ public class Option {
     @JoinTable(name = "contract_option",joinColumns = @JoinColumn(name="option_id"),
             inverseJoinColumns = @JoinColumn(name = "contract_id")
     )
-    private Set<Contract> contractList;
+    private Set<Contract> contractList=new HashSet<>();
 
     public void addTariffToOption(Tariff tariff)
     {

@@ -55,7 +55,12 @@
     <jsp:include page="../header.jsp" />
 </head>
 <body class="bg-light">
-<span class="pull-right"><a href="/employee/employeecabinet" class="btn btn-info" role="button">Back</a></span>
+<sec:authorize access="hasRole('EMPLOYEE')">
+    <span class="pull-right"><a href="/employee/employeecabinet" class="btn btn-info" role="button">Back</a></span>
+</sec:authorize>
+<sec:authorize access="!hasRole('EMPLOYEE')">
+    <span class="pull-right"><a href="/customer/showcustomerinformation" class="btn btn-info" role="button">Back</a></span>
+</sec:authorize>
 <div class="container">
     <main>
         <div class="py-5 text-center">
@@ -126,7 +131,7 @@
 </div>
 
 <script>
-    $("#opt").bootstrapDualListbox();
+   /* $("#opt").bootstrapDualListbox();*/
 </script>
 </body>
 </html>

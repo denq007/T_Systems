@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -59,7 +60,7 @@ public class ManagerController {
     }
 
     @PostMapping(value = "/saveCustomer")
-    public String saveCustomer(@ModelAttribute("customer") CustomerDTO customerDTO)
+    public String saveCustomer(@ModelAttribute("customer") @Valid CustomerDTO customerDTO)
     {
         managerService.saveCustomer(customerDTO);
         return "redirect:employee/all-customer";

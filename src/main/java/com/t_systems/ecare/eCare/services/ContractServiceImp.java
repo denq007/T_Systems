@@ -4,6 +4,7 @@ import com.t_systems.ecare.eCare.DAO.*;
 import com.t_systems.ecare.eCare.DTO.ContractDTO;
 import com.t_systems.ecare.eCare.entity.Contract;
 import com.t_systems.ecare.eCare.entity.Customer;
+import com.t_systems.ecare.eCare.entity.Option;
 import com.t_systems.ecare.eCare.entity.Tariff;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -48,19 +50,24 @@ public class ContractServiceImp implements ContractService {
     @Transactional
     public Optional<String> update(ContractDTO dto) {
         Tariff tariff = tariffDAO.findOne(dto.getTariffId());
-        if(optionService.checkСompatibilityOptions(dto.getOptionsIds(),tariff.getOptionIdList()).isPresent())
+        Contract contract = contractDAO.findOne(dto.getId());
+        Optional<String> error=optionService.checkСompatibilityOptions(dto.getOptionsIds(),tariff.getOptionIdList(),contract.getAddOptionIdList());
+        if(error.isPresent())
         {
-            return optionService.checkСompatibilityOptions(dto.getOptionsIds(),tariff.getOptionIdList());
+            return error;
         }
         dto.setAddNameOptions(optionService.deleteOptionsAvailableTariffAnDADDNameOption(dto.getOptionsIds(),tariff.getOptionIdList()));
-        Contract contract = contractDAO.findOne(dto.getId());
+
         Customer customer = contract.getCustomerId();
         contract = convertToEntity(dto);
         contract.setCustomerId(customer);
         contract.setTariffId(tariff);
         contract.setBlockedByUser(dto.isBlockedByUser());
         contract.setBlockedByAdmin(dto.isBlockedByAdmin());
-        contract.setAddOptionIdList(dto.getOptionsIds().stream().map(s-> optionDAO.findOne(s)).collect(Collectors.toSet()));
+        Set<Option> set=contract.getAddOptionIdList();
+        Set<Integer>wer= dto.getOptionsIds();
+        set.addAll(dto.getOptionsIds().stream().map(s-> optionDAO.findOne(s)).collect(Collectors.toSet()));
+        contract.setAddOptionIdList(set);
         contractDAO.update(contract);
         return Optional.empty();
     }

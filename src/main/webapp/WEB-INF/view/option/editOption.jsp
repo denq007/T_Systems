@@ -50,7 +50,9 @@
 <sec:authorize access="hasRole('EMPLOYEE')">
     <span class="pull-right"><a href="/employee/employeecabinet" class="btn btn-info" role="button">Back</a></span>
 </sec:authorize>
-
+<sec:authorize access="!hasRole('EMPLOYEE')">
+    <span class="pull-right"><a href="/customer/showcustomerinformation" class="btn btn-info" role="button">Back</a></span>
+</sec:authorize>
 <div class="container">
     <main>
         <div class="py-5 text-center">
@@ -74,6 +76,14 @@
                                 Valid first name is required.
                             </div>
                         </div>
+                        <div class="col-12">
+                            <label for="optionGroupNumber" class="form-label">Group number (0 - The option is compatible with all, 1 - Internet,  2 -Call)</label>
+                                <%-- <form:input path="optionGroupNumber" value="${option.optionGroupNumber}" class="form-control" id="optionGroupNumber" required=""/>--%>
+                            <input type="text" name="optionGroupNumber" class="form-control" id="optionGroupNumber" value="${option.optionGroupNumber}" placeholder="1 or 2 or 3" required>
+                            <div class="invalid-feedback">
+                                Please enter your shipping address.
+                            </div>
+                        </div>
 
                         <div class="col-sm-6">
                             <label for="Connection cost" class="form-label">Connection cost</label>
@@ -81,15 +91,6 @@
                        <input type="text" name="optionConnectionCost" class="form-control" id="Connection cost" placeholder="" value="${option.optionConnectionCost}" required>
                             <div class="invalid-feedback">
                                 Valid last name is required.
-                            </div>
-                        </div>
-
-                        <div class="col-12">
-                            <label for="optionGroupNumber" class="form-label">Group number (0 - The option is compatible with all, 1 - Internet,  2 -Call)</label>
-                           <%-- <form:input path="optionGroupNumber" value="${option.optionGroupNumber}" class="form-control" id="optionGroupNumber" required=""/>--%>
-                              <input type="text" name="optionGroupNumber" class="form-control" id="optionGroupNumber" value="${option.optionGroupNumber}" placeholder="1 or 2 or 3" min="0" max="10" required>
-                            <div class="invalid-feedback">
-                                Please enter your shipping address.
                             </div>
                         </div>
 

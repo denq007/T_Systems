@@ -32,11 +32,13 @@
             <td>${option.optionConnectionCost}</td>
             <td>${option.optionPrice}</td>
             <td>${option.optionGroupNumber}</td>
-         <%--   <sec:authorize access="hasRole('EMPLOYEE')">
-                <form action="/employee/user/unblock" method="get">
-                    <input type="hidden" name="id" value=${contract.id}>
-                    <input type="submit" value="Unblock number" class="btn btn-warning"></form>
-            </sec:authorize>--%>
+            <td>
+            <sec:authorize access="hasRole('EMPLOYEE')">
+                <form action="employee/editoption" method="get">
+                    <input type="hidden" name="optionId" value=${option.optionId}>
+                    <input type="submit" value="Edit option" class="btn btn-warning"></form>
+            </sec:authorize>
+            </td>
         </tr>
     </c:forEach>
     <sec:authorize access="hasRole('EMPLOYEE')">

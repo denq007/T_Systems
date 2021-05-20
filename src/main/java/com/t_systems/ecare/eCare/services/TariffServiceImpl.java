@@ -96,15 +96,31 @@ public class TariffServiceImpl implements TariffService{
     }
 
     @Override
+    @Transactional
     public Optional<String> update(TariffDTO tariffDTO) {
         Tariff tariff=tariffDAO.findOne(tariffDTO.getId());
-        tariff=convertToEntity(tariffDTO);
-        tariff.setOptionIdList(getOptionsById((tariffDTO.getTariffOption()).stream().collect(Collectors.toList())));
+        tariff.getOptionIdList().clear();
+        if (checkOptionsСompatibility(getOptionsById((tariffDTO.getTariffOption()).stream().collect(Collectors.toList())))==false)
+        {
+            return Optional.of("Incompatible options are selected");
+        }
+
+        List<Option> listForAdd=getOptionsById((tariffDTO.getTariffOption()).stream().collect(Collectors.toList()));
+        tariff.setName(tariffDTO.getName());
+        tariff.setOptionIdList(listForAdd);
         tariffDAO.update(tariff);
         return Optional.empty();
     }
 
-
+    public Optional<String> checkRepeatOption(List<Option>listOld,List<Option>listNew)
+    {
+        for(int i=0;i<listNew.size();i++)
+        {
+            if(listOld.contains(listNew.get(i)))
+                return Optional.of("This option is already added -"+listNew.get(i));
+        }
+        return  Optional.empty();
+    }
 
     @Override
     public Tariff convertToEntity(TariffDTO tariffDTO) {
@@ -120,10 +136,28 @@ public class TariffServiceImpl implements TariffService{
                 return Optional.of("This tariff's name is already exist");
             }
             newTariff=convertToEntity(tariffDTO);
-            newTariff.setOptionIdList(getOptionsById((tariffDTO.getTariffOption()).stream().collect(Collectors.toList())));
+            List<Option> list=getOptionsById((tariffDTO.getTariffOption()).stream().collect(Collectors.toList()));
+            if (checkOptionsСompatibility(list)==false)
+            {
+                return Optional.of("Incompatible options are selected");
+            }
+            newTariff.setOptionIdList(list);
             tariffDAO.save(newTariff);
             tariffDTO.setOptionName(newTariff.getOptionIdList().stream().map(s->s.getName()).collect(Collectors.toList()));
        return Optional.empty();
+    }
+    @Override
+    public boolean checkOptionsСompatibility(List<Option> optionList) {
+       boolean b=true;
+        Map<Integer, List<Option>> map = optionList.stream()
+                .collect(Collectors.groupingBy(Option::getNumberGroup, Collectors.toList()));
+       for(Integer i:map.keySet())
+       {
+           if(map.get(i).size()>1)
+               b=false;
+           break;
+       }
+           return b;
     }
 
     private List<Option> getOptionsById(List<Integer> listId)

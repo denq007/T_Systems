@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -17,6 +19,7 @@ public class ContractDTO {
     private String number;
     private int tariffId;
     private int customerId;
+    @NotBlank
     private String tariffName;
     boolean blockedByUser;
     boolean blockedByAdmin;

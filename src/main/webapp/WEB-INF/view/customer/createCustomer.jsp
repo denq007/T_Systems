@@ -1,5 +1,6 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <%--
   Created by IntelliJ IDEA.
@@ -44,7 +45,12 @@
     <jsp:include page="../header.jsp"/>
 </head>
 <body class="bg-light">
-
+<sec:authorize access="hasRole('EMPLOYEE')">
+    <span class="pull-right"><a href="/employee/employeecabinet" class="btn btn-info" role="button">Back</a></span>
+</sec:authorize>
+<sec:authorize access="!hasRole('EMPLOYEE')">
+    <span class="pull-right"><a href="/customer/showcustomerinformation" class="btn btn-info" role="button">Back</a></span>
+</sec:authorize>
 <div class="container">
     <main>
 <%--        <div class="py-5 text-center">--%>

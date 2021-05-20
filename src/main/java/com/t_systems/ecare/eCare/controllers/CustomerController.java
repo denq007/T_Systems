@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.security.Principal;
 import java.util.Optional;
 @Slf4j
@@ -55,13 +56,14 @@ public class CustomerController {
     }
 
     @PostMapping("/editcustomer")
-    public String editClient(@ModelAttribute("customer") CustomerDTO customerDTO , Model model ) {
+    public String editClient(@ModelAttribute("customer")@Valid CustomerDTO customerDTO , Model model ) {
         Optional<String> error = customerService.update(customerDTO);
         if (error.isPresent()) {
             model.addAttribute("customer", customerDTO);
             return "customer/createCustomer";
         }
-        return "customer/showCustomer";
+        model.addAttribute("id",customerDTO.getId());
+        return "redirect:/customer/showcustomer";
     }
 
     @GetMapping("/user/block")

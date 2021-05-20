@@ -8,6 +8,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -17,9 +18,12 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.validation.*;
 import java.io.IOException;
 import java.util.Optional;
-@Slf4j
+import java.util.Set;
+
+
 @Controller
 //@RequestMapping("/user")
 public class UserController {
@@ -35,8 +39,13 @@ public class UserController {
         return "registrationUser";
     }
     @PostMapping("/user/saveuser")
-    public String addUser(@ModelAttribute("user") UserDTO user, Model model, HttpServletRequest request, RedirectAttributes attr)
+    public String addUser(@ModelAttribute("user") @Valid UserDTO user, Model model, BindingResult result, HttpServletRequest request, RedirectAttributes attr)
     {
+        if (result.hasErrors()) {
+            UserDTO newUser=new UserDTO();
+            model.addAttribute("user",newUser);
+            return "registrationUser";
+        }
         Optional<String> error=userService.saveUser(user);
         if (error.isPresent()) {
             model.addAttribute("message", error.get());

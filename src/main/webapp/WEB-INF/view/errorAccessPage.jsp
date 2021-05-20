@@ -2,11 +2,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Home</title>
+    <title>Error</title>
 </head>
 <body>
-<h1>${errorMsg}</h1>
+<h1>${message}</h1>
 <h1></h1>
-<a href="home.jsp">startpage</a>
+<a href="/">startpage</a>
 </body>
 </html>

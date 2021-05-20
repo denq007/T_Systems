@@ -1,5 +1,6 @@
 package com.t_systems.ecare.eCare.controllers;
 
+import com.t_systems.ecare.eCare.DTO.CustomerDTO;
 import com.t_systems.ecare.eCare.DTO.OptionDTO;
 import com.t_systems.ecare.eCare.DTO.TariffDTO;
 import com.t_systems.ecare.eCare.services.OptionService;
@@ -10,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,7 +31,7 @@ public class OptionController {
         return "option/createOption";
     }
     @PostMapping("/employee/create-option")
-    public String createOption(@ModelAttribute("option") OptionDTO optionDTO, Model model, RedirectAttributes attr)
+    public String createOption(@ModelAttribute("option") @Valid OptionDTO optionDTO, Model model, RedirectAttributes attr)
     {
         Optional<String> error = optionService.saveOption(optionDTO);
         if (error.isPresent()) {
@@ -53,6 +55,22 @@ public class OptionController {
         List<OptionDTO> list=optionService.getAllOptions();
         model.addAttribute("allOptions",list);
         return"/option/showAllOptions";
+    }
+    @GetMapping("employee/editoption")
+    public String editClient(@RequestParam("optionId") int id, Model model) {
+
+        model.addAttribute("option",optionService.findById(id));
+        return "option/editOption";
+    }
+
+    @PostMapping("employee/editoption")
+    public String editClient(@ModelAttribute("option") @Valid OptionDTO dto , Model model ) {
+        Optional<String> error = optionService.update(dto);
+        if (error.isPresent()) {
+            model.addAttribute("message", error);
+            return "option/createOption";
+        }
+        return "redirect:/show-all-options";
     }
 
 

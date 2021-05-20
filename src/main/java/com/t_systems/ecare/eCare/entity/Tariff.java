@@ -25,7 +25,7 @@ public class Tariff {
     @ManyToMany(cascade={CascadeType.PERSIST,CascadeType.MERGE, CascadeType.REFRESH,CascadeType.DETACH},fetch = FetchType.LAZY)
     @JoinTable(name = "tariff_option", joinColumns = @JoinColumn(name = "tariff_id"),
             inverseJoinColumns =@JoinColumn(name = "option_id"))
-    private List<Option> optionIdList;
+    private List<Option> optionIdList =new ArrayList<>();
     @Column(name="old")
     boolean isOld;
 
