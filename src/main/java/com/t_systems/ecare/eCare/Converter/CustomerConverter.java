@@ -1,3 +1,4 @@
+/*
 package com.t_systems.ecare.eCare.Converter;
 
 import com.t_systems.ecare.eCare.DTO.CustomerDTO;
@@ -7,3 +8,4 @@ public interface CustomerConverter {
     Customer converterCustomerDTOToCustomer(CustomerDTO customerDTO);
     CustomerDTO converterCustomerToCustomerDTO(Customer customer);
 }
+*/

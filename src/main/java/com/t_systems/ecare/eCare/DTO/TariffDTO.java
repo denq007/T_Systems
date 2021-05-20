@@ -4,14 +4,26 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+import java.util.*;
+
 @Getter
 @Setter
 @NoArgsConstructor
 public class TariffDTO {
-    private int tariffID;
-    private String tariffName;
-    private double tariffPrice;
-    boolean tariffCheckOld;
-    private List<OptionDTO> tariffOption;
+    private int id;
+    @NotBlank
+    @Size(min = 3, max = 255)
+    private String name;
+    @DecimalMin(value = "0.00")
+    private double price;
+    boolean isOld;
+    private Set<Integer> tariffOption;
+    private Map<String, Integer> allOptions = new HashMap<>();
+    private List<String> optionName=new ArrayList<>();
+    private List<String> requiredOption;
+    
+
 }

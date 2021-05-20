@@ -1,3 +1,4 @@
+/*
 package com.t_systems.ecare.eCare.Converter;
 
 import com.t_systems.ecare.eCare.DTO.UserDTO;
@@ -33,3 +34,4 @@ public class UserConverterImpl implements UserConverter{
         return userDTO;
     }
 }
+*/

@@ -4,21 +4,21 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
-
-public class GenericDAO <T> implements IGenericDAO<T> {
+@Repository
+public class GenericDAO<T> implements IGenericDAO<T> {
 
     @Autowired
     SessionFactory sessionFactory;
     private Class<T> clazz;
-   /* @PersistenceContext
-    protected EntityManager entityManager;*/
+
 
     @Override
-    public final void setClass(Class<T> clazzToSet) {
+    public void setClass(Class<T> clazzToSet) {
         this.clazz = clazzToSet;
     }
 
@@ -26,7 +26,6 @@ public class GenericDAO <T> implements IGenericDAO<T> {
     public Long count() {
         Query query = sessionFactory.getCurrentSession().createQuery("select count(*) from " + clazz.getName());
         return (Long) query.uniqueResult();
-
     }
 
     @Override
@@ -60,6 +59,11 @@ public class GenericDAO <T> implements IGenericDAO<T> {
     }
 
     @Override
+    public void save1(T entity) {
+       sessionFactory.getCurrentSession().save(entity);
+    }
+
+    @Override
     public void update(T entity) {
         sessionFactory.getCurrentSession().merge(entity);
     }
@@ -73,9 +77,6 @@ public class GenericDAO <T> implements IGenericDAO<T> {
     public void deleteById(int entityId) {
         T entity = findOne(entityId);
         delete(entity);
-    }
-    protected final Session getCurrentSession(){
-        return sessionFactory.getCurrentSession();
     }
 }
 

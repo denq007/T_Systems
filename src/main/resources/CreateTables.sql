@@ -54,7 +54,7 @@ CREATE TABLE customer
 CREATE TABLE сontract
 (
     id               int NOT NULL AUTO_INCREMENT,
-    number           varchar(255),
+    number           int,
     tariff_id        int,
     customer_id      int,
     blocked_by_user  tinyint(1),
@@ -71,3 +71,22 @@ CREATE TABLE user_role
     PRIMARY KEY (user_id, roles),
     FOREIGN KEY (user_id) REFERENCES eCare_db.user (id)
 );
+
+create table phonenumber_seq
+(
+    id  int AUTO_INCREMENT,
+    nextPhonenumber bigint null,
+        PRIMARY KEY(id)
+);
+ALTER TABLE phonenumber_seq AUTO_INCREMENT=9210010000;
+
+
+create table required_options
+(
+    id              int NOT NULL AUTO_INCREMENT,
+    name             varchar(255),
+    group_id        int,
+    PRIMARY KEY(id)
+);
+
+

@@ -100,12 +100,12 @@
         <button class="w-100 btn btn-lg btn-primary" name="submit" type="submit">Sign in</button>
         </fieldset>
     </form>
-
+    <sec:authorize access="hasRole('EMPLOYEE')">
     <form action="/user/registration" method="get">
         <button class="w-100 btn btn-lg btn-primary" type="submit">Registration</button>
         <p class="mt-5 mb-3 text-muted">&copy; 2021–2021</p>
     </form>
-
+    </sec:authorize>
 </main>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>

@@ -1,3 +1,4 @@
+/*
 package com.t_systems.ecare.eCare.Converter;
 
 import com.t_systems.ecare.eCare.DTO.OptionDTO;
@@ -43,3 +44,4 @@ public class OptionConverterImpl implements OptionConverter{
         return optionDTO;
     }
 }
+*/

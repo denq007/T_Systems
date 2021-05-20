@@ -13,6 +13,8 @@ public interface IGenericDAO <T>{
 
     int save(final T entity);
 
+    void save1(final T entity);
+
     void update(final T entity);
 
     void delete(final T entity);
