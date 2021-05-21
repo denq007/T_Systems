@@ -10,6 +10,8 @@ import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import javax.sql.DataSource;
@@ -20,15 +22,21 @@ import java.util.Properties;
 @ComponentScan(basePackages = "com.t_systems.ecare.eCare")
 @EnableWebMvc
 @EnableTransactionManagement
-public class MyConfig {
+public class MyConfig extends WebMvcConfigurerAdapter {
     @Bean
     public ViewResolver viewResolver()
     {
         InternalResourceViewResolver internalResourceViewResolver=new InternalResourceViewResolver();
         internalResourceViewResolver.setPrefix("/WEB-INF/view/");
         internalResourceViewResolver.setSuffix(".jsp");
+
         return internalResourceViewResolver;
     }
+    @Override
+    public void addResourceHandlers(final ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("E:\\T-Systems учеба\\eCare\\src\\main\\webapp\\WEB-INF\\static\\**").addResourceLocations("E:\\T-Systems учеба\\eCare\\src\\main\\webapp\\WEB-INF\\static");
+    }
+
     @Bean
     public DataSource dataSource()
     {
