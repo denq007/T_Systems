@@ -33,10 +33,11 @@
           href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.2/css/bootstrap-select.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.2/js/bootstrap-select.min.js"></script>
 
-    <script src="<c:url value="/WEB-INF/static/js/jquery.bootstrap-duallistbox.js"/>"></script>
-    <link rel="stylesheet" type="text/css" href="<c:url value="/WEB-INF/static/css/bootstrap-duallistbox.css"/>">
+   <%-- <script src="<c:url value="/WEB-INF/static/js/jquery.bootstrap-duallistbox.js" />"> </script>
+    <link rel="stylesheet" type="text/css" href=""/>--%>
 
-
+    <link rel="stylesheet" href="<c:url value="/WEB-INF/static/css/bootstrap-duallistbox.css" />" />
+    <script src="<c:url value="/WEB-INF/static/js/jquery.bootstrap-duallistbox.js" />"></script>
     <style>
         .bd-placeholder-img {
             font-size: 1.125rem;
@@ -100,17 +101,6 @@
 
 <script>
     $("#opt").bootstrapDualListbox();
-
-/*    up = function () {
-        $("#Name").val("123");
-    }
-    $(document).ready(function () {
-        $("#Name").on('change', function (event) {
-            event.preventDefault();
-            up();
-        })
-    });*/
-
 
 </script>
 </body>

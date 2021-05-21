@@ -34,7 +34,7 @@ public class MyConfig extends WebMvcConfigurerAdapter {
     }
     @Override
     public void addResourceHandlers(final ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("E:\\T-Systems учеба\\eCare\\src\\main\\webapp\\WEB-INF\\static\\**").addResourceLocations("E:\\T-Systems учеба\\eCare\\src\\main\\webapp\\WEB-INF\\static");
+        registry.addResourceHandler("/static/**").addResourceLocations("/WEB-INF/static/");
     }
 
     @Bean

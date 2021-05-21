@@ -51,7 +51,7 @@ CREATE TABLE customer
     PRIMARY KEY (id),
     FOREIGN KEY (user_id) REFERENCES eCare_db.user (id)
 );
-CREATE TABLE сontract
+CREATE TABLE contract
 (
     id               int NOT NULL AUTO_INCREMENT,
     number           int,
@@ -67,14 +67,14 @@ CREATE TABLE сontract
 CREATE TABLE user_role
 (
     user_id int NOT NULL,
-    roles   enum("Customer","Admin","Employee"),
+    roles   enum("ROLE_CUSTOMER","ROLE_ADMIN","ROLE_EMPLOYEE"),
     PRIMARY KEY (user_id, roles),
     FOREIGN KEY (user_id) REFERENCES eCare_db.user (id)
 );
 
 create table phonenumber_seq
 (
-    id  int AUTO_INCREMENT,
+    id  BIGINT AUTO_INCREMENT,
     nextPhonenumber bigint null,
         PRIMARY KEY(id)
 );
