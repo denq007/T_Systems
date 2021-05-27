@@ -33,8 +33,8 @@
           href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.2/css/bootstrap-select.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.2/js/bootstrap-select.min.js"></script>
 
-    <script src="<c:url value="/WEB-INF/static/js/jquery.bootstrap-duallistbox.js"/>"></script>
-    <link rel="stylesheet" type="text/css" href="<c:url value="/WEB-INF/static/css/bootstrap-duallistbox.css"/>">
+    <script src="<c:url value="/resources/js/jquery.bootstrap-duallistbox.js"/>"></script>
+    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/bootstrap-duallistbox.css"/>">
 
     <%--   <script src="/WEB-INF/static/js/jquery.bootstrap-duallistbox.js"></script>
     <link rel="stylesheet" type="text/css" href="/WEB-INF/static/css/bootstrap-duallistbox.css"/>--%>

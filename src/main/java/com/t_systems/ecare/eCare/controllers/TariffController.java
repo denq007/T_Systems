@@ -44,7 +44,8 @@ public class TariffController {
         if(tariffDTO ==null)
         {
             model.addAttribute("message", "Tariff not found");
-            return "/tariff/showTariff";
+          return "employee/employeeCabinet";
+         //   return "redirect:/success";
         }
         model.addAttribute("tariff",tariffDTO);
         return "/tariff/showTariff";
@@ -81,7 +82,7 @@ public class TariffController {
 
     @PostMapping("/employee/edit-tariff")
     public String editTariff(@ModelAttribute("tariff") @Valid TariffDTO tariffDTO, Model model,  RedirectAttributes attr) {
-        tariffDTO.setName(tariffDTO.getName().substring(0, tariffDTO.getName().length()/2));
+       /* tariffDTO.setName(tariffDTO.getName().substring(0, tariffDTO.getName().length()/2));*/
         Optional<String> error = tariffService.update(tariffDTO);
             if (error.isPresent()) {
             model.addAttribute("message", error.get());
@@ -97,7 +98,7 @@ public class TariffController {
     @RequestMapping("show-all-tariffs")
     public String showAllTariffs(Model model)
     {
-        List<TariffDTO> tariffDTOList=tariffService.showAllTariffs();
+        List<TariffDTO> tariffDTOList=tariffService.showAllTariffsForEmployee();
         model.addAttribute("allTarifs",tariffDTOList);
         return "tariff/showAllTariffs";
     }

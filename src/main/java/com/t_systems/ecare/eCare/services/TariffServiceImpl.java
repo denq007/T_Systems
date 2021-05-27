@@ -92,7 +92,14 @@ public class TariffServiceImpl implements TariffService{
     @Override
     @Transactional
     public List<TariffDTO> showAllTariffs() {
-       return tariffDAO.findAll().stream().map(s->convertToDto(s)).collect(Collectors.toList());
+
+        return tariffDAO.findAll().stream().map(s->convertToDto(s)).filter(s->s.isOld()!=true).collect(Collectors.toList());
+    }
+    @Override
+    @Transactional
+    public List<TariffDTO> showAllTariffsForEmployee()
+    {
+        return tariffDAO.findAll().stream().map(s->convertToDto(s)).collect(Collectors.toList());
     }
 
     @Override
@@ -100,7 +107,7 @@ public class TariffServiceImpl implements TariffService{
     public Optional<String> update(TariffDTO tariffDTO) {
         Tariff tariff=tariffDAO.findOne(tariffDTO.getId());
         tariff.getOptionIdList().clear();
-        if (checkOptionsСompatibility(getOptionsById((tariffDTO.getTariffOption()).stream().collect(Collectors.toList())))==false)
+        if (checkOptionsCompatibility(getOptionsById((tariffDTO.getTariffOption()).stream().collect(Collectors.toList())))==false)
         {
             return Optional.of("Incompatible options are selected");
         }
@@ -137,7 +144,7 @@ public class TariffServiceImpl implements TariffService{
             }
             newTariff=convertToEntity(tariffDTO);
             List<Option> list=getOptionsById((tariffDTO.getTariffOption()).stream().collect(Collectors.toList()));
-            if (checkOptionsСompatibility(list)==false)
+            if (checkOptionsCompatibility(list)==false)
             {
                 return Optional.of("Incompatible options are selected");
             }
@@ -147,7 +154,7 @@ public class TariffServiceImpl implements TariffService{
        return Optional.empty();
     }
     @Override
-    public boolean checkOptionsСompatibility(List<Option> optionList) {
+    public boolean checkOptionsCompatibility(List<Option> optionList) {
        boolean b=true;
         Map<Integer, List<Option>> map = optionList.stream()
                 .collect(Collectors.groupingBy(Option::getNumberGroup, Collectors.toList()));

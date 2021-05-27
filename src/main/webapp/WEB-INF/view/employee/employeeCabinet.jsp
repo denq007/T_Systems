@@ -60,13 +60,18 @@
         <form action="/user/registration" method="get">
             <button class="w-100 btn btn-primary btn-lg" type="submit"> Create user and customer</button>
         </form>
-        <form action="/customer/showcustomer" method="get">
-            <input name="id" value=${customer.id}>
+
+        <form class="needs-validation" action="/customer/showcustomer" method="get">
+            <input type="text" name="id" id="lastName"
+                   placeholder=""  value="${customer.id}"  required>
             <button class="w-100 btn btn-primary btn-lg" type="submit">Show customer by id</button>
         </form>
 
+
+
+
         <form action="/employee/findClientByPhoneNumber" method="get">
-            <input name="number" value=${contract.number}>
+            <input type="text" name="number"  placeholder=""  value="${contract.number}" pattern="[9][2][1][0-9][0-9][0-9][0-9][0-9][0-9][0-9]"required >
             <button class="w-100 btn btn-primary btn-lg" type="submit">Show customer by phone number</button>
         </form>
 
@@ -80,7 +85,7 @@
             <button class="w-100 btn btn-primary btn-lg" type="submit" >Create new tariff</button>
         </form>
         <form action="/show-tariff" method="get">
-            <input name="name" value=${tariff.name}>
+            <input name="name" placeholder=""  value="${tariff.name}" required>
             <button class="w-100 btn btn-primary btn-lg" type="submit">Show Tariff</button>
         </form>
         <form action="/show-all-tariffs" method="get">

@@ -17,12 +17,22 @@ public class GlobalExeptionHandler extends DefaultHandlerExceptionResolver{
     @ExceptionHandler(RuntimeException.class)
     public ModelAndView handleException(HttpServletRequest request, Exception ex) {
         ModelAndView model = new ModelAndView("errorAccessPage");
-        model.addObject("message", ex.getMessage());
+        model.addObject("message", "Check the correctness of the entered data");
         return model;
     }
     @ExceptionHandler(NoHandlerFoundException.class)
     public String handleNoHandlerFoundException(NoHandlerFoundException ex) {
         return "errorAccessPage";
+    }
+
+    @ExceptionHandler(NumberFormatException.class)
+    public ModelAndView handleNumberFormatException(HttpServletRequest req,NumberFormatException ex)
+    {
+        ModelAndView mav = new ModelAndView();
+        mav.addObject("message", "Check the correctness of the entered data");
+        mav.addObject("url", req.getRequestURL());
+        mav.setViewName("errorAccessPage");
+        return mav;
     }
 
     @ExceptionHandler(value = Exception.class)

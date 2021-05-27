@@ -83,8 +83,15 @@ public class ManagerController {
     @GetMapping("/findClientByPhoneNumber")
     public String findByPhoneNumber(@RequestParam(value = "number") String phone,Model model) {
         CustomerDTO customerDTO= customerService.findByPhoneNumber(phone);
-        model.addAttribute("id",customerDTO.getId());
-        return "redirect:/customer/showcustomer";
+        if(customerDTO.getName()==null)
+        {
+            model.addAttribute("message","this number " +phone+" does not exist");
+            return "/employee/employeeCabinet";
+        }
+        else {
+            model.addAttribute("id", customerDTO.getId());
+            return "redirect:/customer/showcustomer";
+        }
     }
 
 

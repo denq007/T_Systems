@@ -25,5 +25,7 @@ public interface TariffService {
 
     public List<String> showAllRequiredOptions(Set<Integer> tariffOption);
 
-    public boolean checkOptionsСompatibility(List<Option> optionList);
+    public boolean checkOptionsCompatibility(List<Option> optionList);
+
+    public List<TariffDTO> showAllTariffsForEmployee();
 }

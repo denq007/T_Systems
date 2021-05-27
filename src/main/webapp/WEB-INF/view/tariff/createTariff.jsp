@@ -36,8 +36,8 @@
    <%-- <script src="<c:url value="/WEB-INF/static/js/jquery.bootstrap-duallistbox.js" />"> </script>
     <link rel="stylesheet" type="text/css" href=""/>--%>
 
-    <link rel="stylesheet" href="<c:url value="/WEB-INF/static/css/bootstrap-duallistbox.css" />" />
-    <script src="<c:url value="/WEB-INF/static/js/jquery.bootstrap-duallistbox.js" />"></script>
+    <script src="<c:url value="/resources/js/jquery.bootstrap-duallistbox.js"/>"></script>
+    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/bootstrap-duallistbox.css"/>">
     <style>
         .bd-placeholder-img {
             font-size: 1.125rem;
@@ -76,7 +76,9 @@
 
             <div class="col-sm-6">
                 <label for="Name" class="form-label">Tariff name</label>
-                <form:input path="name" value="${tariff.name}" class="form-control" id="Name"/>
+            <%--    <form:input path="name" value="${tariff.name}" class="form-control" id="Name"/>--%>
+                <input type="text" name="name" class="form-control" id="Name" placeholder=""
+                       value="${tariff.name}" required>
             </div>
 
             <div class="col-12">
