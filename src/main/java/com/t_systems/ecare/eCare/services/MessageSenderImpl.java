@@ -1,10 +1,11 @@
 package com.t_systems.ecare.eCare.services;
 
 import org.apache.log4j.Logger;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import javax.jms.*;
-
+@Service
 public class MessageSenderImpl implements MessageSender{
 
     private static final long TIME_TO_LIVE_MILLISEC = 30_000; //messages older than that value won't be delivered to destination
