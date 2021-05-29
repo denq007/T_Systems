@@ -22,3 +22,7 @@ target/
 
 ### VS Code ###
 .vscode/
+
+
+### Log ###
+logs.txt
