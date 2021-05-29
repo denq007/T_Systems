@@ -28,4 +28,6 @@ public interface TariffService {
     public boolean checkOptionsCompatibility(List<Option> optionList);
 
     public List<TariffDTO> showAllTariffsForEmployee();
+
+    public List<Tariff> getLast(int i);
 }

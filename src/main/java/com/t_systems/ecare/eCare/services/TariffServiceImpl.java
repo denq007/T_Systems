@@ -103,6 +103,11 @@ public class TariffServiceImpl implements TariffService{
     }
 
     @Override
+    public List<Tariff> getLast(int i) {
+       return tariffDAO.getLast(3);
+    }
+
+    @Override
     @Transactional
     public Optional<String> update(TariffDTO tariffDTO) {
         Tariff tariff=tariffDAO.findOne(tariffDTO.getId());
