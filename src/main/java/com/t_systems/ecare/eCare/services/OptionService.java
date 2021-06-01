@@ -14,7 +14,7 @@ public interface OptionService {
     Optional<String> saveOption(OptionDTO optionDTO);
     public OptionDTO convertToDto(Option option);
     public Option convertToEntity(OptionDTO optionDTO);
-    public Optional<String> checkСompatibilityOptions(Set<Integer> idOptionforAdd, List<Option> tariffOptionList,Set<Option> contractOptions);
+    public Optional<String> checkCompatibilityOptions(Set<Integer> idOptionforAdd, List<Option> tariffOptionList, Set<Option> contractOptions);
     List<OptionDTO> getAllOptions();
     public Set<String> deleteOptionsAvailableTariffAnDADDNameOption(Set<Integer> idOptionforAdd,List<Option> tariffOptionList);
 

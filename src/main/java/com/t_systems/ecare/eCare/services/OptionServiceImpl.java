@@ -53,7 +53,7 @@ public class OptionServiceImpl implements OptionService {
     }
 
     //check id and group
-    public Optional<String> checkСompatibilityOptions(Set<Integer> idOptionforAdd, List<Option> tariffOptionList, Set<Option> contractOptions) {
+    public Optional<String> checkCompatibilityOptions(Set<Integer> idOptionforAdd, List<Option> tariffOptionList, Set<Option> contractOptions) {
         if (idOptionforAdd.isEmpty()) {
             return Optional.empty();
         }

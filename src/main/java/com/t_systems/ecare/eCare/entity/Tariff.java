@@ -1,5 +1,9 @@
 package com.t_systems.ecare.eCare.entity;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.t_systems.ecare.eCare.jsonAdapter.TariffAdapter;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -17,9 +21,14 @@ public class Tariff {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
+   /* @SerializedName("id")*/
     private int id;
+   /* @SerializedName("name")*/
+    @Expose
     @Column(name = "name")
     private String name;
+   /* @SerializedName("price")*/
+    @Expose
     @Column(name = "price")
     private double price;
     @ManyToMany(cascade={CascadeType.PERSIST,CascadeType.MERGE, CascadeType.REFRESH,CascadeType.DETACH},fetch = FetchType.LAZY)
@@ -43,10 +52,7 @@ public class Tariff {
     }
     @Override
     public String toString() {
-        return "Tariff{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", price=" + price +
-                '}';
+
+        return "Tariff [id=" + id + ", name=" + name + ", price=" + price +"]";
     }
 }

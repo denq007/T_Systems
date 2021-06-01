@@ -51,7 +51,7 @@ public class ContractServiceImp implements ContractService {
     public Optional<String> update(ContractDTO dto) {
         Tariff tariff = tariffDAO.findOne(dto.getTariffId());
         Contract contract = contractDAO.findOne(dto.getId());
-        Optional<String> error=optionService.checkСompatibilityOptions(dto.getOptionsIds(),tariff.getOptionIdList(),contract.getAddOptionIdList());
+        Optional<String> error=optionService.checkCompatibilityOptions(dto.getOptionsIds(),tariff.getOptionIdList(),contract.getAddOptionIdList());
         if(error.isPresent())
         {
             return error;

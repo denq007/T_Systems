@@ -81,8 +81,8 @@ public class TariffController {
     }
 
     @PostMapping("/employee/edit-tariff")
-    public String editTariff(@ModelAttribute("tariff") @Valid TariffDTO tariffDTO, Model model,  RedirectAttributes attr) {
-       /* tariffDTO.setName(tariffDTO.getName().substring(0, tariffDTO.getName().length()/2));*/
+    public String editTariff(@ModelAttribute("tariff") @Valid TariffDTO tariffDTO, Model model) {
+      tariffDTO.setName(tariffDTO.getName().substring(0, tariffDTO.getName().length()/2));
         Optional<String> error = tariffService.update(tariffDTO);
             if (error.isPresent()) {
             model.addAttribute("message", error.get());
@@ -90,7 +90,7 @@ public class TariffController {
             model.addAttribute("tariff",tariffDTO);
             return "tariff/createTariff";
         }
-        attr.addAttribute("name", tariffDTO.getName());
+        model.addAttribute("name", tariffDTO.getName());
         return "redirect:/show-tariff";
     }
 

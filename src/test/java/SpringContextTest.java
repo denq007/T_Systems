@@ -1,3 +1,4 @@
+/*
 
 import com.t_systems.ecare.eCare.configuration.MyConfig;
 
@@ -20,3 +21,4 @@ public class SpringContextTest {
     }
 }
 
+*/

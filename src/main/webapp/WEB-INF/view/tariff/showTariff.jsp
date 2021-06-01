@@ -88,6 +88,12 @@
                                 <td>${tariff.name} </td>
                             </tr>
                         </div>
+                        <div class="form-group">
+                            <tr>
+                                <td>Tariff price:</td>
+                                <td>${tariff.price} </td>
+                            </tr>
+                        </div>
 
                         <div class="form-group">
                             <td>Options name:

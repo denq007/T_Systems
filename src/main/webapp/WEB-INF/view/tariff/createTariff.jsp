@@ -76,9 +76,9 @@
 
             <div class="col-sm-6">
                 <label for="Name" class="form-label">Tariff name</label>
-            <%--    <form:input path="name" value="${tariff.name}" class="form-control" id="Name"/>--%>
-                <input type="text" name="name" class="form-control" id="Name" placeholder=""
-                       value="${tariff.name}" required>
+         <form:input path="name" class="form-control" id="Name" required="required"/>
+              <%--  <input type="text" name="name" class="form-control" id="Name" placeholder=""
+                       value="${tariff.name}" required>--%>
             </div>
 
             <div class="col-12">

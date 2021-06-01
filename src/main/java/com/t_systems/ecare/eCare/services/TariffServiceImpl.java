@@ -25,6 +25,8 @@ public class TariffServiceImpl implements TariffService{
     OptionDAO optionDAO;
     @Autowired
     RequiredOptionServiceImpl requiredOptionService;
+    @Autowired
+    HotTariffService hotTariffService;
 
 
     @Override
@@ -122,6 +124,7 @@ public class TariffServiceImpl implements TariffService{
         tariff.setName(tariffDTO.getName());
         tariff.setOptionIdList(listForAdd);
         tariffDAO.update(tariff);
+        hotTariffService.sendMessage();
         return Optional.empty();
     }
 
@@ -157,6 +160,7 @@ public class TariffServiceImpl implements TariffService{
             newTariff.setOptionIdList(list);
             tariffDAO.save(newTariff);
             tariffDTO.setOptionName(newTariff.getOptionIdList().stream().map(s->s.getName()).collect(Collectors.toList()));
+            hotTariffService.sendMessage();
        return Optional.empty();
     }
     @Override
