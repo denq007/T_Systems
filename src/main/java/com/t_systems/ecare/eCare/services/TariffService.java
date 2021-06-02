@@ -30,4 +30,6 @@ public interface TariffService {
     public List<TariffDTO> showAllTariffsForEmployee();
 
     List<Tariff> getLast(int i);
+
+    TariffDTO findById(int id);
 }

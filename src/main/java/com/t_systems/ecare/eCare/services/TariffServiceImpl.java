@@ -34,7 +34,7 @@ public class TariffServiceImpl implements TariffService{
         TariffDTO tariffDTO=new TariffDTO();
         tariffDTO.setId(tariff.getId());
         tariffDTO.setName(tariff.getName());
-        tariffDTO.setPrice(tariffDTO.getPrice());
+        tariffDTO.setPrice(tariff.getPrice());
         tariffDTO.setOld(tariff.isOld());
         tariffDTO.setOptionName(tariff.getOptionIdList().stream().map(s->s.getName()).collect(Collectors.toList()));
         tariffDTO.setTariffOption(tariff.getOptionIdList().stream().map(s->s.getNumberGroup()).collect(Collectors.toSet()));
@@ -112,6 +112,12 @@ public class TariffServiceImpl implements TariffService{
 
     @Override
     @Transactional
+    public TariffDTO findById(int id) {
+       return convertToDto(tariffDAO.findOne(id));
+    }
+
+    @Override
+    @Transactional
     public Optional<String> update(TariffDTO tariffDTO) {
         Tariff tariff=tariffDAO.findOne(tariffDTO.getId());
         tariff.getOptionIdList().clear();
@@ -123,6 +129,7 @@ public class TariffServiceImpl implements TariffService{
         List<Option> listForAdd=getOptionsById((tariffDTO.getTariffOption()).stream().collect(Collectors.toList()));
         tariff.setName(tariffDTO.getName());
         tariff.setOptionIdList(listForAdd);
+        tariff.setPrice(tariffDTO.getPrice());
         tariffDAO.update(tariff);
         hotTariffService.sendMessage();
         return Optional.empty();

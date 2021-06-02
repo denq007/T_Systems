@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -17,7 +18,8 @@ public class TariffDTO {
     @NotBlank
     @Size(min = 3, max = 255)
     private String name;
-    @DecimalMin(value = "0.00")
+    @DecimalMin(value = "0.0")
+    @DecimalMax("1000.0")
     private double price;
     boolean isOld;
     private Set<Integer> tariffOption;

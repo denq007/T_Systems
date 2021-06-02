@@ -10,11 +10,13 @@ import org.springframework.context.annotation.DependsOn;
 import org.springframework.transaction.annotation.Transactional;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+
+import javax.annotation.PostConstruct;
 import java.util.List;
 
 @Service
 /*@DependsOn("messageSender")*/
-public class HotTariffServiceImpl implements HotTariffService{
+public class HotTariffServiceImpl implements HotTariffService {
     @Autowired
     MessageSender messageSender;
     @Autowired
@@ -22,7 +24,6 @@ public class HotTariffServiceImpl implements HotTariffService{
 
     @Override
     public void sendMessage() {
-       /* String str="Tariff [id= 2, name= Black, price=4.0]";*/
         messageSender.sendMessage(build());
     }
 
@@ -30,5 +31,10 @@ public class HotTariffServiceImpl implements HotTariffService{
         List<Tariff> tariffList = tariffService.getLast(3);
         Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
         return gson.toJson(tariffList);
+    }
+
+    @PostConstruct
+    public void postConstruct() {
+        sendMessage();
     }
 }

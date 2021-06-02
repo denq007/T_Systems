@@ -5,6 +5,7 @@ import com.t_systems.ecare.eCare.services.TariffService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -65,30 +66,36 @@ public class TariffController {
     }
 
     @GetMapping("/employee/edit-tariff")
-    public String editTariff(@RequestParam("name")String name,Model model)
+    public String editTariff(@RequestParam("id")int id,Model model)
     {
-        TariffDTO tariffDTO= tariffService.findTariffByName(name);
+        TariffDTO tariffDTO= tariffService.findById(id);
         if(tariffDTO ==null)
         {
             model.addAttribute("message", "Tariff not found");
             tariffService.showAllOptions(tariffDTO);
             model.addAttribute("tariff",tariffDTO);
-            return "/tariff/createTariff";
+            return "tariff/editTariff";
         }
         tariffService.showAllOptions(tariffDTO);
         model.addAttribute("tariff",tariffDTO);
-        return "/tariff/createTariff";
+        return "/tariff/editTariff";
     }
 
     @PostMapping("/employee/edit-tariff")
-    public String editTariff(@ModelAttribute("tariff") @Valid TariffDTO tariffDTO, Model model) {
-      tariffDTO.setName(tariffDTO.getName().substring(0, tariffDTO.getName().length()/2));
-        Optional<String> error = tariffService.update(tariffDTO);
+    public String editTariff(@ModelAttribute("tariff") @Valid TariffDTO tariffDTO, BindingResult result, Model model) {
+   if(result.hasErrors())
+   {
+       model.addAttribute("message", "The price was entered incorrectly");
+       tariffService.showAllOptions(tariffDTO);
+       model.addAttribute("tariff",tariffDTO);
+       return "tariff/editTariff";
+   }
+       Optional<String> error = tariffService.update(tariffDTO);
             if (error.isPresent()) {
             model.addAttribute("message", error.get());
             tariffService.showAllOptions(tariffDTO);
             model.addAttribute("tariff",tariffDTO);
-            return "tariff/createTariff";
+            return "tariff/editTariff";
         }
         model.addAttribute("name", tariffDTO.getName());
         return "redirect:/show-tariff";

@@ -61,7 +61,7 @@
         </td>
         <td>
             <form action="/employee/edit-tariff" method="get">
-                <input hidden name="name" value=${allTarifs.name}>
+                <input hidden name="id" value=${allTarifs.id}>
                 <button class="w-100 btn btn-primary btn-lg" type="submit">Edit tariff</button>
             </form>
         </td>
